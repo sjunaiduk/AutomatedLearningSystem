@@ -12,4 +12,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj" />
+    <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
