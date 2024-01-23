@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="LearningPaths\Persistence\" />
+    <Folder Include="Users\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

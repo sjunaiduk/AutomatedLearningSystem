@@ -14,9 +14,9 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public Guid Id { get; init; }
 
 
-        private List<LearningItem> _items { get; } 
+        private List<LearningItem> _learningItems { get; } 
 
-        public List<LearningItem> Items => _items.ToList();
+        public List<LearningItem> LearningItems => _learningItems.ToList();
 
         private LearningPath()
         {
@@ -28,7 +28,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         }
 
 
-        public Result<LearningPath> CreateLearningPath(Guid? id = null)
+        public static Result<LearningPath> CreateLearningPath(Guid? id = null)
         {
            
             return new LearningPath(id);
@@ -37,25 +37,25 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public Result AddLearningItem(LearningItem item)
         {
          
-            if (_items.Any(i => i.Id == item.Id))
+            if (_learningItems.Any(i => i.Id == item.Id))
             {
-                return Error.Conflict("DuplicateLearningItem",
+                return Error.Conflict(
                     "Duplicate learning item added to learning items");
 
             }
 
-            _items.Add(item);
+            _learningItems.Add(item);
             return Result.Success;
         }
 
         public Result DeleteLearningItem(Guid id)
         {
-            if (_items.All(i => i.Id != id))
+            if (_learningItems.All(i => i.Id != id))
             {
-                return Error.NotFound("LearningItemDoesntExist",
+                return Error.NotFound(
                     "Learning item in learning path was not found, failed to delete");
             }
-            _items.RemoveAll(m => m.Id == id);
+            _learningItems.RemoveAll(m => m.Id == id);
             return Result.Success;
         }
     }

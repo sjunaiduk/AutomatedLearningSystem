@@ -15,7 +15,9 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-    public LearningPath? LearningPath { get; private set; }
+    private List<LearningPath> _learningPaths; 
+    public List<LearningPath> LearningPaths => _learningPaths.ToList();
+
 
     public Role Role { get; private set; }
 
@@ -36,7 +38,7 @@ public class User
     {
 
     }
-    public async Task<Result<User>> CreateUser(IEmailService emailService,
+    public static async Task<Result<User>> CreateUser(IEmailService emailService,
         string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)
     {

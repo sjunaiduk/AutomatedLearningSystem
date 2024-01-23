@@ -7,11 +7,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DAD68404-7A8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Api", "src\AutomatedLearningSystem.Api\AutomatedLearningSystem.Api.csproj", "{0D056FCB-BDE2-4934-BD88-2C96C3C8C014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedLearningSystem.Application", "src\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj", "{AA63607D-EB18-4382-8B2C-D254993E27E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Application", "src\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj", "{AA63607D-EB18-4382-8B2C-D254993E27E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedLearningSystem.Infrastructure", "src\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj", "{B01D44D6-C1CD-489F-B984-FC8D675CF52A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Infrastructure", "src\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj", "{B01D44D6-C1CD-489F-B984-FC8D675CF52A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedLearningSystem.Domain", "src\AutomatedLearningSystem.Domain\AutomatedLearningSystem.Domain.csproj", "{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Domain", "src\AutomatedLearningSystem.Domain\AutomatedLearningSystem.Domain.csproj", "{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF9C5074-0580-4740-A85C-0897FA8BA962}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Domain.UnitTests", "tests\AutomatedLearningSystem.Domain.UnitTests\AutomatedLearningSystem.Domain.UnitTests.csproj", "{628A7665-A39A-4312-AE64-39532BE7EEB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommon", "tests\TestCommon\TestCommon.csproj", "{E538FC30-CA0D-43BC-B615-C6338BD7A75A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1DB1968-1B9A-4180-AEC9-4743B88361B9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +46,14 @@ Global
 		{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628A7665-A39A-4312-AE64-39532BE7EEB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628A7665-A39A-4312-AE64-39532BE7EEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628A7665-A39A-4312-AE64-39532BE7EEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628A7665-A39A-4312-AE64-39532BE7EEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E538FC30-CA0D-43BC-B615-C6338BD7A75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E538FC30-CA0D-43BC-B615-C6338BD7A75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E538FC30-CA0D-43BC-B615-C6338BD7A75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E538FC30-CA0D-43BC-B615-C6338BD7A75A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +63,8 @@ Global
 		{AA63607D-EB18-4382-8B2C-D254993E27E5} = {DAD68404-7A8C-4AD5-B033-6C6AFBDB83BE}
 		{B01D44D6-C1CD-489F-B984-FC8D675CF52A} = {DAD68404-7A8C-4AD5-B033-6C6AFBDB83BE}
 		{2DF4CBD1-8850-4F43-BE60-93F90A6A51C8} = {DAD68404-7A8C-4AD5-B033-6C6AFBDB83BE}
+		{628A7665-A39A-4312-AE64-39532BE7EEB0} = {CF9C5074-0580-4740-A85C-0897FA8BA962}
+		{E538FC30-CA0D-43BC-B615-C6338BD7A75A} = {CF9C5074-0580-4740-A85C-0897FA8BA962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28055369-988B-4199-A137-0F0CA06DC0FE}

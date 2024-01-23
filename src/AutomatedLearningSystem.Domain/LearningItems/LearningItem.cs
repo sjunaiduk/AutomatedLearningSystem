@@ -26,7 +26,7 @@ public class LearningItem
 
     }
 
-    public Result<LearningItem> Create(string name, string description, Category category,
+    public static Result<LearningItem> Create(string name, string description, Category category,
         Guid? id = null)
     {
         return new LearningItem( name,  description,  category,
