@@ -1,4 +1,4 @@
-﻿using AutomatedLearningSystem.Application.Users.CreateUser;
+﻿using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 using AutomatedLearningSystem.Domain.Users;
 using TestCommon.Constants;
 

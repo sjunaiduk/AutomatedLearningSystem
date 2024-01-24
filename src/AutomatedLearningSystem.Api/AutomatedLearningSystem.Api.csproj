@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
     <ProjectReference Include="..\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj" />
     <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
   </ItemGroup>

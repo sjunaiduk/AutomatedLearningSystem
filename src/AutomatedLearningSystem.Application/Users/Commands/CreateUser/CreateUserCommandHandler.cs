@@ -3,7 +3,7 @@ using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
 
-namespace AutomatedLearningSystem.Application.Users.CreateUser;
+namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result>
 {
@@ -27,7 +27,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
         {
             return UserErrors.DuplicateEmail;
         }
-        
+
         var user = User.Create(
             request.FirstName,
             request.LastName,
@@ -36,7 +36,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
             request.Password);
 
 
-        await _userRepository.CreateAsync(user, cancellationToken);
+        _userRepository.Create(user);
 
         await _unitOfWork.CommitChangesAsync(cancellationToken);
 

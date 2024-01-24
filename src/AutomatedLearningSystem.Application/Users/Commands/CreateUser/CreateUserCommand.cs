@@ -2,7 +2,7 @@
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
 
-namespace AutomatedLearningSystem.Application.Users.CreateUser;
+namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 
 public sealed record CreateUserCommand(
     string FirstName,
@@ -10,4 +10,5 @@ public sealed record CreateUserCommand(
     string Email,
     string Password,
     Role Role
-    ) : IRequest<Result> {}
+    ) : IRequest<Result>
+{ }

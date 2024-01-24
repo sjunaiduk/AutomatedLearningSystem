@@ -28,7 +28,16 @@ public class Result
         _errors = errors;
     }
 
-   
+    public TResponse MatchAll<TResponse>(Func<TResponse> onValue,
+        Func<List<Error>, TResponse> onErrors)
+    {
+        if (IsSuccess)
+        {
+            return onValue();
+        }
+
+        return onErrors(_errors);
+    }
 
     protected Result(bool isSuccess)
     {

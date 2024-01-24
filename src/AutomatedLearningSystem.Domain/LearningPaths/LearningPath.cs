@@ -39,8 +39,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
          
             if (_learningItems.Any(i => i.Id == item.Id))
             {
-                return Error.Conflict(
-                    "Duplicate learning item added to learning items");
+                return LearningPathErrors.Conflict;
 
             }
 

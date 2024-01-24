@@ -4,7 +4,7 @@ namespace AutomatedLearningSystem.Application.Common.Abstractions;
 
 public interface IUserRepository
 {
-    Task CreateAsync(User  user, CancellationToken token = default);
+    void Create(User  user);
     Task<User?> GetByIdAsync(Guid id, CancellationToken token = default);
 
 }

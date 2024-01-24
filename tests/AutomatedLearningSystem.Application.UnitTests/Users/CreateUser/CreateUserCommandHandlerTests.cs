@@ -1,6 +1,5 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
-using AutomatedLearningSystem.Application.Users.CreateUser;
-using AutomatedLearningSystem.Domain.Common;
+using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 using AutomatedLearningSystem.Domain.Users;
 using FluentAssertions;
 using NSubstitute;
