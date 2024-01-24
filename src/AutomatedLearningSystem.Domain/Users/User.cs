@@ -38,7 +38,7 @@ public class User
     {
 
     }
-    public static User CreateUser(
+    public static User Create(
         string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)
     {

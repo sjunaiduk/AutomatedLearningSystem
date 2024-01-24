@@ -14,7 +14,7 @@ public class UserTests
      
         // Act
 
-        var createUserResult = User.CreateUser(
+        var createUserResult = User.Create(
             UserConstants.FirstName,
             UserConstants.LastName,
             UserConstants.Email, UserConstants.Role,
