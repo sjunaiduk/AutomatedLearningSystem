@@ -12,7 +12,7 @@ public class LearningPathTests
     {
         // Arrange
         var learningItems = LearningItemFactory.Create(count: 10);
-        var learningPath = LearningPath.CreateLearningPath().Value;
+        var learningPath = LearningPath.CreateLearningPath();
 
         // Act
         var results = learningItems.Select(x => learningPath.AddLearningItem(x))

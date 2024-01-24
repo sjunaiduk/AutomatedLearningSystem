@@ -38,21 +38,12 @@ public class User
     {
 
     }
-    public static async Task<Result<User>> CreateUser(IEmailService emailService,
+    public static User CreateUser(
         string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)
     {
-        // check if email is unique
-        if (!await emailService.IsEmailUniqueAsync(email))
-        {
-            return UserErrors.DuplicateEmail;
-        }
 
-        if (role is Role.Admin && password.Length < 8)
-        {
-            return UserErrors.AdminPasswordTooShort;
-        }
-
+      
         return new User( firstName,  lastName,  email, role,  password,
             id);
     }

@@ -14,7 +14,7 @@ public static class LearningItemFactory
     {
         return Enumerable.Range(0, count)
             .Select(x => LearningItem.Create(name, description, category ?? LearningItemConstants.Category,
-                id ?? Guid.NewGuid()).Value)
+                id ?? Guid.NewGuid()))
             .ToList();
     }
 }

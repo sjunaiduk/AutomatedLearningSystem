@@ -14,7 +14,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public Guid Id { get; init; }
 
 
-        private List<LearningItem> _learningItems { get; } 
+        private List<LearningItem> _learningItems { get; } = new();
 
         public List<LearningItem> LearningItems => _learningItems.ToList();
 
@@ -28,7 +28,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         }
 
 
-        public static Result<LearningPath> CreateLearningPath(Guid? id = null)
+        public static LearningPath CreateLearningPath(Guid? id = null)
         {
            
             return new LearningPath(id);

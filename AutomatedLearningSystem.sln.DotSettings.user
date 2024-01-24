@@ -1,8 +1,0 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4e00f75a_002Db8b9_002D44c2_002Db861_002D68280bb2f884/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="User_GivenValidData_ShouldCreateUser" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::628A7665-A39A-4312-AE64-39532BE7EEB0::net8.0::AutomatedLearningSystem.Domain.UnitTests.Users.UserTests.User_GivenValidData_ShouldCreateUser&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::628A7665-A39A-4312-AE64-39532BE7EEB0::net8.0::AutomatedLearningSystem.Domain.UnitTests.Users.UserTests.User_GivenDuplicateEmail_ShouldReturnError&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::628A7665-A39A-4312-AE64-39532BE7EEB0::net8.0::AutomatedLearningSystem.Domain.UnitTests.LearningPaths.LearningPathTests.LearningPath_WhenValidLearningItemsSupplied_ShouldCreateLearningPath&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
