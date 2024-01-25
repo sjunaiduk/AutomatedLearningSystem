@@ -26,6 +26,20 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<int>(type: "INTEGER", nullable: false),
+                    DifficultyLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -39,6 +53,26 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnswerForQuestion",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    QuestionId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Response = table.Column<int>(type: "INTEGER", nullable: false),
+                    AddedDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnswerForQuestion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnswerForQuestion_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +117,11 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AnswerForQuestion_QuestionId",
+                table: "AnswerForQuestion",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LearningItemLearningPath_LearningPathId",
                 table: "LearningItemLearningPath",
                 column: "LearningPathId");
@@ -97,7 +136,13 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AnswerForQuestion");
+
+            migrationBuilder.DropTable(
                 name: "LearningItemLearningPath");
+
+            migrationBuilder.DropTable(
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "LearningItem");

@@ -15,7 +15,7 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-    private List<LearningPath> _learningPaths; 
+    private List<LearningPath> _learningPaths { get; set; } = null!;
     public List<LearningPath> LearningPaths => _learningPaths.ToList();
 
 

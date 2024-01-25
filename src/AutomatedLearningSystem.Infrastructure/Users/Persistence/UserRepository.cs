@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
 using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedLearningSystem.Infrastructure.Users.Persistence;
 
@@ -20,6 +21,14 @@ public class UserRepository : IUserRepository
 
     public Task<User?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
-        throw new NotImplementedException();
+        return _dbContext.Set<User>()
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync(token);
+    }
+
+    public void Delete(User user)
+    {
+        _dbContext.Set<User>()
+            .Remove(user);
     }
 }

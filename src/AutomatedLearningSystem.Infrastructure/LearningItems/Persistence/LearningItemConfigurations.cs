@@ -15,5 +15,8 @@ public class LearningItemConfigurations : IEntityTypeConfiguration<LearningItem>
             .IsRequired();
         builder.Property(x => x.Description)
             .HasMaxLength(300);
+
+        builder.Ignore(x => x.Score);
+
     }
 }

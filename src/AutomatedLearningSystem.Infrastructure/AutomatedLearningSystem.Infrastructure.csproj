@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Answers\Persistence\" />
     <Folder Include="LearningPaths\Persistence\" />
+    <Folder Include="Questions\Persistence\" />
   </ItemGroup>
 
   <ItemGroup>

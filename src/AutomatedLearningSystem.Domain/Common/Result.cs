@@ -9,10 +9,9 @@ public class Result
     public bool IsSuccess { get; init; }
 
     public bool IsFailure => !IsSuccess;
-
-    protected List<Error> _errors { get; }
-
-    public Error? FirstError => _errors.FirstOrDefault();
+    
+    protected List<Error> Errors { get; } = null!;
+    public Error? FirstError => Errors.FirstOrDefault();
 
     public static Result Success => new Result(true);
 
@@ -25,7 +24,7 @@ public class Result
 
         }
         IsSuccess = isSuccess;
-        _errors = errors;
+        Errors = errors;
     }
 
     public TResponse MatchAll<TResponse>(Func<TResponse> onValue,
@@ -36,7 +35,7 @@ public class Result
             return onValue();
         }
 
-        return onErrors(_errors);
+        return onErrors(Errors);
     }
 
     protected Result(bool isSuccess)
@@ -83,7 +82,7 @@ public class Result<TValue> : Result
             return onValue(Value);
         }
 
-        return onErrors(_errors);
+        return onErrors(Errors);
     }
 
 

@@ -11,7 +11,6 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
     {
         builder.HasMany(x => x.LearningPaths)
             .WithOne()
-            .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired(false);
 
         builder.Property(u => u.Email)

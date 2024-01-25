@@ -17,6 +17,28 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
 
+            modelBuilder.Entity("AutomatedLearningSystem.Domain.Answers.AnswerForQuestion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("AddedDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Response")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("AnswerForQuestion");
+                });
+
             modelBuilder.Entity("AutomatedLearningSystem.Domain.LearningItems.LearningItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -55,6 +77,27 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("LearningPath");
+                });
+
+            modelBuilder.Entity("AutomatedLearningSystem.Domain.Questions.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DifficultyLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.Users.User", b =>
@@ -101,6 +144,17 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                     b.HasIndex("LearningPathId");
 
                     b.ToTable("LearningItemLearningPath");
+                });
+
+            modelBuilder.Entity("AutomatedLearningSystem.Domain.Answers.AnswerForQuestion", b =>
+                {
+                    b.HasOne("AutomatedLearningSystem.Domain.Questions.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.LearningPaths.LearningPath", b =>

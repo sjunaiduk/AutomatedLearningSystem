@@ -1,4 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.LearningItems;
+﻿using AutomatedLearningSystem.Domain.Common;
+using AutomatedLearningSystem.Domain.LearningItems;
 using TestCommon.Constants;
 
 namespace TestCommon.Factories;
@@ -14,6 +15,9 @@ public static class LearningItemFactory
     {
         return Enumerable.Range(0, count)
             .Select(x => LearningItem.Create(name, description, category ?? LearningItemConstants.Category,
+                LearningItemConstants.Priority,
+                LearningItemConstants.DifficultyLevel,
+
                 id ?? Guid.NewGuid()))
             .ToList();
     }

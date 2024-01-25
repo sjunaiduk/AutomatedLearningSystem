@@ -3,3 +3,4 @@
 .vs
 **/**/*.db
 *.sln.DotSettings.user
+src/**/als.*

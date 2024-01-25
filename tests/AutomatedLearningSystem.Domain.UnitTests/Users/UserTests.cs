@@ -9,7 +9,7 @@ namespace AutomatedLearningSystem.Domain.UnitTests.Users;
 public class UserTests
 {
     [Fact]
-    public async void User_GivenValidData_ShouldCreateUser()
+    public void User_GivenValidData_ShouldCreateUser()
     {
      
         // Act

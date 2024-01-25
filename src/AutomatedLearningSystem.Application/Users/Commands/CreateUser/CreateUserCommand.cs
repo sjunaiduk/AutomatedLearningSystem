@@ -10,5 +10,5 @@ public sealed record CreateUserCommand(
     string Email,
     string Password,
     Role Role
-    ) : IRequest<Result>
+    ) : ICommand<Result>
 { }
