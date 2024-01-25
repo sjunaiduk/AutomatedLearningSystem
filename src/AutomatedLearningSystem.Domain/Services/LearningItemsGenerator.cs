@@ -71,11 +71,11 @@ public class LearningItemsGenerator
         switch (category)
         {
             case Category.Backend:
-                return item.DifficultyLevel <= profile.BackEndLevel ? 0.75m : 1.25m;
+                return item.DifficultyLevel < profile.BackEndLevel ? 0.75m : 1.25m;
             case Category.Frontend:
-                return item.DifficultyLevel <= profile.FrontEndLevel ? 0.75m : 1.25m;
+                return item.DifficultyLevel < profile.FrontEndLevel ? 0.75m : 1.25m;
             case Category.Database:
-                return item.DifficultyLevel <= profile.DatabaseLevel ? 0.75m : 1.25m;
+                return item.DifficultyLevel < profile.DatabaseLevel ? 0.75m : 1.25m;
             default:
                 return 1.0m;
         }
