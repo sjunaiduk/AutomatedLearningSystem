@@ -21,7 +21,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
     public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
 
-        var isEmailUnique = await _emailService.IsEmailUniqueAsync(request.Email);
+        var isEmailUnique = await _emailService.IsEmailUniqueAsync(request.Email, cancellationToken);
 
         if (!isEmailUnique)
         {

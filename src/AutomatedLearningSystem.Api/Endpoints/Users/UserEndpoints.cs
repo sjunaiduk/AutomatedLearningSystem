@@ -22,7 +22,7 @@ public static class UserEndpoints
             var result = await sender.Send(command);
 
             return result.MatchAll(
-                Results.NoContent,
+                Results.Created,
                 errors => errors.ToProblemDetails());
         });
 
