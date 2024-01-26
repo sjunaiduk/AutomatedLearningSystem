@@ -1,5 +1,6 @@
 ﻿using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 using AutomatedLearningSystem.Application.Users.Commands.DeleteUser;
+using AutomatedLearningSystem.Application.Users.Queries.GetUser;
 using AutomatedLearningSystem.Contracts.Users.CreateUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,19 @@ public static class UserEndpoints
             var result = await sender.Send(command);
 
             return result.MatchAll(
-                Results.Created,
+               user => Results.CreatedAtRoute("GetUser", new {id=user.Id}),
                 errors => errors.ToProblemDetails());
         });
+
+        app.MapGet(Routes.UserRoutes.Get, async ([FromRoute] Guid id, ISender sender) =>
+        {
+            var query = new GetUserQuery(id);
+
+            var result = await sender.Send(query);
+
+            return result.MatchAll(user => Results.Ok(user),
+                errors => errors.ToProblemDetails());
+        }).WithName("GetUser");
 
         app.MapDelete(Routes.UserRoutes.Delete, async ([FromRoute] Guid id,
             ISender sender) =>

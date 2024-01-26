@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result<User>>
 {
     private readonly IUserRepository _userRepository;
     private readonly IEmailService _emailService;
@@ -18,7 +18,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
         _emailService = emailService;
     }
 
-    public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
 
         var isEmailUnique = await _emailService.IsEmailUniqueAsync(request.Email, cancellationToken);
@@ -40,7 +40,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
 
         await _unitOfWork.CommitChangesAsync(cancellationToken);
 
-        return Result.Success;
+        return user;
 
     }
 }

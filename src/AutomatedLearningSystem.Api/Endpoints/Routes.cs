@@ -8,7 +8,10 @@ public static class Routes
 
     public static class UserRoutes
     {
-        public const string UserBase = $"{Base}/users";
+
+        private const string UserBase = $"{Base}/users";
+
+        public const string Get = $"{UserBase}/{{id:guid}}";
 
         public const string Create = $"{UserBase}";
 
