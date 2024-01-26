@@ -18,7 +18,9 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
-                    Category = table.Column<int>(type: "INTEGER", nullable: false)
+                    Category = table.Column<int>(type: "INTEGER", nullable: false),
+                    Priority = table.Column<int>(type: "INTEGER", nullable: false),
+                    DifficultyLevel = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +33,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Category = table.Column<int>(type: "INTEGER", nullable: false),
-                    DifficultyLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                    Category = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

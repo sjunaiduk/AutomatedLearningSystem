@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240125003423_InitialMigration")]
+    [Migration("20240126164228_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -56,10 +56,16 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("DifficultyLevel")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -94,9 +100,6 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("DifficultyLevel")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

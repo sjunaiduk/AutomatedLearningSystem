@@ -15,8 +15,8 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-    private List<LearningPath> _learningPaths { get; set; } = null!;
-    public List<LearningPath> LearningPaths => _learningPaths.ToList();
+    private List<LearningPath> _learningPaths { get; set; } = new();
+    public IReadOnlyCollection<LearningPath> LearningPaths => _learningPaths.ToList();
 
 
     public Role Role { get; private set; }

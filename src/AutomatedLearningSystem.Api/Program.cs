@@ -1,4 +1,5 @@
 using AutomatedLearningSystem.Api.Endpoints.Users;
+using AutomatedLearningSystem.Api.Extensions;
 using AutomatedLearningSystem.Application;
 using AutomatedLearningSystem.Infrastructure;
 
@@ -20,6 +21,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ApplyMigrations();
+    app.SeedData();
 }
 
 app.UseHttpsRedirection();
