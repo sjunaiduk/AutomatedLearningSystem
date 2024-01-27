@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
     <ProjectReference Include="..\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj" />
+    <ProjectReference Include="..\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
     <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
   </ItemGroup>
 

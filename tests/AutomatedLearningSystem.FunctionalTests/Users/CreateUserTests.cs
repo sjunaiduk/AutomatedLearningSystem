@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using AutomatedLearningSystem.Api.Endpoints;
-using AutomatedLearningSystem.Api.Endpoints.Users;
 using AutomatedLearningSystem.Contracts.Users;
 using AutomatedLearningSystem.Contracts.Users.CreateUser;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
