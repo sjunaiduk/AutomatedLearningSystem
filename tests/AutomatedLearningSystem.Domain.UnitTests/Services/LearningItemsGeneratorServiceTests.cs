@@ -1,15 +1,14 @@
 ﻿using AutomatedLearningSystem.Domain.Answers;
 using AutomatedLearningSystem.Domain.Common;
+using AutomatedLearningSystem.Domain.LearningItems;
 using AutomatedLearningSystem.Domain.Questions;
-using AutomatedLearningSystem.Domain.Services;
 using AutomatedLearningSystem.Domain.Users;
 using FluentAssertions;
-using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.Domain.UnitTests.Services;
 
-public class LearningItemsGeneratorTests
+public class LearningItemsGeneratorServiceTests
 {
     [Fact]
 
@@ -40,7 +39,7 @@ public class LearningItemsGeneratorTests
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGenerator();
+        var service = new LearningItemsGeneratorService();
         var inputItems = preferredLearningItem.Concat(otherLearningItems).ToList();
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile
@@ -96,7 +95,7 @@ public class LearningItemsGeneratorTests
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGenerator();
+        var service = new LearningItemsGeneratorService();
         var inputItems = otherLearningItems;
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile
@@ -156,7 +155,7 @@ public class LearningItemsGeneratorTests
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGenerator();
+        var service = new LearningItemsGeneratorService();
         var inputItems = otherLearningItems;
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile

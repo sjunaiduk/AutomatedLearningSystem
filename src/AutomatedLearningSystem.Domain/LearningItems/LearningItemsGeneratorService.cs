@@ -1,12 +1,11 @@
 ﻿using AutomatedLearningSystem.Domain.Answers;
 using AutomatedLearningSystem.Domain.Common;
-using AutomatedLearningSystem.Domain.LearningItems;
 using AutomatedLearningSystem.Domain.Users;
 
-namespace AutomatedLearningSystem.Domain.Services;
+namespace AutomatedLearningSystem.Domain.LearningItems;
 
 
-public class LearningItemsGenerator
+public class LearningItemsGeneratorService
 {
     private const decimal HighInterestMultiplier = 2.0m;
     private const decimal LowInterestMultiplier = 0.5m;
@@ -82,7 +81,7 @@ public class LearningItemsGenerator
     }
 }
 
-//public static class LearningItemsGenerator
+//public static class LearningItemsGeneratorService
 //{
 //    private const decimal positiveDifficultyLevelMultiplier = 1.5m;
 //    private const decimal negativeDifficultyLevelMultiplier = 0.75m;
