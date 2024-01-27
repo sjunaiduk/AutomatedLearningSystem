@@ -18,5 +18,14 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Test
-      run: dotnet test --no-restore
+    - name: Run Tests
+      run: dotnet test --logger "trx;LogFileName=test_results.trx"
+
+    - name: Process Test Results
+      uses: dorny/test-reporter@v1
+      with:
+        name: .NET Test Results
+        path: '**/test_results.trx'
+        reporter: 'dotnet-trx'
+
+
