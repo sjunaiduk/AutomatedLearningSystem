@@ -32,6 +32,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedLearningSystem.Contracts", "src\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj", "{4D36B927-E495-49D1-9230-8A0B84EAD422}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A3D1B968-F08B-4E0A-B29C-D45EC12BF9DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{7CC90846-E5D8-4B3F-8115-78A7EC4059BC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\test.yml = .github\workflows\test.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +102,7 @@ Global
 		{78583FCD-F9A9-4833-ACAF-B13E15047AFF} = {CF9C5074-0580-4740-A85C-0897FA8BA962}
 		{EFE83742-FD34-4530-93FB-7EBAF646DBE1} = {CF9C5074-0580-4740-A85C-0897FA8BA962}
 		{4D36B927-E495-49D1-9230-8A0B84EAD422} = {DAD68404-7A8C-4AD5-B033-6C6AFBDB83BE}
+		{7CC90846-E5D8-4B3F-8115-78A7EC4059BC} = {A3D1B968-F08B-4E0A-B29C-D45EC12BF9DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28055369-988B-4199-A137-0F0CA06DC0FE}
