@@ -1,4 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Common;
+﻿using System.Runtime.CompilerServices;
+using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningPaths;
 
 namespace AutomatedLearningSystem.Domain.Users;
@@ -46,6 +47,17 @@ public class User
       
         return new User( firstName,  lastName,  email, role,  password,
             id);
+    }
+
+    public void Update(string? firstName, string? lastName, string? email,
+        string? password,
+        Role? role)
+    {
+        FirstName = firstName ?? FirstName;
+        LastName = lastName ?? LastName;
+        Email = email ?? Email;
+        _password = password ?? _password;
+        Role = role ?? Role;
     }
 
     

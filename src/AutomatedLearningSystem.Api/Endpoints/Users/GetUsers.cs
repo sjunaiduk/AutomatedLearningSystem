@@ -1,4 +1,6 @@
-﻿using AutomatedLearningSystem.Application.Users.Queries.GetUsers;
+﻿using AutomatedLearningSystem.Api.Mappings;
+using AutomatedLearningSystem.Application.Users.Queries.GetUsers;
+using AutomatedLearningSystem.Contracts.Users;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -7,8 +9,6 @@ namespace AutomatedLearningSystem.Api.Endpoints.Users;
 
 public class GetUsers : IEndpoint
 {
-
-    
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
 
@@ -16,7 +16,17 @@ public class GetUsers : IEndpoint
         {
             var query = new GetUsersQuery();
             var result = await sender.Send(query);
-            return Results.Ok(result.Value);
+            return Results.Ok(result.Value.Select(user =>
+
+                new UserResponse
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role.MapToUiRole()
+                })
+            );
 
         });
     }

@@ -1,5 +1,6 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Queries.GetUser;
+using AutomatedLearningSystem.Contracts.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,15 @@ public class GetUser : IEndpoint
 
             var result = await sender.Send(query);
 
-            return result.MatchAll(user => Results.Ok(user),
+            return result.MatchAll(user => Results.Ok(
+                    new UserResponse
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Role = user.Role.MapToUiRole()
+                    }),
                 errors => errors.ToProblemDetails());
         }).WithName("GetUser");
     }

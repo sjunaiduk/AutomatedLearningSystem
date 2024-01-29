@@ -18,5 +18,7 @@ public static class Routes
         public const string Create = $"{UserBase}";
 
         public const string Delete = $"{UserBase}/{{id:guid}}";
+
+        public const string Update = $"{UserBase}/{{id:guid}}";
     }
 }

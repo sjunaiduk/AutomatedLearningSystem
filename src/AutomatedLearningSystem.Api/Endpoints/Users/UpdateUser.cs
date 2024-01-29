@@ -1,28 +1,30 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
-using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
+using AutomatedLearningSystem.Application.Users.Commands.UpdateUser;
 using AutomatedLearningSystem.Contracts.Users;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Users;
 
-public class CreateUser : IEndpoint
+public class UpdateUser : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost(Routes.User.Create, async ([FromBody] CreateUserRequest request,
-            ISender sender) =>
+        app.MapPut(Routes.User.Update, async (UpdateUserRequest request,
+            Guid id,
+        ISender sender) =>
         {
-            CreateUserCommand command = new(request.FirstName,
+            UpdateUserCommand command = new(
+                id,
+                request.FirstName,
                 request.LastName,
                 request.Email,
                 request.Password,
-                request.Role.MapToDomainRole());
+                request.Role?.MapToDomainRole());
 
             var result = await sender.Send(command);
 
             return result.MatchAll(
-                user => Results.CreatedAtRoute("GetUser", new { id = user.Id }),
+                Results.NoContent,
                 errors => errors.ToProblemDetails());
         });
     }
