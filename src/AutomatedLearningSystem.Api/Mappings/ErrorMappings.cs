@@ -1,8 +1,8 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
 
-namespace AutomatedLearningSystem.Api.Endpoints;
+namespace AutomatedLearningSystem.Api.Mappings;
 
-public static class ErrorExtensions
+public static class ErrorMappings
 {
     public static IResult ToProblemDetails(this List<Error> errors)
     {

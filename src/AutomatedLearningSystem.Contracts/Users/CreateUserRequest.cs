@@ -1,4 +1,4 @@
-﻿namespace AutomatedLearningSystem.Contracts.Users.CreateUser;
+﻿namespace AutomatedLearningSystem.Contracts.Users;
 
 public record CreateUserRequest(string FirstName,
     string LastName,

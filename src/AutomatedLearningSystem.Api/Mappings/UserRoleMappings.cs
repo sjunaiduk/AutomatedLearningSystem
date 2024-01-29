@@ -1,8 +1,8 @@
 ﻿using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.Contracts.Users;
-namespace AutomatedLearningSystem.Api.Endpoints;
+namespace AutomatedLearningSystem.Api.Mappings;
 
-public static class UserRoleExtensions
+public static class UserRoleMappings
 {
     public static Role MapToRole(this UserRole userRole)
     {

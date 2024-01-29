@@ -31,4 +31,10 @@ public class UserRepository : IUserRepository
         _dbContext.Set<User>()
             .Remove(user);
     }
+
+    public async Task<List<User>> GetAllAsync(CancellationToken token = default)
+    {
+        return await _dbContext.Set<User>()
+            .ToListAsync(token);
+    }
 }

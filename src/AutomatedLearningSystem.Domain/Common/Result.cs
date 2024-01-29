@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Data.SqlTypes;
+using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.VisualBasic;
 
 namespace AutomatedLearningSystem.Domain.Common;
@@ -95,4 +97,5 @@ public class Result<TValue> : Result
 
     public static implicit operator Result<TValue>(List<Error> errors) =>
         new Result<TValue>(false, errors, default!);
+
 }

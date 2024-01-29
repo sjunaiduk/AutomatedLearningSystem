@@ -2,11 +2,8 @@
 using System.Net.Http.Json;
 using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Contracts.Users;
-using AutomatedLearningSystem.Contracts.Users.CreateUser;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using TestCommon.Constants;
 
 namespace AutomatedLearningSystem.FunctionalTests.Users;
 
@@ -31,7 +28,7 @@ public class CreateUserTests : BaseFunctionalTest
 
         // Act
 
-        var result = await HttpClient.PostAsJsonAsync(Routes.UserRoutes.Create,
+        var result = await HttpClient.PostAsJsonAsync(Routes.User.Create,
             createUserRequest);
 
         // Assert
