@@ -1,4 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Common;
+﻿using AutomatedLearningSystem.Domain.Answers;
+using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems.Services;
 using FluentAssertions;
 using TestCommon.Factories;
@@ -141,6 +142,102 @@ public class LearningItemsGeneratorServiceTests
 
         firstItem.Id.Should().NotBe(preferredLearningItem.First().Id);
         firstItem.Category.Should().Be(Category.Backend);
+
+    }
+
+    [Fact]
+
+    public void Generate_WeHaveMoreThanRequiredLearningItems_ShouldIncludeOnlyMaxLearningItems()
+    {
+
+        // Arrange
+        var preferredLearningItem = LearningItemFactory.CreateMany(category: Category.Database,
+            difficulty: DifficultyLevel.Advanced);
+        var otherLearningItems = LearningItemFactory.CreateMany(category: Category.Backend, count: 20,
+            difficulty: DifficultyLevel.Intermediate,
+            priority: Priority.High);
+        var allLearningItems = preferredLearningItem.Concat(otherLearningItems).ToList();
+
+        var databaseQuestion = QuestionFactory.Create(category: Category.Database);
+        var otherQuestion = QuestionFactory.Create(category: Category.Backend);
+
+        var databaseQuestionAnswer = AnswerForQuestionFactory.Create(databaseQuestion, answer: 3);
+        var allAnswers = AnswerForQuestionFactory.CreateMany(otherQuestion,
+            answer: 3,
+            count: 3);
+        allAnswers.Add(databaseQuestionAnswer);
+
+
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
+            backendLevel: DifficultyLevel.Intermediate);
+
+        // Act
+
+        var personalizedItems = LearningItemsGeneratorService.Generate(allAnswers,
+            allLearningItems,
+            userProfile);
+
+
+        // Assert
+        var firstItem = personalizedItems.First();
+
+        firstItem.Id.Should().NotBe(preferredLearningItem.First().Id);
+        firstItem.Category.Should().Be(Category.Backend);
+        personalizedItems.Count.Should().Be(10);
+
+    }
+
+
+
+    [Fact]
+
+    public void Generate_ShouldOrderByPriority()
+    {
+
+        // Arrange
+        var databaseLearningItems = LearningItemFactory.CreateMany(category: Category.Database,
+            difficulty: DifficultyLevel.Advanced,
+            priority: Priority.Low);
+        var backendLearningItems = LearningItemFactory.CreateMany(category: Category.Backend,
+            difficulty: DifficultyLevel.Intermediate,
+            priority: Priority.Medium);
+        var frontendLearningItems = LearningItemFactory.CreateMany(category: Category.Frontend,
+            count: 1,
+            priority: Priority.High);
+        var allLearningItems = databaseLearningItems.Concat(backendLearningItems)
+            .Concat(frontendLearningItems)
+            .ToList();
+
+        var databaseQuestion = QuestionFactory.Create(category: Category.Database);
+        var backendQuestion = QuestionFactory.Create(category: Category.Backend);
+        var frontendQuestion = QuestionFactory.Create(category: Category.Frontend);
+
+
+        var databaseQuestionAnswer = AnswerForQuestionFactory.Create(databaseQuestion, answer: 3);
+        var backendQuestionAnswer = AnswerForQuestionFactory.Create(backendQuestion, answer: 3);
+        var frontendQuestionAnswer = AnswerForQuestionFactory.Create(frontendQuestion, answer: 3);
+
+        var allAnswers = new List<AnswerForQuestion>
+            { databaseQuestionAnswer, backendQuestionAnswer, frontendQuestionAnswer };
+
+
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
+            backendLevel: DifficultyLevel.Intermediate);
+
+        // Act
+
+        var personalizedItems = LearningItemsGeneratorService.Generate(allAnswers,
+            allLearningItems,
+            userProfile);
+
+
+        // Assert
+        var firstItem = personalizedItems.First();
+        var secondItem = personalizedItems.Skip(1).First();
+        var thirdItem = personalizedItems.Skip(2).First();
+        firstItem.Category.Should().Be(Category.Frontend);
+        secondItem.Category.Should().Be(Category.Backend);
+        thirdItem.Category.Should().Be(Category.Database);
 
     }
 }

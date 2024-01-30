@@ -1,12 +1,22 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
 using AutomatedLearningSystem.Domain.LearningPaths;
+using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 
 namespace AutomatedLearningSystem.Infrastructure.LearningPaths.Persistence;
 
 public class LearningPathsRepository : ILearningPathRepository
 {
-    public Task Create(LearningPath path)
+
+    private readonly AutomatedLearningSystemDbContext _db;
+
+    public LearningPathsRepository(AutomatedLearningSystemDbContext db)
     {
-        throw new NotImplementedException();
+        _db = db;
+    }
+
+    public void Create(LearningPath path)
+    {
+        _db.Set<LearningPath>()
+            .Add(path);
     }
 }
