@@ -2,7 +2,7 @@
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 
-namespace AutomatedLearningSystem.Domain.LearningItems;
+namespace AutomatedLearningSystem.Domain.LearningItems.Services;
 
 
 public static class LearningItemsGeneratorService

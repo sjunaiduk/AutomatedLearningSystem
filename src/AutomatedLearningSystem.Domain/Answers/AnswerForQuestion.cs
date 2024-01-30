@@ -12,8 +12,7 @@ public class AnswerForQuestion
     public Guid Id { get; private set; }
 
     public Guid UserId { get; private set; }
-    // set to protected and only allow unit test project to set this.
-    internal Question Question { get; set; } = null!;
+    public Question Question { get; set; } = null!;
 
     public Guid QuestionId { get; private set; }
     public int Answer { get; private set; }

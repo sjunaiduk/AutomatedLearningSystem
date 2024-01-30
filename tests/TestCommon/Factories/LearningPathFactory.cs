@@ -9,7 +9,7 @@ public static class LearningPathFactory
     public static LearningPath Create(int learningItemsCount = 1)
     {
         var learningPath = LearningPath.CreateLearningPath();
-        var learningItems = LearningItemFactory.Create(count: learningItemsCount);
+        var learningItems = LearningItemFactory.CreateMany(count: learningItemsCount);
 
         learningItems.Select(item => learningPath.AddLearningItem(item));
 

@@ -1,6 +1,6 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
 using AutomatedLearningSystem.Domain.Common;
-using AutomatedLearningSystem.Domain.LearningItems;
+using AutomatedLearningSystem.Domain.LearningItems.Services;
 using AutomatedLearningSystem.Domain.LearningPaths;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;

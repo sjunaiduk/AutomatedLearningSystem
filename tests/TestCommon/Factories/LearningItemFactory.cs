@@ -6,7 +6,7 @@ namespace TestCommon.Factories;
 
 public static class LearningItemFactory
 {
-    public static List<LearningItem> Create(Category? category = null,
+    public static List<LearningItem> CreateMany(Category? category = null,
         Guid? id = null,
         int count = 1,
         string name = LearningItemConstants.Name,
@@ -18,7 +18,7 @@ public static class LearningItemFactory
         return Enumerable.Range(0, count)
             .Select(x => LearningItem.Create(name, description, category ?? LearningItemConstants.Category,
                priority ?? LearningItemConstants.Priority,
-                difficulty ?? LearningItemConstants.DifficultyLevel,
+                difficulty ?? LearningItemConstants.Level,
                 
                 id ?? Guid.NewGuid()))
             .ToList();

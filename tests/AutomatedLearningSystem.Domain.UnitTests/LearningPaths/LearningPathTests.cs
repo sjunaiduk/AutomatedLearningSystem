@@ -11,7 +11,7 @@ public class LearningPathTests
     public void LearningPath_WhenValidLearningItemsSupplied_ShouldCreateLearningPath()
     {
         // Arrange
-        var learningItems = LearningItemFactory.Create(count: 10);
+        var learningItems = LearningItemFactory.CreateMany(count: 10);
         var learningPath = LearningPath.CreateLearningPath();
 
         // Act
@@ -29,7 +29,7 @@ public class LearningPathTests
     public void LearningPath_WhenDuplicateLearningItemsSupplied_ShouldReturnError()
     {
         // Arrange
-        var learningItems = LearningItemFactory.Create(count: 2, id: LearningItemConstants.Id);
+        var learningItems = LearningItemFactory.CreateMany(count: 2, id: LearningItemConstants.Id);
         var learningPath = LearningPath.CreateLearningPath();
 
         // Act
