@@ -3,6 +3,7 @@ using System;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    partial class AutomatedLearningSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240130002150_UpdateAnswerForQuestion")]
+    partial class UpdateAnswerForQuestion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");

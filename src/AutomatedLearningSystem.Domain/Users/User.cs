@@ -23,6 +23,17 @@ public class User
     public Role Role { get; private set; }
 
 
+    public Result AddLearningPath(LearningPath learningPath)
+    {
+        if (_learningPaths.Any(lp => lp.Id == learningPath.Id))
+        {
+            return LearningPathErrors.Conflict;
+        }
+
+        _learningPaths.Add(learningPath);
+
+        return Result.Success;
+    }
 
     private User(string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)

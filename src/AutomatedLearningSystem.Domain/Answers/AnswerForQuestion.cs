@@ -1,5 +1,6 @@
 ﻿using System.Dynamic;
 using AutomatedLearningSystem.Domain.Questions;
+using AutomatedLearningSystem.Domain.Users;
 
 namespace AutomatedLearningSystem.Domain.Answers;
 
@@ -10,11 +11,12 @@ public class AnswerForQuestion
     private const int _maxScale = 5;
     public Guid Id { get; private set; }
 
-
+    public Guid UserId { get; private set; }
     // set to protected and only allow unit test project to set this.
-    public Question Question { get; set; } = null!;
+    internal Question Question { get; set; } = null!;
 
-    public int Response { get; private set; }
+    public Guid QuestionId { get; private set; }
+    public int Answer { get; private set; }
 
     public DateTimeOffset AddedDateTime { get; private set; }
 
@@ -25,15 +27,18 @@ public class AnswerForQuestion
 
     }
 
-    private AnswerForQuestion(int response)
+    private AnswerForQuestion(int answer, Guid questionId, Guid userId)
     {
-        Response = response;
+        Answer = answer;
         AddedDateTime = DateTimeOffset.Now;
+        QuestionId = questionId;
+        UserId = userId;
 
     }
 
     
-    public static AnswerForQuestion Create(int response)
+    public static AnswerForQuestion Create(int response, Guid questionId,
+        Guid userId)
     {
         if (response < _minScale || response > _maxScale)
         {
@@ -41,7 +46,8 @@ public class AnswerForQuestion
                                         $"-{_maxScale}");
         }
 
-        return new AnswerForQuestion(response);
+        return new AnswerForQuestion(response, questionId,
+            userId);
     }
 
 }

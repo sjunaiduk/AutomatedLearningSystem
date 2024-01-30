@@ -25,21 +25,23 @@ public class LearningItemsGeneratorServiceTests
         var otherLearningItems = LearningItemFactory.Create(category: Category.Backend, count: 3);
      
 
-        var answer = AnswerForQuestion.Create(5);
+        var answer = AnswerForQuestion.Create(5, Guid.NewGuid(),
+            Guid.NewGuid());
         answer.Question = Question.Create("x", Category.Database);
         var otherQuestion = Question.Create("x", Category.Backend);
 
         var allAnswers = Enumerable.Range(0, 3)
             .Select(x =>
             {
-                var otherAnswer = AnswerForQuestion.Create(2);
+                var otherAnswer = AnswerForQuestion.Create(2,
+                    Guid.NewGuid(),
+                    Guid.NewGuid());
                 otherAnswer.Question = otherQuestion;
                 return otherAnswer;
             }).ToList();
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGeneratorService();
         var inputItems = preferredLearningItem.Concat(otherLearningItems).ToList();
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile
@@ -52,7 +54,7 @@ public class LearningItemsGeneratorServiceTests
         // Act
 
         // the input items are a shallow copy of what we arranged...
-        var personalizedItems = service.Generate(inputAnswers,
+        var personalizedItems = LearningItemsGeneratorService.Generate(inputAnswers,
             inputItems,
             userProfile);
 
@@ -81,21 +83,22 @@ public class LearningItemsGeneratorServiceTests
             difficulty: DifficultyLevel.Beginner);
         otherLearningItems.Add(preferredLearningItem);
 
-        var answer = AnswerForQuestion.Create(3);
+        var answer = AnswerForQuestion.Create(3,
+            Guid.NewGuid(), Guid.NewGuid());
         answer.Question = Question.Create("x", Category.Database);
         var otherQuestion = Question.Create("x", Category.Backend);
 
         var allAnswers = Enumerable.Range(0, 3)
             .Select(x =>
             {
-                var otherAnswer = AnswerForQuestion.Create(3);
+                var otherAnswer = AnswerForQuestion.Create(3,
+                    Guid.NewGuid(), Guid.NewGuid());
                 otherAnswer.Question = otherQuestion;
                 return otherAnswer;
             }).ToList();
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGeneratorService();
         var inputItems = otherLearningItems;
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile
@@ -106,7 +109,7 @@ public class LearningItemsGeneratorServiceTests
         };
 
         // Act
-        var personalizedItems = service.Generate(inputAnswers,
+        var personalizedItems = LearningItemsGeneratorService.Generate(inputAnswers,
             inputItems,
             userProfile);
 
@@ -141,21 +144,22 @@ public class LearningItemsGeneratorServiceTests
             difficulty: DifficultyLevel.Intermediate);
         otherLearningItems.Add(preferredLearningItem);
 
-        var answer = AnswerForQuestion.Create(3);
+        var answer = AnswerForQuestion.Create(3,
+            Guid.NewGuid(), Guid.NewGuid());
         answer.Question = Question.Create("x", Category.Database);
         var otherQuestion = Question.Create("x", Category.Backend);
 
         var allAnswers = Enumerable.Range(0, 3)
             .Select(x =>
             {
-                var otherAnswer = AnswerForQuestion.Create(3);
+                var otherAnswer = AnswerForQuestion.Create(3
+                    , Guid.NewGuid(), Guid.NewGuid());
                 otherAnswer.Question = otherQuestion;
                 return otherAnswer;
             }).ToList();
 
         allAnswers.Add(answer);
 
-        var service = new LearningItemsGeneratorService();
         var inputItems = otherLearningItems;
         var inputAnswers = allAnswers;
         var userProfile = new UserProficiencyProfile
@@ -166,7 +170,7 @@ public class LearningItemsGeneratorServiceTests
         };
 
         // Act
-        var personalizedItems = service.Generate(inputAnswers,
+        var personalizedItems = LearningItemsGeneratorService.Generate(inputAnswers,
             inputItems,
             userProfile);
 

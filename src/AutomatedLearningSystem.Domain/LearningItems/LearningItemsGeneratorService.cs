@@ -5,13 +5,13 @@ using AutomatedLearningSystem.Domain.Users;
 namespace AutomatedLearningSystem.Domain.LearningItems;
 
 
-public class LearningItemsGeneratorService
+public static class LearningItemsGeneratorService
 {
     private const decimal HighInterestMultiplier = 2.0m;
     private const decimal LowInterestMultiplier = 0.5m;
     private const int _maxLearningItems = 10;
 
-    public List<LearningItem> Generate(List<AnswerForQuestion> answers,
+    public static List<LearningItem> Generate(List<AnswerForQuestion> answers,
         List<LearningItem> availableLearningItems, UserProficiencyProfile proficiencyProfile)
     {
         var categorizedItems = CategorizeLearningItems(availableLearningItems);
@@ -37,7 +37,7 @@ public class LearningItemsGeneratorService
 
     private static void AdjustScoresBasedOnInterestAndProficiency(List<LearningItem> items, AnswerForQuestion answer, UserProficiencyProfile profile)
     {
-        decimal interestMultiplier = CalculateInterestMultiplier(answer.Response);
+        decimal interestMultiplier = CalculateInterestMultiplier(answer.Answer);
 
         foreach (var item in items)
         {
@@ -103,7 +103,7 @@ public class LearningItemsGeneratorService
 
 //            int score = 0;
 
-//            if (answer.Response >= 3)
+//            if (answer.Answer >= 3)
 //            {
 //                score = 3;
 //            }
