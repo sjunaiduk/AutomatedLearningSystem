@@ -25,6 +25,8 @@ jobs:
 
     - name: Run Tests
       run: dotnet test --logger "trx;LogFileName=test_results.trx"
+      continue-on-error: true # This allows the step to "pass" even if tests fail
+
 
     - name: Process Test Results
       uses: dorny/test-reporter@v1
@@ -32,5 +34,6 @@ jobs:
         name: .NET Test Results
         path: '**/test_results.trx'
         reporter: 'dotnet-trx'
+        fail-on-error: true
 
 
