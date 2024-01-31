@@ -13,13 +13,13 @@ public static class LearningItemFactory
         string description = LearningItemConstants.Description,
         Priority? priority = null,
         DifficultyLevel? difficulty = null)
-       
+
     {
         return Enumerable.Range(0, count)
             .Select(x => LearningItem.Create(name, description, category ?? LearningItemConstants.Category,
                priority ?? LearningItemConstants.Priority,
                 difficulty ?? LearningItemConstants.Level,
-                
+
                 id ?? Guid.NewGuid()))
             .ToList();
     }

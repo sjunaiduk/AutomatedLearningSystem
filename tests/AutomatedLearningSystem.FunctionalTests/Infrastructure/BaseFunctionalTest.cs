@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using Xunit;
-
-namespace AutomatedLearningSystem.FunctionalTests.Infrastructure;
+﻿namespace AutomatedLearningSystem.FunctionalTests.Infrastructure;
 
 public class BaseFunctionalTest : IClassFixture<FunctionalTestWebApplicationFactory>
 {

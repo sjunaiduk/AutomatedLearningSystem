@@ -2,7 +2,6 @@
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AutomatedLearningSystem.Application.Users.Commands.UpdateUser;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using AutomatedLearningSystem.Domain.Common;
+﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems;
 
 namespace AutomatedLearningSystem.Domain.LearningPaths
@@ -30,13 +24,13 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
 
         public static LearningPath CreateLearningPath(Guid? id = null)
         {
-           
+
             return new LearningPath(id);
         }
 
         public Result AddLearningItem(LearningItem item)
         {
-         
+
             if (_learningItems.Any(i => i.Id == item.Id))
             {
                 return LearningPathErrors.Conflict;

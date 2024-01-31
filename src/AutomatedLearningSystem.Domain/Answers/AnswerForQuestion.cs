@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-using AutomatedLearningSystem.Domain.Questions;
-using AutomatedLearningSystem.Domain.Users;
+﻿using AutomatedLearningSystem.Domain.Questions;
 
 namespace AutomatedLearningSystem.Domain.Answers;
 
@@ -20,7 +18,7 @@ public class AnswerForQuestion
     public DateTimeOffset AddedDateTime { get; private set; }
 
 
-  
+
     private AnswerForQuestion()
     {
 
@@ -35,7 +33,7 @@ public class AnswerForQuestion
 
     }
 
-    
+
     public static AnswerForQuestion Create(int response, Guid questionId,
         Guid userId)
     {

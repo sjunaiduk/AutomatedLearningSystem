@@ -1,5 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Users;
-using AutomatedLearningSystem.Contracts.Users;
+﻿using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Domain.Users;
 namespace AutomatedLearningSystem.Api.Mappings;
 
 public static class UserRoleMappings

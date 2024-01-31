@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class IntitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,8 +60,9 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     QuestionId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Response = table.Column<int>(type: "INTEGER", nullable: false),
+                    Answer = table.Column<int>(type: "INTEGER", nullable: false),
                     AddedDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -72,6 +72,12 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         name: "FK_AnswerForQuestion_Question_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Question",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnswerForQuestion_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -121,6 +127,11 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 name: "IX_AnswerForQuestion_QuestionId",
                 table: "AnswerForQuestion",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnswerForQuestion_UserId",
+                table: "AnswerForQuestion",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LearningItemLearningPath_LearningPathId",

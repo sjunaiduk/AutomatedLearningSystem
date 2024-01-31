@@ -1,9 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Queries.GetUsers;
 using AutomatedLearningSystem.Contracts.Users;
-using AutomatedLearningSystem.Domain.Users;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Users;
 

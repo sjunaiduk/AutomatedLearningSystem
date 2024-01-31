@@ -1,6 +1,5 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
-using MediatR;
 
 namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 

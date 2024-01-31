@@ -22,7 +22,7 @@ public class CreateUserCommandHandlerTests
             _unitOfWorkMock,
             _emailServiceMock);
         var command = UserCommandsFactory.CreateUserCommandFactory.Create();
-        
+
         // Act
         var result = await handler.Handle(command, default);
 

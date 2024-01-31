@@ -22,7 +22,7 @@ app.UseSwaggerUI();
 
 if (app.Environment.IsDevelopment())
 {
-    app.ApplyMigrations();
+    await app.ApplyMigrations();
     app.SeedData();
 
 }

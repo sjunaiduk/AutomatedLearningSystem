@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using AutomatedLearningSystem.Domain.Common;
+﻿using AutomatedLearningSystem.Domain.Common;
 
 namespace AutomatedLearningSystem.Domain.Questions;
 

@@ -1,7 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Common;
-using AutomatedLearningSystem.Domain.Users;
+﻿using AutomatedLearningSystem.Domain.Users;
 using FluentAssertions;
-using NSubstitute;
 using TestCommon.Constants;
 
 namespace AutomatedLearningSystem.Domain.UnitTests.Users;
@@ -11,7 +9,7 @@ public class UserTests
     [Fact]
     public void User_GivenValidData_ShouldCreateUser()
     {
-     
+
         // Act
 
         var createUserResult = User.Create(
@@ -29,5 +27,5 @@ public class UserTests
 
 
 
-   
+
 }

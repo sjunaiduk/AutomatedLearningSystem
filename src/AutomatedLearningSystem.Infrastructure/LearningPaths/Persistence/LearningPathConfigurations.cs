@@ -1,5 +1,4 @@
-﻿using AutomatedLearningSystem.Domain.LearningItems;
-using AutomatedLearningSystem.Domain.LearningPaths;
+﻿using AutomatedLearningSystem.Domain.LearningPaths;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

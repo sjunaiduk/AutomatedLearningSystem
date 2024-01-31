@@ -1,6 +1,4 @@
-﻿using AutomatedLearningSystem.Domain.LearningItems;
-using AutomatedLearningSystem.Domain.LearningPaths;
-using TestCommon.Constants;
+﻿using AutomatedLearningSystem.Domain.LearningPaths;
 
 namespace TestCommon.Factories;
 

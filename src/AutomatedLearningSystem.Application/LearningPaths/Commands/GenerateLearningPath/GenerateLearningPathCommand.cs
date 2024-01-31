@@ -2,8 +2,9 @@
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 
-namespace AutomatedLearningSystem.Application.LearningPaths.Commands;
+namespace AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 
 public record GenerateLearningPathCommand(Guid UserId,
     List<AnswerForQuestion> AnswersForQuestions,
-    UserProficiencyProfile Profile) : ICommand<Result> {}
+    UserProficiencyProfile Profile) : ICommand<Result>
+{ }

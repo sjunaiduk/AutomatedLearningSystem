@@ -2,10 +2,11 @@
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems.Services;
 using AutomatedLearningSystem.Domain.LearningPaths;
+using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
 
-namespace AutomatedLearningSystem.Application.LearningPaths.Commands;
+namespace AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 
 public class GenerateLearningPathCommandHandler : IRequestHandler<GenerateLearningPathCommand,
 Result>
@@ -36,42 +37,43 @@ Result>
 
         foreach (var answer in request.AnswersForQuestions)
         {
-            var question = await  _questionRepository.GetByIdAsync(answer.QuestionId);
+            var question = await _questionRepository.GetByIdAsync(answer.QuestionId);
             if (question is null)
             {
-                throw new InvalidOperationException();
+                return QuestionErrors.NotFound;
             }
+
             answer.Question = question;
         }
 
         var learningItems = await _learningItemsRepository.GetAllAsync(cancellationToken);
 
-       var generatedLearningItems =  LearningItemsGeneratorService.Generate(request.AnswersForQuestions, learningItems,
-            request.Profile);
+        var generatedLearningItems = LearningItemsGeneratorService.Generate(request.AnswersForQuestions, learningItems,
+             request.Profile);
 
-       var learningPath = LearningPath.CreateLearningPath();
+        var learningPath = LearningPath.CreateLearningPath();
+
+        _learningPathRepository.Create(learningPath);
+
+        foreach (var item in generatedLearningItems)
+        {
+            var addLearningItemResult = learningPath.AddLearningItem(item);
+            if (addLearningItemResult.IsFailure)
+            {
+                return addLearningItemResult;
+            }
+        }
+
+        var addLearningPathToUserResult = user.AddLearningPath(learningPath);
+
+        if (addLearningPathToUserResult.IsFailure)
+        {
+            return addLearningPathToUserResult;
+        }
+
+        await _unitOfWork.CommitChangesAsync(cancellationToken);
 
 
-       foreach (var item in generatedLearningItems)
-       {
-           var addLearningItemResult = learningPath.AddLearningItem(item);
-           if (addLearningItemResult.IsFailure)
-           {
-               return addLearningItemResult;
-           }
-       }
-
-
-       var addLearningPathToUserResult =  user.AddLearningPath(learningPath);
-
-       if (addLearningPathToUserResult.IsFailure)
-       {
-           return addLearningPathToUserResult;
-       }
-
-       await _unitOfWork.CommitChangesAsync(cancellationToken);
-
-
-       return Result.Success;
+        return Result.Success;
     }
 }

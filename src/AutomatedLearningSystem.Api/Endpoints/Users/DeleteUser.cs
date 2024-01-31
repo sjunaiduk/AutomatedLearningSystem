@@ -19,7 +19,7 @@ public class DeleteUser : IEndpoint
             return result.MatchAll(
                 Results.NoContent,
                 errors => errors.ToProblemDetails());
-        }); 
-            
+        });
+
     }
 }

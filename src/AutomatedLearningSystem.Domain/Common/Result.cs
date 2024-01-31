@@ -1,9 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
-using Microsoft.VisualBasic;
-
-namespace AutomatedLearningSystem.Domain.Common;
+﻿namespace AutomatedLearningSystem.Domain.Common;
 
 public class Result
 {
@@ -11,13 +6,13 @@ public class Result
     public bool IsSuccess { get; init; }
 
     public bool IsFailure => !IsSuccess;
-    
+
     protected List<Error> Errors { get; } = null!;
     public Error? FirstError => Errors.FirstOrDefault();
 
     public static Result Success => new Result(true);
 
-    
+
     protected Result(bool isSuccess, List<Error> errors)
     {
         if (isSuccess && errors.Any())
@@ -43,7 +38,7 @@ public class Result
     protected Result(bool isSuccess)
     {
         this.IsSuccess = isSuccess;
-    
+
     }
 
 
@@ -57,13 +52,13 @@ public class Result
 public class Result<TValue> : Result
 {
 
-    private TValue? _value { get; init; } 
+    private TValue? _value { get; init; }
     protected Result(bool isSuccess, List<Error> errors, TValue value) : base(isSuccess, errors)
     {
         _value = value;
     }
 
-   
+
 
     private Result(bool isSuccess, TValue value) : base(isSuccess)
     {

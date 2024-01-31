@@ -4,5 +4,5 @@ namespace AutomatedLearningSystem.Application.Common.Abstractions;
 
 public interface ILearningPathRepository
 {
-    void Create(LearningPath  path);
+    void Create(LearningPath path);
 }

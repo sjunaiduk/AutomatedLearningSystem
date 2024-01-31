@@ -3,7 +3,7 @@
 public record Error(string Code, string Description, ErrorType ErrorType)
 {
     public static Error NotFound(string code = "General.NotFound",
-        string description = "A NotFound error has occured") => 
+        string description = "A NotFound error has occured") =>
     new Error(code, description, ErrorType.NotFound);
 
     public static Error Conflict(string code = "General.Conflict",

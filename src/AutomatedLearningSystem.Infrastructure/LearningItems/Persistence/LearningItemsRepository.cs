@@ -19,4 +19,10 @@ public class LearningItemsRepository : ILearningItemsRepository
         return _db.Set<LearningItem>()
             .ToListAsync(cancellationToken);
     }
+
+    public void Create(LearningItem newItem)
+    {
+        _db.Set<LearningItem>()
+            .Add(newItem);
+    }
 }

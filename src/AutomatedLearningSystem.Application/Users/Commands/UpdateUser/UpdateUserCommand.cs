@@ -9,7 +9,8 @@ public record UpdateUserCommand(Guid Id,
     string? Email,
     string? Password,
     Role? role
-    ) : ICommand<Result> {}
+    ) : ICommand<Result>
+{ }
 
 
 

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using AutomatedLearningSystem.Domain.Common;
+﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Questions;
 using TestCommon.Constants;
 

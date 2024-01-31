@@ -1,9 +1,9 @@
-﻿using System.Net;
-using System.Net.Http.Json;
-using AutomatedLearningSystem.Api.Endpoints;
+﻿using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Contracts.Users;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace AutomatedLearningSystem.FunctionalTests.Users;
 

@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using TestCommon.Factories;
 
-namespace AutomatedLearningSystem.FunctionalTests.Users.Commands.CreateUser;
+namespace AutomatedLearningSystem.IntegrationTests.Users.Commands.CreateUser;
 
 public class CreateUserTests : BaseIntegrationTest
 {
@@ -20,7 +20,7 @@ public class CreateUserTests : BaseIntegrationTest
         // Arrange
         var createUserCommand = UserCommandsFactory.CreateUserCommandFactory
             .Create();
-        
+
         // Act
         var createUserResult = await Sender.Send(createUserCommand);
         var createdUser = await DbContext

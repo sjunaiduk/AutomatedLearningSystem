@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="LearningPaths\GenerateLearningPath\" />
     <Folder Include="Users\CreateUser\" />
   </ItemGroup>
 

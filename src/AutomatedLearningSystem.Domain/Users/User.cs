@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using AutomatedLearningSystem.Domain.Common;
+﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningPaths;
 
 namespace AutomatedLearningSystem.Domain.Users;
@@ -16,8 +15,8 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-    private List<LearningPath> _learningPaths { get; set; } = new();
-    public IReadOnlyCollection<LearningPath> LearningPaths => _learningPaths.ToList();
+    private List<LearningPath> _learningPaths { get; } = new();
+    public List<LearningPath> LearningPaths => _learningPaths.ToList();
 
 
     public Role Role { get; private set; }
@@ -55,8 +54,8 @@ public class User
         Guid? id = null)
     {
 
-      
-        return new User( firstName,  lastName,  email, role,  password,
+
+        return new User(firstName, lastName, email, role, password,
             id);
     }
 
@@ -71,7 +70,7 @@ public class User
         Role = role ?? Role;
     }
 
-    
+
 
 
 

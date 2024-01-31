@@ -1,5 +1,4 @@
-﻿using AutomatedLearningSystem.Domain.LearningPaths;
-using AutomatedLearningSystem.Domain.Users;
+﻿using AutomatedLearningSystem.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

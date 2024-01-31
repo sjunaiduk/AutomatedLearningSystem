@@ -5,7 +5,7 @@ using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.Domain.UnitTests.LearningPaths;
 
-public class LearningPathTests  
+public class LearningPathTests
 {
     [Fact]
     public void LearningPath_WhenValidLearningItemsSupplied_ShouldCreateLearningPath()

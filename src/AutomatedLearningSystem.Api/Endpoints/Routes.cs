@@ -1,6 +1,4 @@
-﻿using AutomatedLearningSystem.Domain.Users;
-
-namespace AutomatedLearningSystem.Api.Endpoints;
+﻿namespace AutomatedLearningSystem.Api.Endpoints;
 
 public static class Routes
 {

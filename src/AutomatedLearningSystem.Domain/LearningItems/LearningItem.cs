@@ -42,7 +42,7 @@ public class LearningItem
         DifficultyLevel difficultyLevel,
         Guid? id = null)
     {
-        return new LearningItem( name,  description,  category, priority,
+        return new LearningItem(name, description, category, priority,
             difficultyLevel,
              id);
     }

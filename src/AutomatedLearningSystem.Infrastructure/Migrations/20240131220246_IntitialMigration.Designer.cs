@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240130002150_UpdateAnswerForQuestion")]
-    partial class UpdateAnswerForQuestion
+    [Migration("20240131220246_IntitialMigration")]
+    partial class IntitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

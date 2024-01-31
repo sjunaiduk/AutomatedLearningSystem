@@ -1,7 +1,6 @@
 ﻿using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -10,15 +9,20 @@ namespace AutomatedLearningSystem.FunctionalTests.Infrastructure;
 
 public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program>
 {
+
+    private readonly string _dbName = Guid.NewGuid().ToString();
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices(services =>
+        builder.ConfigureServices(services =>
         {
-            services.RemoveAll<AutomatedLearningSystemDbContext>();
-            services.AddDbContext<AutomatedLearningSystemDbContext>(o =>
+            services.RemoveAll<DbContextOptions<AutomatedLearningSystemDbContext>>();
+
+            services.AddDbContext<AutomatedLearningSystemDbContext>(opt =>
             {
-                o.UseSqlite("Date source = test.db");
+                opt.UseSqlite($"Data Source=test-{_dbName}.db");
+
             });
+
         });
     }
 
