@@ -19,4 +19,10 @@ public class LearningPathsRepository : ILearningPathRepository
         _db.Set<LearningPath>()
             .Add(path);
     }
+
+    public void DeleteRange(List<LearningPath> userLearningPaths)
+    {
+        _db.Set<LearningPath>()
+            .RemoveRange(userLearningPaths);
+    }
 }

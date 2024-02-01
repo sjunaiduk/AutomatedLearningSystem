@@ -1,4 +1,5 @@
 ﻿using AutomatedLearningSystem.Domain.LearningPaths;
+using AutomatedLearningSystem.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,6 +12,7 @@ public class LearningPathConfigurations : IEntityTypeConfiguration<LearningPath>
     {
 
         builder.HasKey(x => x.Id);
+
 
         builder.HasMany(x => x.LearningItems)
             .WithMany();

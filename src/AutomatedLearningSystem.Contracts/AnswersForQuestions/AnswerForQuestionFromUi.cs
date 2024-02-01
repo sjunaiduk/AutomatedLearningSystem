@@ -1,4 +1,4 @@
-﻿namespace AutomatedLearningSystem.Contracts.AnswerForQuestions;
+﻿namespace AutomatedLearningSystem.Contracts.AnswersForQuestions;
 
 public class AnswerForQuestionFromUi
 {

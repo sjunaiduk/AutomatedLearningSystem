@@ -1,11 +1,10 @@
 ﻿namespace AutomatedLearningSystem.Contracts.Users;
 
-public class UserProficiencyProfile
+public class UserProficiencyProfileUi
 {
     public UserLevel Frontend { get; init; }
     public UserLevel Backend { get; init; }
     public UserLevel Database { get; init; }
-
 
 }
 

@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
-namespace AutomatedLearningSystem.Api.Endpoints.Users;
+namespace AutomatedLearningSystem.Api.Endpoints;
 
-public static class UserEndpoints
+public static class Endpoints
 {
-    public static void MapUserEndpoints(this IEndpointRouteBuilder app)
+    public static void MapEndpoints(this IEndpointRouteBuilder app)
     {
 
         var assembly = Assembly.GetExecutingAssembly();
@@ -15,8 +15,8 @@ public static class UserEndpoints
 
         foreach (var type in endpoints)
         {
-            var endpoint = (IEndpoint)Activator.CreateInstance(type);
-            endpoint.MapEndpoint(app);
+            var endpoint = (IEndpoint)Activator.CreateInstance(type)!;
+            endpoint?.MapEndpoint(app);
         }
     }
 }

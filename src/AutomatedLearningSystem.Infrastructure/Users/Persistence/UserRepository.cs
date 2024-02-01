@@ -22,6 +22,7 @@ public class UserRepository : IUserRepository
     public Task<User?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
         return _dbContext.Set<User>()
+            .Include(x => x.LearningPaths)
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync(token);
     }

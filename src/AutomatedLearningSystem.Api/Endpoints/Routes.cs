@@ -18,5 +18,11 @@ public static class Routes
         public const string Delete = $"{UserBase}/{{id:guid}}";
 
         public const string Update = $"{UserBase}/{{id:guid}}";
+        public static class LearningPaths
+        {
+            
+            private const string LearningPathBase = $"{UserBase}/{{userId:guid}}/learning-paths";
+            public const string Create = $"{LearningPathBase}";
+        }
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240131220246_IntitialMigration")]
-    partial class IntitialMigration
+    [Migration("20240201182853_MigrationBase")]
+    partial class MigrationBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -178,7 +178,9 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 {
                     b.HasOne("AutomatedLearningSystem.Domain.Users.User", null)
                         .WithMany("LearningPaths")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LearningItemLearningPath", b =>

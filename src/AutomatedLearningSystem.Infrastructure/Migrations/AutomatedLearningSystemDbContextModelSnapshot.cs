@@ -80,7 +80,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -175,7 +175,9 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 {
                     b.HasOne("AutomatedLearningSystem.Domain.Users.User", null)
                         .WithMany("LearningPaths")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LearningItemLearningPath", b =>

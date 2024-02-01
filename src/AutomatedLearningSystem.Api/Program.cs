@@ -1,3 +1,4 @@
+using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Api.Endpoints.Users;
 using AutomatedLearningSystem.Api.Extensions;
 using AutomatedLearningSystem.Application;
@@ -29,7 +30,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapUserEndpoints();
+app.MapEndpoints();
 
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Users;
+﻿using AutomatedLearningSystem.Domain.LearningPaths;
+using AutomatedLearningSystem.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,12 +11,14 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
     {
         builder.HasMany(x => x.LearningPaths)
             .WithOne()
-            .IsRequired(false);
+            .IsRequired();
+
 
         builder.Property(u => u.Email)
             .IsRequired();
 
         builder.HasKey(u => u.Id);
+
 
         builder.Property("_password")
             .HasColumnName("password")

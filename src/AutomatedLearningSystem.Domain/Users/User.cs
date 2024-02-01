@@ -15,8 +15,8 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-    private List<LearningPath> _learningPaths { get; } = new();
-    public List<LearningPath> LearningPaths => _learningPaths.ToList();
+   // private List<LearningPath> _learningPaths { get; } = new();
+   public List<LearningPath> LearningPaths { get; set; } = new();
 
 
     public Role Role { get; private set; }
@@ -24,15 +24,16 @@ public class User
 
     public Result AddLearningPath(LearningPath learningPath)
     {
-        if (_learningPaths.Any(lp => lp.Id == learningPath.Id))
+        if (LearningPaths.Any(lp => lp.Id == learningPath.Id))
         {
             return LearningPathErrors.Conflict;
         }
 
-        _learningPaths.Add(learningPath);
+        LearningPaths.Add(learningPath);
 
         return Result.Success;
     }
+
 
     private User(string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)
