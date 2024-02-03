@@ -1,4 +1,5 @@
-﻿using AutomatedLearningSystem.Domain.Common;
+﻿using System.Runtime.InteropServices;
+using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems;
 using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.Domain.Users;
@@ -54,12 +55,18 @@ public static class ApplicationBuilderExtensions
 
         if (!anyQuestions)
         {
-            var questions = Enumerable.Range(0, 5)
+            var questions = Enumerable.Range(0, 6)
                 .Select(x =>
                 {
                     var faker = new Faker();
                     return Question.Create(faker.Lorem.Sentence(),
-                        Category.Database);
+                        x switch
+                        {
+                            <=2 => Category.Database,
+                            <= 4 => Category.Frontend,
+                            <= 6 => Category.Backend,
+                            _ => throw new InvalidOperationException()
+                        });
                 })
                 .ToList();
 
@@ -72,7 +79,7 @@ public static class ApplicationBuilderExtensions
 
         if (!anyLearningItems)
         {
-            var learningItems = Enumerable.Range(0, 10)
+            var learningItems = Enumerable.Range(0, 20)
                 .Select(x =>
                 {
                     var faker = new Faker();

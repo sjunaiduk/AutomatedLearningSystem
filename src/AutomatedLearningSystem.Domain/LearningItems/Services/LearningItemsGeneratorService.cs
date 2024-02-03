@@ -18,6 +18,10 @@ public static class LearningItemsGeneratorService
 
         foreach (var answer in answers)
         {
+            if (!categorizedItems.ContainsKey(answer.Question.Category))
+            {
+                continue;
+            } 
             var categoryItems = categorizedItems[answer.Question.Category];
             AdjustScoresBasedOnInterestAndProficiency(categoryItems, answer, proficiencyProfile);
         }
