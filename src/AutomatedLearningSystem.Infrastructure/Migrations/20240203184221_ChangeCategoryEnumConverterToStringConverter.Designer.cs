@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240203162637_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240203184221_ChangeCategoryEnumConverterToStringConverter")]
+    partial class ChangeCategoryEnumConverterToStringConverter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

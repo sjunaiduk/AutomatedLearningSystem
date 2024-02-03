@@ -25,4 +25,10 @@ public static class Routes
             public const string Create = $"{LearningPathBase}";
         }
     }
+
+    public static class Questions
+    {
+        private const string QuestionsBase = $"{Base}/questions";
+        public const string GetAll = $"{QuestionsBase}";
+    }
 }

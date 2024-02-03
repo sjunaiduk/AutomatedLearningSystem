@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AutomatedLearningSystem.Api\AutomatedLearningSystem.Api.csproj" />
+    <ProjectReference Include="..\..\src\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
     <ProjectReference Include="..\TestCommon\TestCommon.csproj" />
   </ItemGroup>
 

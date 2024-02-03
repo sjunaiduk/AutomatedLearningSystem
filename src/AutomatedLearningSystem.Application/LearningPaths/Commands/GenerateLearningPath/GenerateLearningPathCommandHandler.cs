@@ -5,6 +5,9 @@ using AutomatedLearningSystem.Domain.LearningPaths;
 using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 
@@ -18,7 +21,11 @@ Result>
     private readonly IQuestionRepository _questionRepository;
     private readonly ILearningItemsRepository _learningItemsRepository;
 
-    public GenerateLearningPathCommandHandler(ILearningPathRepository learningPathRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, IQuestionRepository questionRepository, ILearningItemsRepository learningItemsRepository)
+    public GenerateLearningPathCommandHandler(ILearningPathRepository learningPathRepository,
+        IUserRepository userRepository,
+        IUnitOfWork unitOfWork,
+        IQuestionRepository questionRepository,
+        ILearningItemsRepository learningItemsRepository)
     {
         _learningPathRepository = learningPathRepository;
         _userRepository = userRepository;
@@ -30,6 +37,7 @@ Result>
     public async Task<Result> Handle(GenerateLearningPathCommand request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
+   
         if (user is null)
         {
             return UserErrors.NotFound;

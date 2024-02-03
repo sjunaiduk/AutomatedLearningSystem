@@ -26,9 +26,11 @@ namespace AutomatedLearningSystem.IntegrationTests.LearningPaths.Commands.Genera
 
             // Assert
             user.LearningPaths.Count.Should().Be(1);
-            DbContext.Set<User>().Include(x => x.LearningPaths)
-                .First(x => x.Id == user.Id)
-                .LearningPaths.Count.Should().Be(1);
+            var savedUser = DbContext.Set<User>()
+                .Include(x => x.LearningPaths)
+                .First(x => x.Id == user.Id);
+
+            savedUser.LearningPaths.Count.Should().Be(1);
             result.IsSuccess.Should().BeTrue();
         }
 
@@ -50,6 +52,11 @@ namespace AutomatedLearningSystem.IntegrationTests.LearningPaths.Commands.Genera
 
 
             // Assert
+            var savedUser = DbContext.Set<User>()
+                .Include(x => x.LearningPaths)
+                .First(x => x.Id == user.Id);
+
+            savedUser.LearningPaths.Count.Should().Be(3);
             result.IsFailure.Should().BeTrue();
             result.FirstError.Should().Be(LearningPathErrors.LearningPathLimitReached);
         }
