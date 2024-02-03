@@ -5,7 +5,7 @@ namespace AutomatedLearningSystem.Domain.Users;
 
 public class User
 {
-
+    private const int _maxLearningPaths = 3;
     private string _password { get; set; } = null!;
 
     public Guid Id { get; init; }
@@ -15,8 +15,8 @@ public class User
 
     public string Email { get; private set; } = string.Empty;
 
-   // private List<LearningPath> _learningPaths { get; } = new();
-   public List<LearningPath> LearningPaths { get; set; } = new();
+   private List<LearningPath> _learningPaths { get; } = new();
+   public IReadOnlyCollection<LearningPath> LearningPaths => _learningPaths.ToList();
 
 
     public Role Role { get; private set; }
@@ -24,12 +24,16 @@ public class User
 
     public Result AddLearningPath(LearningPath learningPath)
     {
-        if (LearningPaths.Any(lp => lp.Id == learningPath.Id))
+        if (_learningPaths.Any(lp => lp.Id == learningPath.Id))
         {
             return LearningPathErrors.Conflict;
         }
 
-        LearningPaths.Add(learningPath);
+        if (_learningPaths.Count == _maxLearningPaths)
+        {
+            return LearningPathErrors.LearningPathLimitReached;
+        }
+        _learningPaths.Add(learningPath);
 
         return Result.Success;
     }

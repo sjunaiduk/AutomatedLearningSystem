@@ -1,7 +1,8 @@
+using System.Reflection.Metadata.Ecma335;
 using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Api.Endpoints.Users;
 using AutomatedLearningSystem.Api.Extensions;
-using AutomatedLearningSystem.Application;
+using AutomatedLearningSystem.Application;using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,12 +27,12 @@ if (app.Environment.IsDevelopment())
     await app.ApplyMigrations();
     app.SeedData();
 
+
 }
 
 app.UseHttpsRedirection();
 
 app.MapEndpoints();
-
 
 app.Run();
 
