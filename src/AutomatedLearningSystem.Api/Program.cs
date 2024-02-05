@@ -16,6 +16,28 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAuthentication("cookie")
+    .AddCookie("cookie", opt =>
+    {
+        //opt.Events.OnRedirectToLogin = ctx =>
+        //{
+        //    ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        //    return Task.CompletedTask;
+        //};
+    });
+
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("protected", pb =>
+    {
+        pb.RequireRole("admin")
+            .RequireAuthenticatedUser();
+    });
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,6 +53,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapEndpoints();
 

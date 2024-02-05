@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240203184221_ChangeCategoryEnumConverterToStringConverter")]
-    partial class ChangeCategoryEnumConverterToStringConverter
+    [Migration("20240205181928_UpdatePassword")]
+    partial class UpdatePassword
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,13 +129,12 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Role")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("_password")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("password");
 
                     b.HasKey("Id");
 

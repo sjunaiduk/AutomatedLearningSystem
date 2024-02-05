@@ -28,7 +28,13 @@ public static class DependencyInjection
         services.AddScoped<DbContext, AutomatedLearningSystemDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+        
+     
+
+
         return services;
     }
+
+    
 
 }

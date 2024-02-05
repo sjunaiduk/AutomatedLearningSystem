@@ -26,6 +26,7 @@ public class GetUser : IEndpoint
                         Role = user.Role.MapToUiRole()
                     }),
                 errors => errors.ToProblemDetails());
-        }).WithName("GetUser");
+        }).WithName("GetUser")
+        .RequireAuthorization("admin");
     }
 }

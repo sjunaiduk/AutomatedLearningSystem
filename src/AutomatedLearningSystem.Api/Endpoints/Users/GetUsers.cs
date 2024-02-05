@@ -22,7 +22,8 @@ public class GetUsers : IEndpoint
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
-                    Role = user.Role.MapToUiRole()
+                    Role = user.Role.MapToUiRole(),
+                    Password = user.Password
                 })
             );
 

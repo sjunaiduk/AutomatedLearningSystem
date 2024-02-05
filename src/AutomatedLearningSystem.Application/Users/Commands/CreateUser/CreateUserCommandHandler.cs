@@ -2,6 +2,7 @@
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 
@@ -10,7 +11,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
     private readonly IUserRepository _userRepository;
     private readonly IEmailService _emailService;
     private readonly IUnitOfWork _unitOfWork;
-
     public CreateUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IEmailService emailService)
     {
         _userRepository = userRepository;

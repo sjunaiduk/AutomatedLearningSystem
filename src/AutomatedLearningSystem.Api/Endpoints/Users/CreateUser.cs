@@ -24,6 +24,6 @@ public class CreateUser : IEndpoint
             return result.MatchAll(
                 user => Results.CreatedAtRoute("GetUser", new { id = user.Id }),
                 errors => errors.ToProblemDetails());
-        });
+        }).RequireAuthorization("protected");
     }
 }

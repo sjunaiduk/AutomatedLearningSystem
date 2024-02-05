@@ -14,11 +14,7 @@ public static class ErrorMappings
         if (errors.Count == 1)
         {
             var error = errors[0];
-            return Results.Problem(
-                statusCode: error.GetStatusCode(),
-                title: error.Code,
-                detail: error.Description
-            );
+            return error.ToProblemDetails();
         }
 
         return Results.Problem(
@@ -28,6 +24,15 @@ public static class ErrorMappings
                 {"errors", errors}
             });
 
+    }
+
+    public static IResult ToProblemDetails(this Error error)
+    {
+        return Results.Problem(
+            statusCode: error.GetStatusCode(),
+            title: error.Code,
+            detail: error.Description
+        );
     }
 
     public static int GetStatusCode(this Error error)

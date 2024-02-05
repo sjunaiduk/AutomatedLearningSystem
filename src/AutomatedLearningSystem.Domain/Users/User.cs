@@ -1,13 +1,13 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningPaths;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedLearningSystem.Domain.Users;
 
 public class User
 {
     private const int _maxLearningPaths = 3;
-    private string _password { get; set; } = null!;
-
+    public string Password { get; private set; }
     public Guid Id { get; init; }
     public string FirstName { get; private set; } = string.Empty;
 
@@ -42,7 +42,7 @@ public class User
     private User(string firstName, string lastName, string email, Role role, string password,
         Guid? id = null)
     {
-        _password = password;
+        Password = password;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -71,7 +71,7 @@ public class User
         FirstName = firstName ?? FirstName;
         LastName = lastName ?? LastName;
         Email = email ?? Email;
-        _password = password ?? _password;
+        Password = password ?? Password;
         Role = role ?? Role;
     }
 

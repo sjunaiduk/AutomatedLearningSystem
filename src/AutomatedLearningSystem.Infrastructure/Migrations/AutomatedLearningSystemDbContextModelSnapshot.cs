@@ -126,13 +126,12 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Role")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("_password")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("password");
 
                     b.HasKey("Id");
 

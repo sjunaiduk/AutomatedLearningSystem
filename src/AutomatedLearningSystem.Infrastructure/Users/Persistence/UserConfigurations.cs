@@ -20,8 +20,7 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
         builder.HasKey(u => u.Id);
 
 
-        builder.Property("_password")
-            .HasColumnName("password")
+        builder.Property(x => x.Password)
             .IsRequired();
     }
 }

@@ -8,10 +8,13 @@ namespace AutomatedLearningSystem.Infrastructure.Users.Persistence;
 public class UserRepository : IUserRepository
 {
     private readonly AutomatedLearningSystemDbContext _dbContext;
+    private readonly DbSet<User> _users;
+
 
     public UserRepository(AutomatedLearningSystemDbContext dbContext)
     {
         _dbContext = dbContext;
+        _users = dbContext.Set<User>();
     }
 
     public void Create(User user)
@@ -31,6 +34,12 @@ public class UserRepository : IUserRepository
     {
         _dbContext.Set<User>()
             .Remove(user);
+    }
+
+    public Task<User?> LoginAsync(string requestEmail, string requestPassword)
+    {
+        return _users.FirstOrDefaultAsync(u => u.Email == requestEmail &&
+                                        u.Password == requestPassword);
     }
 
     public async Task<List<User>> GetAllAsync(CancellationToken token = default)

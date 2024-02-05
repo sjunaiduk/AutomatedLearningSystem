@@ -8,25 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
 
-	<ItemGroup>
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-			<_Parameter1>AutomatedLearningSystem.Domain.UnitTests</_Parameter1>
-
-		</AssemblyAttribute>
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-			<_Parameter1>AutomatedLearningSystem.Infrastructure</_Parameter1>
-
-		</AssemblyAttribute>
-
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-			<_Parameter1>AutomatedLearningSystem.Application</_Parameter1>
-
-		</AssemblyAttribute>
-
-
-	</ItemGroup>
 
 </Project>

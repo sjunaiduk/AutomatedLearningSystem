@@ -27,7 +27,7 @@ public class CreateUserTests : BaseFunctionalTest
             UserRole.Student);
 
         // Act
-
+        
         var result = await HttpClient.PostAsJsonAsync(Routes.User.Create,
             createUserRequest);
 
