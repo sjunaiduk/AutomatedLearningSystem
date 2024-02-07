@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Queries.GetUsers;
 using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using MediatR;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Users;
@@ -27,6 +28,6 @@ public class GetUsers : IEndpoint
                 })
             );
 
-        });
+        }).RequireAuthorization(AuthConstants.Policies.Privileged);
     }
 }

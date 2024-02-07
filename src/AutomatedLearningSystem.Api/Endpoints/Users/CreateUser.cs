@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,6 @@ public class CreateUser : IEndpoint
             return result.MatchAll(
                 user => Results.CreatedAtRoute("GetUser", new { id = user.Id }),
                 errors => errors.ToProblemDetails());
-        }).RequireAuthorization("protected");
+        });
     }
 }

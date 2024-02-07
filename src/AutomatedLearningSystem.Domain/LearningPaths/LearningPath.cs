@@ -8,11 +8,14 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public Guid Id { get; init; }
 
 
-        private List<LearningItem> _learningItems { get; } = new();
+        //private List<LearningItem> _learningItems { get; } = new();
 
-        public List<LearningItem> LearningItems => _learningItems.ToList();
+        //public List<LearningItem> LearningItems => _learningItems.ToList();
 
-        private LearningPath()
+        public List<LearningItem> LearningItems { get; private set; } = new();
+
+
+        public LearningPath()
         {
         }
 
@@ -31,24 +34,24 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public Result AddLearningItem(LearningItem item)
         {
 
-            if (_learningItems.Any(i => i.Id == item.Id))
+            if (LearningItems.Any(i => i.Id == item.Id))
             {
                 return LearningPathErrors.Conflict;
 
             }
 
-            _learningItems.Add(item);
+            LearningItems.Add(item);
             return Result.Success;
         }
 
         public Result DeleteLearningItem(Guid id)
         {
-            if (_learningItems.All(i => i.Id != id))
+            if (LearningItems.All(i => i.Id != id))
             {
                 return Error.NotFound(
                     "Learning item in learning path was not found, failed to delete");
             }
-            _learningItems.RemoveAll(m => m.Id == id);
+            LearningItems.RemoveAll(m => m.Id == id);
             return Result.Success;
         }
     }

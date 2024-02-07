@@ -1,5 +1,5 @@
 ﻿using AutomatedLearningSystem.Contracts.AnswersForQuestions;
-using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Contracts.Common;
 
 namespace AutomatedLearningSystem.Contracts.Questionnaire;
 

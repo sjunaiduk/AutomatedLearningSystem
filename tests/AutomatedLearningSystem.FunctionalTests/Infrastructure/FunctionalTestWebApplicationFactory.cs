@@ -1,6 +1,8 @@
-﻿using System.Security.Claims;
+﻿using System.Net.Security;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,15 +12,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using static AutomatedLearningSystem.Infrastructure.Identity.AuthConstants;
 
 namespace AutomatedLearningSystem.FunctionalTests.Infrastructure;
 
 public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program>
 {
-
     private readonly string _dbName = Guid.NewGuid().ToString();
+
+  
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+
+        
         builder.ConfigureTestServices(services =>
         {
             services.RemoveAll<DbContextOptions<AutomatedLearningSystemDbContext>>();
@@ -29,11 +36,33 @@ public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program
 
             });
 
-            services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
-
+            {
+                services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
+                
+                services.AddSingleton(_ => new MockedClaims()
+                {
+                    Claims = []
+                });
+            }
         });
     }
 
+    public WebApplicationFactory<Program> WithMockedClaims(List<Claim> claims)
+    {
+        
+        return WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddSingleton(_ => new MockedClaims()
+                    {
+                        Claims = claims
+                    });
+                });
+            });
+    }
+
+ 
     protected override void Dispose(bool disposing)
     {
         var scope = Services.CreateScope();
@@ -54,30 +83,36 @@ public class MockSchemeProvider : AuthenticationSchemeProvider
 
     public override Task<AuthenticationScheme?> GetSchemeAsync(string name)
     {
-        return Task.FromResult(new AuthenticationScheme("cookie",
-            "cookie",
+        return Task.FromResult(new AuthenticationScheme(AuthConstants.DefaultCookieScheme,
+            AuthConstants.DefaultCookieScheme,
             typeof(MockAuthHandler)))!;
     }
 }
 
+public class MockedClaims
+{
+    public List<Claim> Claims { get; init; }
+}
 public class MockAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    public MockAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    {
-    }
+    private readonly MockedClaims _mockedClaims;
 
-    public MockAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
+    public MockAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        MockedClaims mockedClaims) : base(options,
+        logger,
+        encoder)
     {
+        _mockedClaims = mockedClaims;
     }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        var claim = new Claim(ClaimTypes.Role, "admin");
-        var claims = new List<Claim> { claim };
 
-        var identity = new ClaimsIdentity(claims, "cookie");
+        var identity = new ClaimsIdentity(_mockedClaims.Claims, AuthConstants.DefaultCookieScheme);
         var principal = new ClaimsPrincipal(identity);
-        var ticket = new AuthenticationTicket(principal, "cookie");
+        var ticket = new AuthenticationTicket(principal, AuthConstants.DefaultCookieScheme);
         return Task.FromResult(AuthenticateResult.Success(ticket));
     }
 }

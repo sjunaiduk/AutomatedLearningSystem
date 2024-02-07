@@ -6,7 +6,7 @@ namespace AutomatedLearningSystem.Domain.Users;
 
 public class User
 {
-    private const int _maxLearningPaths = 3;
+    public const int _maxLearningPaths = 2;
     public string Password { get; private set; }
     public Guid Id { get; init; }
     public string FirstName { get; private set; } = string.Empty;

@@ -36,6 +36,7 @@ Result>
 
     public async Task<Result> Handle(GenerateLearningPathCommand request, CancellationToken cancellationToken)
     {
+
         var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
    
         if (user is null)

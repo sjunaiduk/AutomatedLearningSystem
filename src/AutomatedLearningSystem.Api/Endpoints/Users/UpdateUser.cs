@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Commands.UpdateUser;
 using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using MediatR;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Users;
@@ -26,6 +27,6 @@ public class UpdateUser : IEndpoint
             return result.MatchAll(
                 Results.NoContent,
                 errors => errors.ToProblemDetails());
-        });
+        }).RequireAuthorization(AuthConstants.Policies.Protected);
     }
 }

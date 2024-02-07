@@ -1,4 +1,4 @@
-﻿namespace AutomatedLearningSystem.Contracts.Users;
+﻿namespace AutomatedLearningSystem.Contracts.Common;
 
 public class UserProficiencyProfileUi
 {

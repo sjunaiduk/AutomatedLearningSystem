@@ -1,9 +1,8 @@
-using System.Reflection.Metadata.Ecma335;
 using AutomatedLearningSystem.Api.Endpoints;
-using AutomatedLearningSystem.Api.Endpoints.Users;
 using AutomatedLearningSystem.Api.Extensions;
-using AutomatedLearningSystem.Application;using AutomatedLearningSystem.Domain.Users;
+using AutomatedLearningSystem.Application;
 using AutomatedLearningSystem.Infrastructure;
+using AutomatedLearningSystem.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,21 +17,21 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddAuthentication("cookie")
-    .AddCookie("cookie", opt =>
-    {
-        //opt.Events.OnRedirectToLogin = ctx =>
-        //{
-        //    ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        //    return Task.CompletedTask;
-        //};
-    });
+builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
+    .AddCookie(AuthConstants.DefaultCookieScheme);
+
 
 builder.Services.AddAuthorization(opt =>
 {
-    opt.AddPolicy("protected", pb =>
+    opt.AddPolicy(AuthConstants.Policies.Privileged, pb =>
     {
-        pb.RequireRole("admin")
+        pb.RequireRole(AuthConstants.Roles.Admin)
+            .RequireAuthenticatedUser();
+    });
+
+    opt.AddPolicy(AuthConstants.Policies.Protected, pb =>
+    {
+        pb.RequireRole(AuthConstants.Roles.Admin, AuthConstants.Roles.Student)
             .RequireAuthenticatedUser();
     });
 

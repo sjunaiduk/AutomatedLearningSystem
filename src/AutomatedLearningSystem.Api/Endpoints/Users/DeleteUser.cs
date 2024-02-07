@@ -1,5 +1,6 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Commands.DeleteUser;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ public class DeleteUser : IEndpoint
             return result.MatchAll(
                 Results.NoContent,
                 errors => errors.ToProblemDetails());
-        });
+        }).RequireAuthorization(AuthConstants.Policies.Protected);
 
     }
 }

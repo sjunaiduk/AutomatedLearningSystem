@@ -56,7 +56,7 @@ namespace AutomatedLearningSystem.IntegrationTests.LearningPaths.Commands.Genera
                 .Include(x => x.LearningPaths)
                 .First(x => x.Id == user.Id);
 
-            savedUser.LearningPaths.Count.Should().Be(3);
+            savedUser.LearningPaths.Count.Should().Be(User._maxLearningPaths);
             result.IsFailure.Should().BeTrue();
             result.FirstError.Should().Be(LearningPathErrors.LearningPathLimitReached);
         }

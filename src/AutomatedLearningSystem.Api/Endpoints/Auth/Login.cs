@@ -26,7 +26,7 @@ public class Login : IEndpoint
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Role, result.Value.Role switch
+                new(ClaimTypes.Role, result.Value.Role switch
                 {
                     Role.Admin => "admin",
                     Role.Student => "student",

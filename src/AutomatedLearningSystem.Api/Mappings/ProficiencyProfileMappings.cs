@@ -1,4 +1,4 @@
-﻿using AutomatedLearningSystem.Contracts.Users;
+﻿using AutomatedLearningSystem.Contracts.Common;
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

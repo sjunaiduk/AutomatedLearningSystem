@@ -6,4 +6,5 @@ public interface ILearningPathRepository
 {
     void Create(LearningPath path);
     void DeleteRange(List<LearningPath> userLearningPaths);
+    Task<List<LearningPath>> GetAll();
 }

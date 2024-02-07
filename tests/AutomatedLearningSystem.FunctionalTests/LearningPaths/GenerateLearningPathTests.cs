@@ -1,10 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Reflection;
-using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Contracts.AnswersForQuestions;
+using AutomatedLearningSystem.Contracts.Common;
 using AutomatedLearningSystem.Contracts.Questionnaire;
-using AutomatedLearningSystem.Contracts.Users;
 using AutomatedLearningSystem.Domain.LearningPaths;
 using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.Domain.Users;
@@ -12,13 +10,15 @@ using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
 
 public class GenerateLearningPathTests : BaseFunctionalTest
 {
-    public GenerateLearningPathTests(FunctionalTestWebApplicationFactory factory) : base(factory)
+
+    public GenerateLearningPathTests(FunctionalTestWebApplicationFactory factory) : base(factory, [ClaimConstants.AdminRole])
     {
     }
 
@@ -58,4 +58,6 @@ public class GenerateLearningPathTests : BaseFunctionalTest
         response?.Title.Should().Be(LearningPathErrors.LearningPathLimitReached.Code);
         response?.Detail.Should().Be(LearningPathErrors.LearningPathLimitReached.Description);
     }
+
+
 }

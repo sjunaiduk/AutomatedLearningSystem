@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Queries.GetUser;
 using AutomatedLearningSystem.Contracts.Users;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,6 @@ public class GetUser : IEndpoint
                     }),
                 errors => errors.ToProblemDetails());
         }).WithName("GetUser")
-        .RequireAuthorization("admin");
+        .RequireAuthorization(AuthConstants.Policies.Privileged);
     }
 }
