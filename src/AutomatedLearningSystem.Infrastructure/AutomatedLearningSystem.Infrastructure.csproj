@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Answers\Persistence\" />
     <Folder Include="LearningPaths\Persistence\" />
+    <Folder Include="Middlewares\" />
     <Folder Include="Questions\Persistence\" />
   </ItemGroup>
 

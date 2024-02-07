@@ -13,7 +13,6 @@ public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFa
         var scope = factory.Services.CreateScope();
         Sender = scope.ServiceProvider.GetRequiredService<ISender>();
         DbContext = scope.ServiceProvider.GetRequiredService<AutomatedLearningSystemDbContext>();
-
     }
 
 }

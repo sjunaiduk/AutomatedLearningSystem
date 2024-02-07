@@ -16,4 +16,7 @@ public class UserErrors
 
     public static Error NotFound =>
         new("User.NotFound", "User was not found", ErrorType.NotFound);
+
+    public static Error UnAuthorized => new("User.UnAuthorized", "User is unauthorized to complete this action",
+        ErrorType.UnAuthorized);
 }

@@ -7,7 +7,7 @@ public class Result
 
     public bool IsFailure => !IsSuccess;
 
-    protected List<Error> Errors { get; } = null!;
+    protected List<Error> Errors { get; } = new();
     public Error? FirstError => Errors.FirstOrDefault();
 
     public static Result Success => new Result(true);

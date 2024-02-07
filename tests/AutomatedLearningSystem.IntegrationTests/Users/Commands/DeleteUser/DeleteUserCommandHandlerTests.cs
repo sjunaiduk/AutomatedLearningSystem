@@ -5,6 +5,7 @@ using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.IntegrationTests.Infrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.IntegrationTests.Users.Commands.DeleteUser;
@@ -29,12 +30,15 @@ public class DeleteUserCommandHandlerTests : BaseIntegrationTest
         // Act
         
         
-        await Sender.Send(generateLearningPathCommand);
+        var genLearnPathResult =  await Sender.Send(generateLearningPathCommand);
         var learningPath = (await DbContext.Set<User>().Include(x => x.LearningPaths)
             .FirstAsync(u => u.Id == userId)).LearningPaths.First();
         await Sender.Send(deleteUserCommand);
 
         // Assert
+        genLearnPathResult.FirstError.Should().BeNull();
+        genLearnPathResult.IsSuccess.Should().BeTrue();
+
         DbContext.Set<User>()
             .FirstOrDefault(u => u.Id == userId)
             .Should().BeNull();

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
+using AutomatedLearningSystem.Application.Common.Abstractions;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Forms;
@@ -31,14 +32,36 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
             });
 
             services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
+
+            services.AddScoped<IAuthenticatedUserProvider, MockAuthenticatedUserProvider>();
         });
     }
+
+    
 
     protected override void Dispose(bool disposing)
     {
         var scope = Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AutomatedLearningSystemDbContext>();
         dbContext.Database.EnsureDeleted();
+    }
+}
+
+
+public class MockAuthenticatedUserProvider : IAuthenticatedUserProvider
+{
+    public AuthenticatedUser GetAuthenticatedUser()
+    {
+        return new()
+        {
+            Id = Guid.NewGuid(),
+            Role = "admin"
+        };
+    }
+
+    public void SetAuthenticatedUser(List<Claim> claims)
+    {
+        
     }
 }
 
