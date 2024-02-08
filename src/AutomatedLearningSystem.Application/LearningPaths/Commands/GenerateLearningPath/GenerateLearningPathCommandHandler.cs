@@ -39,18 +39,16 @@ Result>
 
     public async Task<Result> Handle(GenerateLearningPathCommand request, CancellationToken cancellationToken)
     {
-        var authenticatedUser = _authenticatedUserProvider.GetAuthenticatedUser();
+        
 
-        if (authenticatedUser.Id != request.UserId && authenticatedUser.Role != "admin")
-        {
-            return UserErrors.UnAuthorized;
-        }
         var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
-   
+
         if (user is null)
         {
             return UserErrors.NotFound;
         }
+
+
 
         foreach (var answer in request.AnswersForQuestions)
         {

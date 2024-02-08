@@ -33,11 +33,35 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
 
             services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
 
-            services.AddScoped<IAuthenticatedUserProvider, MockAuthenticatedUserProvider>();
+            services.AddScoped<IAuthenticatedUserProvider>(_ => 
+                new MockAuthenticatedUserProvider(new()
+            {
+                Id = Guid.NewGuid(),
+                Role = "admin"
+            }));
         });
     }
 
-    
+    public WebApplicationFactory<Program> WithMockedClaims(string role, Guid userId)
+    {
+        return WithWebHostBuilder(c =>
+        {
+            c.ConfigureTestServices(services =>
+            {
+                services.AddScoped<IAuthenticatedUserProvider>(_ =>
+                    new MockAuthenticatedUserProvider(new()
+                    {
+                        Id = userId,
+                        Role = role
+
+                    }));
+            });
+        });
+    }
+
+
+  
+
 
     protected override void Dispose(bool disposing)
     {
@@ -50,13 +74,14 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
 
 public class MockAuthenticatedUserProvider : IAuthenticatedUserProvider
 {
+    private readonly AuthenticatedUser _user;
+    public MockAuthenticatedUserProvider(AuthenticatedUser user)
+    {
+        _user = user;
+    }
     public AuthenticatedUser GetAuthenticatedUser()
     {
-        return new()
-        {
-            Id = Guid.NewGuid(),
-            Role = "admin"
-        };
+        return _user;
     }
 
     public void SetAuthenticatedUser(List<Claim> claims)

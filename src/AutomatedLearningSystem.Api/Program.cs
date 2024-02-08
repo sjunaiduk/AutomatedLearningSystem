@@ -15,7 +15,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
-builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
     .AddCookie(AuthConstants.DefaultCookieScheme);

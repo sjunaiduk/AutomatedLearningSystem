@@ -47,4 +47,6 @@ public class DeleteUserCommandHandlerTests : BaseIntegrationTest
             .Should().BeNull();
 
     }
+
+   
 }

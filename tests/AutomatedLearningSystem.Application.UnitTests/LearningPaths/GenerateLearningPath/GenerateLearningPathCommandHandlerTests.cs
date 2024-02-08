@@ -1,4 +1,5 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
+using AutomatedLearningSystem.Application.Common.Behaviours;
 using AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 using AutomatedLearningSystem.Domain.Answers;
 using AutomatedLearningSystem.Domain.Common;
@@ -92,26 +93,7 @@ public class GenerateLearningPathCommandHandlerTests
 
     }
 
-    [Fact]
-
-    public async void Handler_ShouldReturnUnauthorizedResponse_WhenAuthenticatedUserUsesDifferentUserId()
-    {
-        // Arrange
-        _authenticatedUserProvider.GetAuthenticatedUser().Returns(new AuthenticatedUser()
-        {
-            Id = Guid.NewGuid(),
-            Role = "student"
-        });
-
-        var command = GenerateLearningPathCommandFactory.Create();
-
-        // Act
-        var result = await _handler.Handle(command, default);
-
-        // Assert
-        result.IsFailure.Should().BeTrue();
-        result.FirstError.Should().Be(UserErrors.UnAuthorized);
-    }
+   
 
     [Fact]
 
