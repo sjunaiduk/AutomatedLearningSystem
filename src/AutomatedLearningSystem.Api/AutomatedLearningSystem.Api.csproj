@@ -24,4 +24,16 @@
     <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\client\" />
+  </ItemGroup>
+
+	<Target Name='CompileClient'
+	        BeforeTargets="Publish">
+		<Exec WorkingDirectory="../automatedlearningsystem.ui"
+		      Command="npm install" />
+		<Exec WorkingDirectory="../automatedlearningsystem.ui"
+		      Command="npm run build" />
+	</Target>
+
 </Project>

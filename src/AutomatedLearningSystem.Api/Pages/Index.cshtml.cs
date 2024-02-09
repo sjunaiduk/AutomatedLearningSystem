@@ -5,8 +5,10 @@ namespace AutomatedLearningSystem.Api.Pages
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/client/index.html");
+            return PhysicalFile(path, "text/html");
         }
     }
 }
