@@ -4,6 +4,7 @@ using System.Text.Encodings.Web;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using AutomatedLearningSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -38,7 +39,7 @@ public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program
 
             {
                 services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
-                
+
                 services.AddSingleton(_ => new MockedClaims()
                 {
                     Claims = []
@@ -84,28 +85,18 @@ public class MockSchemeProvider : AuthenticationSchemeProvider
     public override Task<AuthenticationScheme?> GetSchemeAsync(string name)
     {
         return Task.FromResult(new AuthenticationScheme(AuthConstants.DefaultCookieScheme,
-            AuthConstants.DefaultCookieScheme,
+      AuthConstants.DefaultCookieScheme,
             typeof(MockAuthHandler)))!;
     }
 }
 
 public class MockedClaims
 {
-    public List<Claim> Claims { get; init; }
+    public List<Claim> Claims { get; init; } = new();
 }
-public class MockAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+public class MockAuthHandler : CookieAuthenticationHandler
 {
     private readonly MockedClaims _mockedClaims;
-
-    public MockAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
-        ILoggerFactory logger,
-        UrlEncoder encoder,
-        MockedClaims mockedClaims) : base(options,
-        logger,
-        encoder)
-    {
-        _mockedClaims = mockedClaims;
-    }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
@@ -114,5 +105,15 @@ public class MockAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         var principal = new ClaimsPrincipal(identity);
         var ticket = new AuthenticationTicket(principal, AuthConstants.DefaultCookieScheme);
         return Task.FromResult(AuthenticateResult.Success(ticket));
+    }
+
+    public MockAuthHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, MockedClaims mockedClaims) : base(options, logger, encoder, clock)
+    {
+        _mockedClaims = mockedClaims;
+    }
+
+    public MockAuthHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, MockedClaims mockedClaims) : base(options, logger, encoder)
+    {
+        _mockedClaims = mockedClaims;
     }
 }

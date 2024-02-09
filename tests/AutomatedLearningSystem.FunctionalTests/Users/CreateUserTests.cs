@@ -33,6 +33,7 @@ public class CreateUserTests : BaseFunctionalTest
 
         // Assert
 
+
         result.StatusCode.Should().Be(HttpStatusCode.Created);
 
     }

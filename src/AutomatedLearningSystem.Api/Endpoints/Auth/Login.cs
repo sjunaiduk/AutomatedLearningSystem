@@ -13,7 +13,7 @@ public class Login : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/auth/login", async (HttpContext context, ISender sender, 
+        app.MapPost(Routes.Login, async (HttpContext context, ISender sender, 
             LoginRequest request) =>
         {
             var query = new LoginQuery(request.Email, request.Password);
@@ -31,7 +31,8 @@ public class Login : IEndpoint
                     Role.Admin => "admin",
                     Role.Student => "student",
                     _ => throw new InvalidOperationException()
-                })
+                }),
+                new("sub",result.Value.Id.ToString())
             };
             var identity = new ClaimsIdentity(claims, "cookie");
             var principal = new ClaimsPrincipal(identity);

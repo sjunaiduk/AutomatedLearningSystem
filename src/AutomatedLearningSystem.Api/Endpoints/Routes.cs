@@ -1,4 +1,6 @@
-﻿namespace AutomatedLearningSystem.Api.Endpoints;
+﻿using AutomatedLearningSystem.Api.Endpoints.Auth;
+
+namespace AutomatedLearningSystem.Api.Endpoints;
 
 public static class Routes
 {
@@ -37,4 +39,6 @@ public static class Routes
         private const string LearningPathsBase = $"{Base}/learning-paths";
         public const string GetAll = $"{Base}";
     }
+
+    public const string Login = $"/auth/login";
 }
