@@ -107,12 +107,12 @@ public class MockAuthHandler : CookieAuthenticationHandler
         return Task.FromResult(AuthenticateResult.Success(ticket));
     }
 
-    public MockAuthHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, MockedClaims mockedClaims) : base(options, logger, encoder, clock)
-    {
-        _mockedClaims = mockedClaims;
-    }
-
-    public MockAuthHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, MockedClaims mockedClaims) : base(options, logger, encoder)
+    public MockAuthHandler(IOptionsMonitor<CookieAuthenticationOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        MockedClaims mockedClaims) : base(options,
+        logger,
+        encoder)
     {
         _mockedClaims = mockedClaims;
     }

@@ -5,7 +5,6 @@ using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.IntegrationTests.Infrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.IntegrationTests.Users.Commands.DeleteUser;

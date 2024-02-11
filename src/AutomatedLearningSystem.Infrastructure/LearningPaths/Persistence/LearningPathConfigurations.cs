@@ -17,7 +17,8 @@ public class LearningPathConfigurations : IEntityTypeConfiguration<LearningPath>
         builder.HasMany(x => x.LearningItems)
             .WithMany();
 
-
+        builder.Property(x => x.Name)
+            .IsRequired();
 
     }
 }

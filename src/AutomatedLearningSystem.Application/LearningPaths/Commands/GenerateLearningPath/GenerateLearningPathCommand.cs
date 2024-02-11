@@ -6,5 +6,6 @@ namespace AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLea
 
 public record GenerateLearningPathCommand(Guid UserId,
     List<AnswerForQuestion> AnswersForQuestions,
-    UserProficiencyProfile Profile) : ICommand<Result>
+    UserProficiencyProfile Profile,
+    string LearningPathName) : ICommand<Result>
 { }

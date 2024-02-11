@@ -7,11 +7,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
     {
         public Guid Id { get; init; }
 
-
-        //private List<LearningItem> _learningItems { get; } = new();
-
-        //public List<LearningItem> LearningItems => _learningItems.ToList();
-
+        public string Name { get; private set; }
         public List<LearningItem> LearningItems { get; private set; } = new();
 
 
@@ -19,16 +15,17 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         {
         }
 
-        private LearningPath(Guid? id = null)
+        private LearningPath(string name, Guid? id = null)
         {
+            Name = name;
             Id = id ?? Guid.NewGuid();
         }
 
 
-        public static LearningPath CreateLearningPath(Guid? id = null)
+        public static LearningPath CreateLearningPath(string name,Guid? id = null)
         {
 
-            return new LearningPath(id);
+            return new LearningPath(name,id);
         }
 
         public Result AddLearningItem(LearningItem item)

@@ -21,7 +21,7 @@ public class GenerateLearningPath : IEndpoint
                     AnswerForQuestion.Create(x.Answer, x.QuestionId, userId))
             .ToList();
             var profile = request.Profile.ToUserProficiencyProfile();
-            GenerateLearningPathCommand command = new(userId, answers, profile);
+            GenerateLearningPathCommand command = new(userId, answers, profile, request.LearningPathName);
 
             var result = await sender.Send(command);
 

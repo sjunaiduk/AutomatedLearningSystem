@@ -69,7 +69,7 @@ Result>
         var generatedLearningItems = LearningItemsGeneratorService.Generate(request.AnswersForQuestions, learningItems,
              request.Profile);
 
-        var learningPath = LearningPath.CreateLearningPath();
+        var learningPath = LearningPath.CreateLearningPath(request.LearningPathName ?? "");
 
         _learningPathRepository.Create(learningPath);
 

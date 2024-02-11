@@ -39,7 +39,8 @@ public class GenerateLearningPathCommandHandlerTests
         _mockUserRepository.GetByIdAsync(Arg.Any<Guid>()).Returns((User?)null);
         _userContext.Id.Returns(UserConstants.Id);
         GenerateLearningPathCommand command = new(UserConstants.Id, new List<AnswerForQuestion>() { },
-            UserProficiencyProfileFactory.Create());
+            UserProficiencyProfileFactory.Create(),
+            LearningPathConstants.Name);
         // Act
         var result = await _handler.Handle(command, default);
 
