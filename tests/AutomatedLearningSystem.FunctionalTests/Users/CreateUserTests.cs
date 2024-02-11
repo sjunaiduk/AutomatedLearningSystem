@@ -7,13 +7,8 @@ using System.Net.Http.Json;
 
 namespace AutomatedLearningSystem.FunctionalTests.Users;
 
-public class CreateUserTests : BaseFunctionalTest
+public class CreateUserTests(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
-    public CreateUserTests(FunctionalTestWebApplicationFactory factory) : base(factory)
-    {
-    }
-
-
     [Fact]
     public async void Create_WhenValidUser_ShouldCreateUser()
     {

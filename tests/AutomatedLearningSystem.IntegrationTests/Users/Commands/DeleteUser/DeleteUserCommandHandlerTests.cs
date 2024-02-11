@@ -12,7 +12,8 @@ namespace AutomatedLearningSystem.IntegrationTests.Users.Commands.DeleteUser;
 
 public class DeleteUserCommandHandlerTests : BaseIntegrationTest
 {
-    public DeleteUserCommandHandlerTests(IntegrationTestWebApplicationFactory factory) : base(factory)
+    public DeleteUserCommandHandlerTests(IntegrationTestWebApplicationFactory factory) : base(factory, role:"admin",
+        userId:Guid.NewGuid())
     {
     }
 

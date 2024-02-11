@@ -38,19 +38,19 @@ public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program
             });
 
             {
-                services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
+                //services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
 
-                services.AddSingleton(_ => new MockedClaims()
-                {
-                    Claims = []
-                });
+                //services.AddSingleton(_ => new MockedClaims()
+                //{
+                //    Claims = []
+                //});
             }
         });
     }
 
     public WebApplicationFactory<Program> WithMockedClaims(List<Claim> claims)
     {
-        
+
         return WithWebHostBuilder(builder =>
             {
                 builder.ConfigureTestServices(services =>
@@ -63,7 +63,7 @@ public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program
             });
     }
 
- 
+
     protected override void Dispose(bool disposing)
     {
         var scope = Services.CreateScope();

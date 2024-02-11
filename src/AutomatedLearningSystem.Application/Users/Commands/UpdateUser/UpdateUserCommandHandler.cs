@@ -10,11 +10,13 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Resul
 
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
+    private readonly IUserContext _userContext;
 
-    public UpdateUserCommandHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+    public UpdateUserCommandHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IUserContext userContext)
     {
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
+        _userContext = userContext;
     }
 
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
@@ -24,6 +26,12 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Resul
         {
             return UserErrors.NotFound;
         }
+
+        if (!_userContext.IsAdmin && user.Id != _userContext.Id)
+        {
+            return UserErrors.UnAuthorized;
+        }
+
 
         user.Update(request.FirstName,
             request.LastName,

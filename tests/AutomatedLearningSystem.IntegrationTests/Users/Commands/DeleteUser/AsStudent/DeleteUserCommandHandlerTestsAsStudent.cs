@@ -20,7 +20,7 @@ public class DeleteUserCommandHandlerTestsAsStudent : BaseIntegrationTest
     public async void Handler_ShouldNotDeleteUser_WhenUserIsStudentAndTriesToDeleteDifferentUser()
     {
         // Arrange
-        var userId = Guid.NewGuid();
+        var userId = DbContext.Set<User>().First().Id;
         var command = new DeleteUserCommand(userId);
 
         // Act

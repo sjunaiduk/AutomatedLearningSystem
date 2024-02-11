@@ -10,12 +10,12 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
 
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILearningPathRepository _learningPathRepository;
-    public DeleteUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILearningPathRepository learningPathRepository)
+    private readonly IUserContext _userContext;
+    public DeleteUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IUserContext userContext)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
-        _learningPathRepository = learningPathRepository;
+        _userContext = userContext;
     }
 
     public async Task<Result> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -27,8 +27,12 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
             return UserErrors.NotFound;
         }
 
+        if (!_userContext.IsAdmin && user.Id != _userContext.Id)
+        {
+            return UserErrors.UnAuthorized;
+        }
+
         _userRepository.Delete(user);
-       // _learningPathRepository.DeleteRange(user.LearningPaths);
 
         await _unitOfWork.CommitChangesAsync(cancellationToken);
 

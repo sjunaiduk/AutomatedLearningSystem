@@ -12,12 +12,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 
 builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
-    .AddCookie(AuthConstants.DefaultCookieScheme);
+    .AddCookie(AuthConstants.DefaultCookieScheme, opt =>
+    {
+
+        opt.Events.OnRedirectToLogin = context => Task.FromResult(context.Response.StatusCode = StatusCodes.Status401Unauthorized);
+
+    });
 
 
 builder.Services.AddAuthorization(opt =>
@@ -56,8 +62,6 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseAuthenticatedUserProvider();
 
 app.MapEndpoints();
 app.MapRazorPages();

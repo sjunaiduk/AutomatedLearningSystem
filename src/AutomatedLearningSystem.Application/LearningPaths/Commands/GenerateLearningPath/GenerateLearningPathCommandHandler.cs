@@ -20,32 +20,35 @@ Result>
     private readonly IUnitOfWork _unitOfWork;
     private readonly IQuestionRepository _questionRepository;
     private readonly ILearningItemsRepository _learningItemsRepository;
-    private readonly IAuthenticatedUserProvider _authenticatedUserProvider;
+    private readonly IUserContext _userContext;
 
     public GenerateLearningPathCommandHandler(ILearningPathRepository learningPathRepository,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork,
         IQuestionRepository questionRepository,
-        ILearningItemsRepository learningItemsRepository,
-        IAuthenticatedUserProvider authenticatedUserProvider )
+        ILearningItemsRepository learningItemsRepository, IUserContext userContext)
     {
         _learningPathRepository = learningPathRepository;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
         _questionRepository = questionRepository;
         _learningItemsRepository = learningItemsRepository;
-        this._authenticatedUserProvider = authenticatedUserProvider;
+        _userContext = userContext;
     }
 
     public async Task<Result> Handle(GenerateLearningPathCommand request, CancellationToken cancellationToken)
     {
-        
 
         var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
 
         if (user is null)
         {
             return UserErrors.NotFound;
+        }
+
+        if (!_userContext.IsAdmin && user.Id != _userContext.Id)
+        {
+            return UserErrors.UnAuthorized;
         }
 
 

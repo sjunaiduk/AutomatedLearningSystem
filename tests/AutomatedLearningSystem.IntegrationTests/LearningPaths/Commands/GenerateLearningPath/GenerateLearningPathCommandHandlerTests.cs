@@ -8,7 +8,8 @@ using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.IntegrationTests.LearningPaths.Commands.GenerateLearningPath
 {
-    public class GenerateLearningPathCommandHandlerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
+    public class GenerateLearningPathCommandHandlerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory,
+        role:"admin",userId: Guid.NewGuid())
     {
 
         [Fact]

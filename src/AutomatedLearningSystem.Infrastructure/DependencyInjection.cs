@@ -4,10 +4,8 @@ using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using AutomatedLearningSystem.Infrastructure.Identity;
 using AutomatedLearningSystem.Infrastructure.LearningItems.Persistence;
 using AutomatedLearningSystem.Infrastructure.LearningPaths.Persistence;
-using AutomatedLearningSystem.Infrastructure.Middlewares;
 using AutomatedLearningSystem.Infrastructure.Questions.Persistence;
 using AutomatedLearningSystem.Infrastructure.Users.Persistence;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,16 +29,9 @@ public static class DependencyInjection
         services.AddScoped<DbContext, AutomatedLearningSystemDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        services.AddScoped<IAuthenticatedUserProvider, AuthenticatedUserProvider>();
-        services.AddTransient<AuthenticatedUserProviderMiddleware>();
+        services.AddScoped<IUserContext, UserContext>();
         return services;
     }
 
-    public static void UseAuthenticatedUserProvider(this IApplicationBuilder app)
-    {
-        app.UseMiddleware<AuthenticatedUserProviderMiddleware>();
-    }
-
-    
 
 }

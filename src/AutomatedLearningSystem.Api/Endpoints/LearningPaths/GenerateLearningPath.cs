@@ -17,11 +17,6 @@ public class GenerateLearningPath : IEndpoint
                 ISender sender,
                 QuestionnaireData request) =>
         {
-            if (context.User.IsInRole("student") && !context.User.HasClaim("uid", userId.ToString()))
-            {
-                return Results.Unauthorized();
-            }
-
             var answers = request.Answers.Select(x => 
                     AnswerForQuestion.Create(x.Answer, x.QuestionId, userId))
             .ToList();

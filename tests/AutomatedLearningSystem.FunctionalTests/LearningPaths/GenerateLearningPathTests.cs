@@ -15,20 +15,16 @@ using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
 
-public class GenerateLearningPathTests : BaseFunctionalTest
+public class GenerateLearningPathTests(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
-
-    public GenerateLearningPathTests(FunctionalTestWebApplicationFactory factory) : base(factory, [ClaimConstants.AdminRole])
-    {
-    }
 
     [Fact]
     public async Task Handler_ShouldReturnError_WhenUserHasMaxLearningPaths()
     {
         // Arrange
-        var user = await DbContext.Set<User>().FirstAsync();
+        await SetAdminCookie();
         var question = await DbContext.Set<Question>().FirstAsync();
-        var answers = AnswerForQuestionFactory.CreateMany(question, 1, user.Id);
+        var answers = AnswerForQuestionFactory.CreateMany(question, 1, AdminUser!.Id);
         var request = new QuestionnaireData
         {
             Profile = new UserProficiencyProfileUi()
@@ -45,10 +41,10 @@ public class GenerateLearningPathTests : BaseFunctionalTest
         };
 
         // Act
-        await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
-        await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
-        await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
-        var result = await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
+        await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
+        await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
+        await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
+        var result = await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
 
         // Assert
 

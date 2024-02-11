@@ -1,5 +1,4 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
-using AutomatedLearningSystem.Application.Common.Behaviours;
 using AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 using AutomatedLearningSystem.Domain.Answers;
 using AutomatedLearningSystem.Domain.Common;
@@ -20,8 +19,8 @@ public class GenerateLearningPathCommandHandlerTests
     private readonly IUnitOfWork _mockUnitOfWork = Substitute.For<IUnitOfWork>();
     private readonly GenerateLearningPathCommandHandler _handler;
 
-    private readonly IAuthenticatedUserProvider _authenticatedUserProvider =
-        Substitute.For<IAuthenticatedUserProvider>();
+    private readonly IUserContext _userContext =
+        Substitute.For<IUserContext>();
     public GenerateLearningPathCommandHandlerTests()
     {
         _handler = new(_mockLearningPathRepository,
@@ -29,7 +28,7 @@ public class GenerateLearningPathCommandHandlerTests
             _mockUnitOfWork,
             _mockQuestionRepository,
             _mockLearningItemsRepository,
-            _authenticatedUserProvider);
+            _userContext);
     }
 
     [Fact]
@@ -38,11 +37,7 @@ public class GenerateLearningPathCommandHandlerTests
     {
         // Arrange
         _mockUserRepository.GetByIdAsync(Arg.Any<Guid>()).Returns((User?)null);
-        _authenticatedUserProvider.GetAuthenticatedUser().Returns(new AuthenticatedUser()
-        {
-            Id = UserConstants.Id,
-            Role = "student"
-        });
+        _userContext.Id.Returns(UserConstants.Id);
         GenerateLearningPathCommand command = new(UserConstants.Id, new List<AnswerForQuestion>() { },
             UserProficiencyProfileFactory.Create());
         // Act
@@ -63,13 +58,11 @@ public class GenerateLearningPathCommandHandlerTests
             UserConstants.LastName,
             UserConstants.Email,
             UserConstants.Role,
-            UserConstants.Password);
+            UserConstants.Password,
+            UserConstants.Id);
         _mockUserRepository.GetByIdAsync(Arg.Any<Guid>()).Returns(user);
-        _authenticatedUserProvider.GetAuthenticatedUser().Returns(new AuthenticatedUser()
-        {
-            Id = user.Id,
-            Role = "student"
-        });
+        _userContext.Id.Returns(UserConstants.Id);
+
 
         var question = QuestionFactory.Create(category: Category.Database);
         var profile = UserProficiencyProfileFactory.Create();
@@ -100,11 +93,8 @@ public class GenerateLearningPathCommandHandlerTests
     public async void Handler_ShouldGenerateLearningPathForAnyUser_WhenAuthenticatedUserIsAdmin()
     {
         // Arrange
-        _authenticatedUserProvider.GetAuthenticatedUser().Returns(new AuthenticatedUser()
-        {
-            Id = Guid.NewGuid(),
-            Role = "admin"
-        });
+        _userContext.Id.Returns(UserConstants.Id);
+        _userContext.IsAdmin.Returns(true);
         var user = User.Create(UserConstants.FirstName,
             UserConstants.LastName,
             UserConstants.Email,

@@ -2,9 +2,11 @@
 using System.Text.Encodings.Web;
 using AutomatedLearningSystem.Application.Common.Abstractions;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
+using AutomatedLearningSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -33,12 +35,13 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
 
             services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();
 
-            services.AddScoped<IAuthenticatedUserProvider>(_ => 
-                new MockAuthenticatedUserProvider(new()
-            {
-                Id = Guid.NewGuid(),
-                Role = "admin"
-            }));
+            services.AddScoped<IUserContext>(_ =>
+                new UserContext(new HttpContextAccessor())
+                {
+                        Id = Guid.NewGuid(),
+                    Role = "admin"
+
+                });
         });
     }
 
@@ -48,18 +51,17 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
         {
             c.ConfigureTestServices(services =>
             {
-                services.AddScoped<IAuthenticatedUserProvider>(_ =>
-                    new MockAuthenticatedUserProvider(new()
-                    {
-                        Id = userId,
-                        Role = role
-
-                    }));
+                services.AddScoped<IUserContext>(_ => new MockUserContext {Id = userId, Role = role});
             });
         });
     }
 
-
+    public class MockUserContext : IUserContext
+    {
+        public Guid Id { get; set; }
+        public string Role { get; set; }
+        public bool IsAdmin => Role == "admin";
+    }
   
 
 
@@ -71,24 +73,6 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
     }
 }
 
-
-public class MockAuthenticatedUserProvider : IAuthenticatedUserProvider
-{
-    private readonly AuthenticatedUser _user;
-    public MockAuthenticatedUserProvider(AuthenticatedUser user)
-    {
-        _user = user;
-    }
-    public AuthenticatedUser GetAuthenticatedUser()
-    {
-        return _user;
-    }
-
-    public void SetAuthenticatedUser(List<Claim> claims)
-    {
-        
-    }
-}
 
 public class MockSchemeProvider : AuthenticationSchemeProvider
 {

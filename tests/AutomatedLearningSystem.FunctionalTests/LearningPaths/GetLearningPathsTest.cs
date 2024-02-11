@@ -18,12 +18,8 @@ using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
 
-public class GetLearningPathsTest : BaseFunctionalTest
+public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
-    public GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) : base(factory, [ClaimConstants.AdminRole])
-    {
-    }
-
     [Fact]
 
     public async void GetLearningPaths_ShouldReturnOk()
@@ -42,9 +38,9 @@ public class GetLearningPathsTest : BaseFunctionalTest
     public async void GetLearningPaths_ShouldReturnLearningPaths_WhenLearningPathsExist()
     {
         // Arrange
-        var user = await DbContext.Set<User>().FirstAsync();
+        await SetAdminCookie();
         var question = await DbContext.Set<Question>().FirstAsync();
-        var answers = AnswerForQuestionFactory.CreateMany(question, 1, user.Id);
+        var answers = AnswerForQuestionFactory.CreateMany(question, 1, AdminUser!.Id);
         var request = new QuestionnaireData
         {
             Profile = new UserProficiencyProfileUi()
@@ -60,7 +56,7 @@ public class GetLearningPathsTest : BaseFunctionalTest
             }).ToList()
         };
 
-        var generateLearningPathResult =  await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
+        var generateLearningPathResult =  await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
         generateLearningPathResult.StatusCode.Should().Be(HttpStatusCode.Created);
 
         // Act
@@ -80,9 +76,9 @@ public class GetLearningPathsTest : BaseFunctionalTest
     public async void GetLearningPaths_ShouldReturnLearningItems_WhenLearningPathsExist()
     {
         // Arrange
-        var user = await DbContext.Set<User>().FirstAsync();
+        await SetAdminCookie();
         var question = await DbContext.Set<Question>().FirstAsync();
-        var answers = AnswerForQuestionFactory.CreateMany(question, 1, user.Id);
+        var answers = AnswerForQuestionFactory.CreateMany(question, 1, AdminUser!.Id);
         var request = new QuestionnaireData
         {
             Profile = new UserProficiencyProfileUi()
@@ -99,7 +95,7 @@ public class GetLearningPathsTest : BaseFunctionalTest
         };
 
         var generateLearningPathResult =
-            await HttpClient.PostAsJsonAsync($"/api/users/{user.Id}/learning-paths", request);
+            await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser.Id}/learning-paths", request);
         generateLearningPathResult.StatusCode.Should().Be(HttpStatusCode.Created);
 
         // Act

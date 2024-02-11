@@ -9,12 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedLearningSystem.FunctionalTests.Login;
 
-public class LoginTests : BaseFunctionalTest
+public class LoginTests(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
-    public LoginTests(FunctionalTestWebApplicationFactory factory, List<Claim>? claims = null) : base(factory, claims)
-    {
-    }
-
     [Fact]
 
     public async void LoginEndpoint_WhenValidCredentials_ShouldReturnSetCookieHeaderInResponse()
