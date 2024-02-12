@@ -24,9 +24,7 @@
     <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\client\" />
-  </ItemGroup>
+ 
 
 	<Target Name='CompileClient'
 	        BeforeTargets="Publish">
@@ -35,5 +33,17 @@
 		<Exec WorkingDirectory="../automatedlearningsystem.ui"
 		      Command="npm run build" />
 	</Target>
+
+	<ItemGroup>
+		<None Include="wwwroot\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
+
+
+
+
 
 </Project>
