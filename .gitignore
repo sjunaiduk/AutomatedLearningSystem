@@ -4,3 +4,4 @@
 **/**/*.db
 *.sln.DotSettings.user
 src/**/als.*
+**/**/.vscode
