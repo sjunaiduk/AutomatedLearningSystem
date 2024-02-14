@@ -48,6 +48,12 @@ public static class ApplicationBuilderExtensions
 
             dbContext.Set<User>()
                 .AddRange(users);
+
+            dbContext.Set<User>()
+                .Add(User.Create("john","doe",
+                "doe@gmail.com",
+                Role.Admin,
+                "password"));
         }
 
         var anyQuestions = dbContext.Set<Question>()

@@ -15,14 +15,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
-
+builder.Services.AddCors();
 
 builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
     .AddCookie(AuthConstants.DefaultCookieScheme, opt =>
     {
-
         opt.Events.OnRedirectToLogin = context => Task.FromResult(context.Response.StatusCode = StatusCodes.Status401Unauthorized);
-
     });
 
 
@@ -55,6 +53,12 @@ if (app.Environment.IsDevelopment())
 
 
 }
+
+app.UseCors(cp => {
+    cp.WithOrigins("http://localhost:5173");
+    cp.AllowCredentials();
+    cp.AllowAnyHeader();
+});
 
 app.UseHttpsRedirection();
 
