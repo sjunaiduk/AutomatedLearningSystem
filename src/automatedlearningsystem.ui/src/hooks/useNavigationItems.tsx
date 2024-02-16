@@ -7,9 +7,11 @@ import {
   BookOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useLogout } from "../features/authentication/hooks/useLogout";
 
 const useNavigationItems = (): ItemType[] => {
-  const { User, LogoutUser } = useAuthStore();
+  const { User } = useAuthStore();
+  const { logout } = useLogout();
   const navigate = useNavigate();
   const items: ItemType[] = [];
 
@@ -26,10 +28,7 @@ const useNavigationItems = (): ItemType[] => {
       label: "Logout",
       icon: <LogoutOutlined />,
       onClick: () => {
-        console.log("Logging out.");
-
-        LogoutUser();
-        navigate("/login");
+        logout();
       },
     });
 

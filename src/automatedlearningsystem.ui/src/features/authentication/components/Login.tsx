@@ -1,14 +1,14 @@
 import { Button, Checkbox, Form, Input, Typography } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import useAuth from "../hooks/useAuth";
+import { useLogin } from "../hooks/useLogin";
 
 const { Text, Title, Link } = Typography;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth({ Email: email, Password: password });
+  const { login } = useLogin({ Email: email, Password: password });
 
   return (
     <section
