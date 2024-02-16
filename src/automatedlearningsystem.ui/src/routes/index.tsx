@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import LayoutPage from "../pages/LayoutPage";
-import HomePage from "../pages/HomePage";
+import HomePage from "../features/admin/pages/HomePage";
 import { LoginPage } from "../features/authentication/pages/LoginPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 

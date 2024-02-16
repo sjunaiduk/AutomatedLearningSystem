@@ -2,11 +2,15 @@ import { create } from "zustand";
 
 interface UserStore {
   Authenticated: boolean;
-  Email: string;
-  Authenticate: (email: string) => void;
+  User: User | null;
+  LoginUser: (email: string) => void;
+  LogoutUser: () => void;
 }
 export const useAuthStore = create<UserStore>((set) => ({
   Authenticated: false,
-  Email: "",
-  Authenticate: (email) => set(() => ({ Authenticated: true, Email: email })),
+  User: null,
+  LoginUser: (email) =>
+    set(() => ({ Authenticated: true, User: { Role: "Admin", Email: email } })),
+  LogoutUser: () =>
+    set(() => ({ Authenticated: false, Email: "", User: null })),
 }));

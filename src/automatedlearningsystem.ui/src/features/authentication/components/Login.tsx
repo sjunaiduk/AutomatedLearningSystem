@@ -1,39 +1,14 @@
 import { Button, Checkbox, Form, Input, Typography } from "antd";
-import axios from "axios";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../stores/userStore";
+import useAuth from "../hooks/useAuth";
 
 const { Text, Title, Link } = Typography;
 
-interface LoginRequest {
-  Email: string;
-  Password: string;
-}
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { Authenticate } = useAuthStore();
-
-  const onFinish = async (data: LoginRequest) => {
-    const loginResult = await axios.post(
-      `${import.meta.env.VITE_API_BASE}/auth/login`,
-      {
-        Email: data.Email,
-        Password: data.Password,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    console.log(loginResult);
-    if (loginResult.status == 200) {
-      navigate("/");
-      Authenticate(data.Email);
-    }
-  };
+  const { login } = useAuth({ Email: email, Password: password });
 
   return (
     <section
@@ -55,7 +30,7 @@ const Login = () => {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
+          onFinish={login}
           layout="vertical"
           requiredMark="optional"
         >
