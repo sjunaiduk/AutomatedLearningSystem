@@ -41,4 +41,6 @@ public static class Routes
     }
 
     public const string Login = $"/auth/login";
+
+    public const string Logout = $"/auth/logout";
 }

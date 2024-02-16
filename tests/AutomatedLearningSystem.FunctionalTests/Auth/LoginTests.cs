@@ -5,9 +5,10 @@ using AutomatedLearningSystem.Contracts.Login;
 using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutomatedLearningSystem.FunctionalTests.Login;
+namespace AutomatedLearningSystem.FunctionalTests.Auth;
 
 public class LoginTests(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
@@ -29,6 +30,5 @@ public class LoginTests(FunctionalTestWebApplicationFactory factory) : BaseFunct
         // Assert
         response.Headers.Any(header => header.Key == "Set-Cookie").Should().BeTrue();
     }
-
 
 }
