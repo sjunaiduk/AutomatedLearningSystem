@@ -15,7 +15,14 @@ export const useAuthStore = create<UserStore>()(
       LoginUser: (email) =>
         set(() => ({
           Authenticated: true,
-          User: { Role: "Admin", Email: email },
+          User: {
+            role: "Admin",
+            email: email,
+            id: "",
+            firstName: "",
+            lastName: "",
+            password: "",
+          },
         })),
       LogoutUser: () =>
         set(() => ({ Authenticated: false, Email: "", User: null })),

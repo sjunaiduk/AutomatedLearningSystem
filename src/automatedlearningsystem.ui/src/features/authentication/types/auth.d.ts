@@ -4,6 +4,10 @@ interface LoginData {
 }
 
 interface User {
-  Role: "Admin" | "Student";
-  Email: string;
+  id: string;
+  role: "Admin" | "Student";
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
 }

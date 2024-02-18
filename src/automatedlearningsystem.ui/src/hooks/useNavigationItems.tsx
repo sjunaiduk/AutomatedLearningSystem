@@ -32,11 +32,12 @@ const useNavigationItems = (): ItemType[] => {
       },
     });
 
-    if (User.Role == "Admin") {
+    if (User.role == "Admin") {
       items.push({
         key: "2",
         label: "Users",
         icon: <UserOutlined />,
+        onClick: () => navigate("/users"),
       });
     } else {
       items.push({

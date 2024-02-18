@@ -41,7 +41,7 @@ public static class ApplicationBuilderExtensions
                     return User.Create(faker.Person.FirstName,
                         faker.Person.LastName, // Changed from FirstName to LastName for more realistic data
                         faker.Person.Email,
-                        Role.Admin,
+                        faker.PickRandomParam(Role.Admin, Role.Student),
                         faker.Random.AlphaNumeric(10));
                 })
                 .ToList();
