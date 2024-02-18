@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>Automated Learning System</h1>
-      <span>{User?.Email}</span>
+      <span>{User?.email}</span>
       <p>home page content</p>
     </div>
   );
