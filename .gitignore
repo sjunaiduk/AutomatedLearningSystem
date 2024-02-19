@@ -5,3 +5,4 @@
 *.sln.DotSettings.user
 src/**/als.*
 **/**/.vscode
+**/**/src/AutomatedLearningSystem.Api/wwwroot/client/

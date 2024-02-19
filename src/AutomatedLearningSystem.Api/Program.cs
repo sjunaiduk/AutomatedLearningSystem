@@ -20,6 +20,10 @@ builder.Services.AddCors();
 builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
     .AddCookie(AuthConstants.DefaultCookieScheme, opt =>
     {
+        opt.Events.OnRedirectToAccessDenied = context => {
+            return Task.FromResult(context.Response.StatusCode = 
+            StatusCodes.Status401Unauthorized);
+        };
         opt.Events.OnRedirectToLogin = context => Task.FromResult(context.Response.StatusCode = StatusCodes.Status401Unauthorized);
     });
 
@@ -56,6 +60,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(cp => {
     cp.WithOrigins("http://localhost:5173");
+    cp.AllowAnyMethod();
     cp.AllowCredentials();
     cp.AllowAnyHeader();
 });

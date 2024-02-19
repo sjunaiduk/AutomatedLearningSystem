@@ -4,6 +4,6 @@ import { userService } from "../services/userService";
 export const useUsers = () => {
   return useQuery({
     queryKey: ["users"],
-    queryFn: () => userService.GetAll("/api/users"),
+    queryFn: userService.GetAll,
   });
 };

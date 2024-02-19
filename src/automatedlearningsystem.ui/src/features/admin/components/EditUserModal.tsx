@@ -1,5 +1,6 @@
 import { Modal, Button, Input, Select, Form } from "antd";
 import { useEffect, useState } from "react";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 
 const { Option } = Select;
 
@@ -10,7 +11,8 @@ interface Props {
 }
 const EditUserModal = ({ open, setOpen, user }: Props) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [form] = Form.useForm();
+  const { mutate: updateUser } = useUpdateUser();
+  const [form] = Form.useForm<User>();
 
   useEffect(() => {
     if (open) {
@@ -30,17 +32,18 @@ const EditUserModal = ({ open, setOpen, user }: Props) => {
     setConfirmLoading(true);
     try {
       var data = await form.validateFields();
-      console.log("Received values of form: ", data);
       setOpen(false);
       setConfirmLoading(false);
+      updateUser({
+        ...data,
+        id: user.id,
+      });
     } catch (info) {
-      console.log("Validate Failed:", info);
       setConfirmLoading(false);
     }
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
     setOpen(false);
   };
   return (
@@ -107,7 +110,7 @@ const EditUserModal = ({ open, setOpen, user }: Props) => {
         >
           <Select placeholder="Select a role">
             <Option value="admin">Admin</Option>
-            <Option value="user">User</Option>
+            <Option value="student">Student</Option>
           </Select>
         </Form.Item>
       </Form>
