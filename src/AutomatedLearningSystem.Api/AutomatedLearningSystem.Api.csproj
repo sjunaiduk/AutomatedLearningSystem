@@ -26,12 +26,9 @@
 
  
 
-	<Target Name='CompileClient'
-	        BeforeTargets="Publish">
-		<Exec WorkingDirectory="../automatedlearningsystem.ui"
-		      Command="npm install" />
-		<Exec WorkingDirectory="../automatedlearningsystem.ui"
-		      Command="npm run build" />
+	<Target Name="CompileClient" BeforeTargets="Publish">
+		<Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm install" />
+		<Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm run build" />
 	</Target>
 
 	<ItemGroup>

@@ -1,3 +1,4 @@
+using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems;
 using AutomatedLearningSystem.Domain.LearningPaths;
 
@@ -17,6 +18,10 @@ public class UserLearningItem
         return new(learningItem, id);
     }
 
+    public void Complete()
+    {
+        Completed = true;
+    }
     private UserLearningItem(LearningItem learningItem,
     Guid? id = null)
     {
@@ -28,4 +33,10 @@ public class UserLearningItem
 
     }
 
+}
+
+public static class UserLearningItemErrors
+{
+    public static Error NotFound =>
+        new("UserLearningItem.NotFound", "UserLearningItem was not found.", ErrorType.NotFound);
 }

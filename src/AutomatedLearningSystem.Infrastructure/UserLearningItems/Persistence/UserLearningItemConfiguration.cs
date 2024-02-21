@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using AutomatedLearningSystem.Domain.LearningPaths;
 using AutomatedLearningSystem.Domain.UserLearningItems;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,9 @@ public class UserLearningItemConfigurations : IEntityTypeConfiguration<UserLearn
 
         builder.HasOne<LearningPath>()
             .WithMany(lp => lp.UserLearningItems);
+
+    
+
 
     }
 }

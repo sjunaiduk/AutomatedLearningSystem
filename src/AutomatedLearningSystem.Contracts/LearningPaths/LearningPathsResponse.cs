@@ -8,7 +8,7 @@ public class LearningPathsResponse
 public class LearningPathResponse
 {
     public Guid Id { get; set; }
-    public List<LearningItemResponse> LearningItems { get; init; }
+    public List<LearningItemResponse> UserLearningItems { get; init; }
 }
 
 public class LearningItemResponse

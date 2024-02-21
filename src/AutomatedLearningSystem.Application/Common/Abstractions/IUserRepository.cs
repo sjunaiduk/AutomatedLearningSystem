@@ -1,4 +1,5 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
+using AutomatedLearningSystem.Domain.UserLearningItems;
 using AutomatedLearningSystem.Domain.Users;
 
 namespace AutomatedLearningSystem.Application.Common.Abstractions;
@@ -12,4 +13,5 @@ public interface IUserRepository
     void Delete(User user);
 
     Task<User?> LoginAsync(string requestEmail, string requestPassword);
+
 }

@@ -34,6 +34,7 @@ public class FunctionalTestWebApplicationFactory : WebApplicationFactory<Program
             services.AddDbContext<AutomatedLearningSystemDbContext>(opt =>
             {
                 opt.UseSqlite($"Data Source=test-{_dbName}.db");
+                opt.EnableSensitiveDataLogging();
 
             });
 

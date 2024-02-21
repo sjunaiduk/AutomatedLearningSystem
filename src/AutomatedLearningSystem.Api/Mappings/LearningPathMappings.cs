@@ -12,7 +12,7 @@ public static class LearningPathMappings
              new LearningPathResponse()
              {
                  Id = lp.Id,
-                 LearningItems = lp.UserLearningItems.Select(userLearningItem => new LearningItemResponse()
+                 UserLearningItems = lp.UserLearningItems.Select(userLearningItem => new LearningItemResponse()
                  {
                      Category = userLearningItem.LearningItem!.Category switch
                      {
@@ -22,7 +22,7 @@ public static class LearningPathMappings
                          _ => throw new InvalidOperationException()
                      },
                      Description = userLearningItem.LearningItem.Description,
-                     Id = userLearningItem.LearningItem.Id,
+                     Id = userLearningItem.Id,
                      Name = userLearningItem.LearningItem.Name,
                      Completed = userLearningItem.Completed
                  }).ToList()

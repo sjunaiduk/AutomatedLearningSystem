@@ -40,6 +40,12 @@ public static class Routes
         public const string GetAll = $"{Base}";
     }
 
+    public static class UserLearningItems
+    {
+        private const string UserLearningItemsBase = $"{Base}/user-learning-items";
+        public const string Update = $"{UserLearningItemsBase}/{{userLearningItemId:guid}}";
+    }
+
     public const string Login = $"/auth/login";
 
     public const string Logout = $"/auth/logout";

@@ -1,4 +1,5 @@
 ﻿using AutomatedLearningSystem.Application.Common.Abstractions;
+using AutomatedLearningSystem.Domain.UserLearningItems;
 using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;

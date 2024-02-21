@@ -64,7 +64,7 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
 
         // Assert
         learningPaths?.LearningPaths.Count.Should().NotBe(0);
-        learningPaths?.LearningPaths.Any(lp => lp.LearningItems.Count == 0).Should().BeFalse();
+        learningPaths?.LearningPaths.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
         learningPaths?.LearningPaths.Any(lp => lp.Id == default).Should().BeFalse();
 
 
@@ -102,8 +102,8 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
         var response = await HttpClient.GetFromJsonAsync<LearningPathsResponse>(Routes.LearningPaths.GetAll);
 
         // Assert
-        response?.LearningPaths.Any(lp => lp.LearningItems.Count == 0).Should().BeFalse();
-        response?.LearningPaths.SelectMany(lp => lp.LearningItems).All(li =>
+        response?.LearningPaths.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
+        response?.LearningPaths.SelectMany(lp => lp.UserLearningItems).All(li =>
             li is not
             {
                 Description: null,

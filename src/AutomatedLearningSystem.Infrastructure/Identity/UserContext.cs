@@ -8,17 +8,15 @@ namespace AutomatedLearningSystem.Infrastructure.Identity;
 public class UserContext : IUserContext
 {
 
-    private readonly IHttpContextAccessor _accessor;
     public UserContext(IHttpContextAccessor accessor, Guid? id = null, string? role = null)
     {
-        this._accessor = accessor;
         if (id is not null)
         {
             Id = (Guid)id;
         }
         else
         {
-            Id = Guid.TryParse(_accessor.HttpContext?.User.FindFirst("sub")?.Value, out var result)
+            Id = Guid.TryParse(accessor.HttpContext?.User.FindFirst("sub")?.Value, out var result)
                 ? result
                 : throw new InvalidOperationException("Cannot access user context of unauthenticated user");
 
@@ -29,13 +27,9 @@ public class UserContext : IUserContext
             Role = role;
             return;
         }
-        var roleFromContext = _accessor.HttpContext?.User.FindFirst(ClaimTypes.Role)?.Value;
-        if (roleFromContext is null)
-        {
-            throw new InvalidOperationException("Cannot access user context of unauthenticated user");
-        }
+        var roleFromContext = accessor.HttpContext?.User.FindFirst(ClaimTypes.Role)?.Value;
 
-        Role = roleFromContext;
+        Role = roleFromContext ?? throw new InvalidOperationException("Cannot access user context of unauthenticated user");
     }
 
    

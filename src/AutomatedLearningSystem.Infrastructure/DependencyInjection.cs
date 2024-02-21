@@ -5,6 +5,7 @@ using AutomatedLearningSystem.Infrastructure.Identity;
 using AutomatedLearningSystem.Infrastructure.LearningItems.Persistence;
 using AutomatedLearningSystem.Infrastructure.LearningPaths.Persistence;
 using AutomatedLearningSystem.Infrastructure.Questions.Persistence;
+using AutomatedLearningSystem.Infrastructure.UserLearningItems.Persistence;
 using AutomatedLearningSystem.Infrastructure.Users.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ public static class DependencyInjection
         services.AddScoped<IQuestionRepository, QuestionsRepository>();
         services.AddScoped<DbContext, AutomatedLearningSystemDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserLearningItemRepository, UserLearningItemRepository>();
 
         services.AddScoped<IUserContext, UserContext>();
         return services;
