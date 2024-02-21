@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using AutomatedLearningSystem.Domain.UserLearningItems;
 
 namespace AutomatedLearningSystem.Application.LearningPaths.Commands.GenerateLearningPath;
 
@@ -75,7 +76,8 @@ Result>
 
         foreach (var item in generatedLearningItems)
         {
-            var addLearningItemResult = learningPath.AddLearningItem(item);
+            var userLearningItem = UserLearningItem.Create(item);
+            var addLearningItemResult = learningPath.AddLearningItem(userLearningItem);
             if (addLearningItemResult.IsFailure)
             {
                 return addLearningItemResult;

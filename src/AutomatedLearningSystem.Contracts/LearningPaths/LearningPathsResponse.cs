@@ -8,7 +8,7 @@ public class LearningPathsResponse
 public class LearningPathResponse
 {
     public Guid Id { get; set; }
-    public List<LearningItemResponse> LearningItems { get; init; } 
+    public List<LearningItemResponse> LearningItems { get; init; }
 }
 
 public class LearningItemResponse
@@ -20,6 +20,8 @@ public class LearningItemResponse
     public string Description { get; set; }
 
     public CategoryUi Category { get; set; }
+
+    public bool Completed { get; set; }
 }
 
 public enum CategoryUi

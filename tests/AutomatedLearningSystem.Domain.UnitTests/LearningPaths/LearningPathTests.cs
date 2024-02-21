@@ -1,5 +1,6 @@
 ﻿using AutomatedLearningSystem.Domain.LearningPaths;
 using FluentAssertions;
+using TestCommon;
 using TestCommon.Constants;
 using TestCommon.Factories;
 
@@ -13,9 +14,10 @@ public class LearningPathTests
         // Arrange
         var learningItems = LearningItemFactory.CreateMany(count: 10);
         var learningPath = LearningPathFactory.Create();
+        var userLearningItems = UserLearningItemFactory.CreateMany(learningItems);
 
         // Act
-        var results = learningItems.Select(x => learningPath.AddLearningItem(x))
+        var results = userLearningItems.Select(learningPath.AddLearningItem)
             .ToList();
 
 
@@ -29,11 +31,11 @@ public class LearningPathTests
     public void LearningPath_WhenDuplicateLearningItemsSupplied_ShouldReturnError()
     {
         // Arrange
-        var learningItems = LearningItemFactory.CreateMany(count: 2, id: LearningItemConstants.Id);
         var learningPath = LearningPathFactory.Create();
-
+        var learningItems = LearningItemFactory.CreateMany(count: 2, id: LearningItemConstants.Id);
+        var userLearningItems = UserLearningItemFactory.CreateMany(learningItems);
         // Act
-        var results = learningItems.Select(x => learningPath.AddLearningItem(x))
+        var results = userLearningItems.Select(learningPath.AddLearningItem)
             .ToList()
             .Last();
 

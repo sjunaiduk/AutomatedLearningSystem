@@ -31,7 +31,8 @@ public class LearningPathsRepository : ILearningPathRepository
     {
         return _learningPaths
             .Select(x => x)
-            .Include(lp => lp.LearningItems)
+            .Include(lp => lp.UserLearningItems)
+            .ThenInclude(ulp => ulp.LearningItem)
             .ToListAsync();
     }
 }

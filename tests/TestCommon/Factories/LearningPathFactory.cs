@@ -9,8 +9,9 @@ public static class LearningPathFactory
     {
         var learningPath = LearningPath.CreateLearningPath(name);
         var learningItems = LearningItemFactory.CreateMany(count: learningItemsCount);
+        var userLearningItems = UserLearningItemFactory.CreateMany(learningItems);
 
-        learningItems.Select(item => learningPath.AddLearningItem(item));
+        _ = userLearningItems.Select(learningPath.AddLearningItem);
 
         return learningPath;
     }

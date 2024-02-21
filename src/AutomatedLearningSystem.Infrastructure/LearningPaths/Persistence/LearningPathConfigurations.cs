@@ -13,12 +13,10 @@ public class LearningPathConfigurations : IEntityTypeConfiguration<LearningPath>
 
         builder.HasKey(x => x.Id);
 
-
-        builder.HasMany(x => x.LearningItems)
-            .WithMany();
-
         builder.Property(x => x.Name)
             .IsRequired();
 
+        builder.HasMany(lp => lp.UserLearningItems)
+            .WithOne();
     }
 }
