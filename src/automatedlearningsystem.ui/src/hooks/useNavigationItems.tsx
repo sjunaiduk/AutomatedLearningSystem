@@ -5,6 +5,7 @@ import {
   LogoutOutlined,
   UserOutlined,
   BookOutlined,
+  QuestionCircleTwoTone,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useLogout } from "../features/authentication/hooks/useLogout";
@@ -45,6 +46,12 @@ const useNavigationItems = (): ItemType[] => {
         label: "My Learning Paths",
         icon: <BookOutlined />,
         onClick: () => navigate("/learning-paths"),
+      });
+      items.push({
+        key: "3",
+        label: "Questionnare",
+        icon: <QuestionCircleTwoTone />,
+        onClick: () => navigate("/questionnare"),
       });
     }
   }

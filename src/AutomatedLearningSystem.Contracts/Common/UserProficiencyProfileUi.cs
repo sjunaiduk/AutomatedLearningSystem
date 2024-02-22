@@ -1,4 +1,6 @@
-﻿namespace AutomatedLearningSystem.Contracts.Common;
+﻿using System.Text.Json.Serialization;
+
+namespace AutomatedLearningSystem.Contracts.Common;
 
 public class UserProficiencyProfileUi
 {
@@ -8,6 +10,7 @@ public class UserProficiencyProfileUi
 
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum UserLevel
 {
     Beginner = 0,

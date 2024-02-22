@@ -20,8 +20,13 @@ export class BaseClient<TResponse> {
     return res.data;
   };
 
-  Update = async (id: string, request: User) => {
+  Update = async <TUpdateRequest>(id: string, request: TUpdateRequest) => {
     var res = await client.put(`${this.endpoint}/${id}`, request);
+    return res.data;
+  };
+
+  Post = async <TPostRequest>(request: TPostRequest) => {
+    var res = await client.post(`${this.endpoint}`, request);
     return res.data;
   };
 

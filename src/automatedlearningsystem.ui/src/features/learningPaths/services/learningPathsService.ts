@@ -1,4 +1,4 @@
-import { BaseClient } from "../../../../services/apiClient";
+import { BaseClient } from "../../../services/apiClient";
 
 export default function getLearningPathsService(userId: string) {
   console.log(`User id : ${userId}`);

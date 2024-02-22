@@ -5,7 +5,7 @@ import { userService } from "../services/userService";
 export const useUpdateUser = () =>
   useMutation({
     mutationFn: (updatedUser: User) => {
-      return userService.Update(updatedUser.id, updatedUser);
+      return userService.Update<User>(updatedUser.id, updatedUser);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

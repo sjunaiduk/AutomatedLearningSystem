@@ -7,6 +7,8 @@ type Role = "Admin" | "Student";
 
 type Categories = "Frontend" | "Backend" | "Database";
 
+type UserLevel = "Beginner" | "Intermediate" | "Advanced";
+
 interface LoginResponse {
   id: string;
   role: Role;
@@ -27,7 +29,7 @@ interface User {
 interface LearningPath {
   id: string;
   name: string;
-  learningItems: LearningItem[];
+  userLearningItems: LearningItem[];
 }
 
 interface LearningItem {
@@ -36,4 +38,20 @@ interface LearningItem {
   description: string;
   category: Categories;
   completed: boolean;
+}
+
+interface Answer {
+  questionId: string;
+  answer: number;
+}
+
+interface Profile {
+  frontend: UserLevel;
+  backend: UserLevel;
+  database: UserLevel;
+}
+interface GenerateLearningPathRequest {
+  answers: Answers[];
+  Profile: Profile;
+  learningPathName: string;
 }

@@ -6,7 +6,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
 
 import UsersPage from "../features/admin/users/pages/UsersPage";
-import LearningPathsPage from "../features/student/learningPaths/pages/LearningPathsPage";
+import LearningPathsPage from "../features/learningPaths/pages/LearningPathsPage";
+import QuestionnarePage from "../features/learningPaths/pages/QuestionnarePage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
           {
             path: "/learning-paths",
             element: <LearningPathsPage />,
+          },
+          {
+            path: "/questionnare",
+            element: <QuestionnarePage />,
           },
         ],
       },

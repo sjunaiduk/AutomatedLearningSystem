@@ -10,6 +10,6 @@ public static class LearningPathErrors
             ErrorType.Conflict);
 
     public static Error LearningPathLimitReached => new("LearningPath.LimitReached",
-        "Learning item count has reached the limit",
+        "Learning path count has reached the limit",
         ErrorType.Validation);
 }

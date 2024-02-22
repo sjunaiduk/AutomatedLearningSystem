@@ -5,8 +5,8 @@ namespace AutomatedLearningSystem.Contracts.Questionnaire;
 
 public class QuestionnaireData
 {
-    public List<AnswerForQuestionFromUi> Answers { get; init; }
-    public UserProficiencyProfileUi Profile { get; init; }
+    public List<AnswerForQuestionFromUi> Answers { get; init; } = null!;
+    public UserProficiencyProfileUi Profile { get; init; } = null!;
 
-    public string LearningPathName { get; init; }
+    public string LearningPathName { get; init; } = null!;
 }
