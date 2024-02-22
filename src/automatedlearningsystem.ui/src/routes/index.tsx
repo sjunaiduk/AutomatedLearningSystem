@@ -5,7 +5,8 @@ import { LoginPage } from "../features/authentication/pages/LoginPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
 
-import UsersPage from "../features/admin/pages/UsersPage";
+import UsersPage from "../features/admin/users/pages/UsersPage";
+import LearningPathsPage from "../features/student/learningPaths/pages/LearningPathsPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                 element: <UsersPage />,
               },
             ],
+          },
+          {
+            path: "/learning-paths",
+            element: <LearningPathsPage />,
           },
         ],
       },

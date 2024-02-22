@@ -44,6 +44,7 @@ const useNavigationItems = (): ItemType[] => {
         key: "2",
         label: "My Learning Paths",
         icon: <BookOutlined />,
+        onClick: () => navigate("/learning-paths"),
       });
     }
   }

@@ -1,13 +1,10 @@
 ﻿namespace AutomatedLearningSystem.Contracts.LearningPaths;
 
-public class LearningPathsResponse
-{
-    public List<LearningPathResponse> LearningPaths { get; init; }
-}
-
 public class LearningPathResponse
 {
     public Guid Id { get; set; }
+
+    public string Name { get; set; }
     public List<LearningItemResponse> UserLearningItems { get; init; }
 }
 

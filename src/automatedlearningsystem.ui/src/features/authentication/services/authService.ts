@@ -4,7 +4,8 @@ class AuthService {
   constructor() {}
 
   async Login(data: LoginData) {
-    await client.post("/auth/login", data);
+    var res = await client.post<LoginResponse>("/auth/login", data);
+    return res.data;
   }
 
   async Logout() {

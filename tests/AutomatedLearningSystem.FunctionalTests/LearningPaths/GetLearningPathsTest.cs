@@ -5,15 +5,10 @@ using AutomatedLearningSystem.Contracts.AnswersForQuestions;
 using AutomatedLearningSystem.Contracts.Common;
 using AutomatedLearningSystem.Contracts.LearningPaths;
 using AutomatedLearningSystem.Contracts.Questionnaire;
-using AutomatedLearningSystem.Contracts.Users;
-using AutomatedLearningSystem.Domain.LearningItems;
-using AutomatedLearningSystem.Domain.LearningPaths;
 using AutomatedLearningSystem.Domain.Questions;
-using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
@@ -25,8 +20,7 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
     public async void GetLearningPaths_ShouldReturnOk()
     {
         // Act
-
-        var result = await HttpClient.GetAsync(Routes.LearningPaths.GetAll);
+        var result = await HttpClient.GetAsync($"/api/users/{Guid.NewGuid()}/learning-paths");
 
         // Assert
 
@@ -56,16 +50,16 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
             }).ToList()
         };
 
-        var generateLearningPathResult =  await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
+        var generateLearningPathResult = await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
         generateLearningPathResult.StatusCode.Should().Be(HttpStatusCode.Created);
 
         // Act
-        var learningPaths = await HttpClient.GetFromJsonAsync<LearningPathsResponse>(Routes.LearningPaths.GetAll);
+        var learningPaths = await HttpClient.GetFromJsonAsync<List<LearningPathResponse>>($"/api/users/{AdminUser.Id}/learning-paths");
 
         // Assert
-        learningPaths?.LearningPaths.Count.Should().NotBe(0);
-        learningPaths?.LearningPaths.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
-        learningPaths?.LearningPaths.Any(lp => lp.Id == default).Should().BeFalse();
+        learningPaths?.Count.Should().NotBe(0);
+        learningPaths?.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
+        learningPaths?.Any(lp => lp.Id == default).Should().BeFalse();
 
 
     }
@@ -99,11 +93,11 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
         generateLearningPathResult.StatusCode.Should().Be(HttpStatusCode.Created);
 
         // Act
-        var response = await HttpClient.GetFromJsonAsync<LearningPathsResponse>(Routes.LearningPaths.GetAll);
+        var response = await HttpClient.GetFromJsonAsync<List<LearningPathResponse>>($"/api/users/{AdminUser.Id}/learning-paths");
 
         // Assert
-        response?.LearningPaths.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
-        response?.LearningPaths.SelectMany(lp => lp.UserLearningItems).All(li =>
+        response?.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
+        response?.SelectMany(lp => lp.UserLearningItems).All(li =>
             li is not
             {
                 Description: null,

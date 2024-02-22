@@ -6,12 +6,13 @@ namespace AutomatedLearningSystem.Api.Mappings;
 
 public static class LearningPathMappings
 {
-    public static LearningPathsResponse ToLearningPathsResponse(this List<LearningPath> learningPathsDomain)
+    public static List<LearningPathResponse> ToLearningPathsResponse(this List<LearningPath> learningPathsDomain)
     {
         var learningPaths = learningPathsDomain.Select(lp =>
              new LearningPathResponse()
              {
                  Id = lp.Id,
+                 Name = lp.Name,
                  UserLearningItems = lp.UserLearningItems.Select(userLearningItem => new LearningItemResponse()
                  {
                      Category = userLearningItem.LearningItem!.Category switch
@@ -29,9 +30,6 @@ public static class LearningPathMappings
              }
          ).ToList();
 
-        return new LearningPathsResponse()
-        {
-            LearningPaths = learningPaths
-        };
+        return learningPaths;
     }
 }

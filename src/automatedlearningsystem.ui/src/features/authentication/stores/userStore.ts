@@ -1,10 +1,18 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
+interface LoginStoreData {
+  id: string;
+  role: "Admin" | "Student";
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 interface UserStore {
   Authenticated: boolean;
   User: User | null;
-  LoginUser: (email: string) => void;
+  LoginUser: (loginData: LoginStoreData) => void;
   LogoutUser: () => void;
 }
 export const useAuthStore = create<UserStore>()(
@@ -12,15 +20,11 @@ export const useAuthStore = create<UserStore>()(
     (set) => ({
       Authenticated: false,
       User: null,
-      LoginUser: (email) =>
+      LoginUser: (loginData) =>
         set(() => ({
           Authenticated: true,
           User: {
-            role: "Admin",
-            email: email,
-            id: "",
-            firstName: "",
-            lastName: "",
+            ...loginData,
             password: "",
           },
         })),

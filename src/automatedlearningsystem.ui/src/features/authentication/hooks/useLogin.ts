@@ -8,9 +8,9 @@ export const useLogin = ({ Email, Password }: LoginData) => {
   const { LoginUser } = useAuthStore();
   const { mutate } = useMutation({
     mutationFn: () => authService.Login({ Email, Password }),
-    onSuccess: () => {
-      console.log("Login was successful");
-      LoginUser(Email);
+    onSuccess: (loginResponse) => {
+      console.log("Login success ", loginResponse);
+      LoginUser(loginResponse);
       navigate("/");
     },
     onError: () => console.log("Login failed"),

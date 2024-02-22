@@ -3,9 +3,11 @@ using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Auth.Login;
 using AutomatedLearningSystem.Application.Users.Queries.GetUser;
 using AutomatedLearningSystem.Contracts.Login;
+using AutomatedLearningSystem.Contracts.Users;
 using AutomatedLearningSystem.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
+using SQLitePCL;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Auth;
 
@@ -13,31 +15,50 @@ public class Login : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost(Routes.Login, async (HttpContext context, ISender sender, 
+        app.MapPost(Routes.Login, async (HttpContext context, ISender sender,
             LoginRequest request) =>
         {
             var query = new LoginQuery(request.Email, request.Password);
-            var result = await sender.Send(query);
+            var loginResult
+             = await sender.Send(query);
 
-            if (result.IsFailure)
+            if (loginResult
+            .IsFailure)
             {
-                return result?.FirstError?.ToProblemDetails();
+                return loginResult
+                ?.FirstError?.ToProblemDetails();
             }
 
             var claims = new List<Claim>()
             {
-                new(ClaimTypes.Role, result.Value.Role switch
+                new(ClaimTypes.Role, loginResult
+                .Value.Role switch
                 {
                     Role.Admin => "admin",
                     Role.Student => "student",
                     _ => throw new InvalidOperationException()
                 }),
-                new("sub",result.Value.Id.ToString())
+                new("sub",loginResult
+                .Value.Id.ToString())
             };
             var identity = new ClaimsIdentity(claims, "cookie");
             var principal = new ClaimsPrincipal(identity);
             await context.SignInAsync("cookie", principal);
-            return Results.Ok();
+            var user = loginResult.Value;
+            return Results.Ok(new LoginResponse
+            {
+                Id = user.Id,
+                Role = user.Role switch
+                {
+                    Role.Admin => UserRole.Admin,
+                    Role.Student => UserRole.Student,
+                    _ => throw new InvalidOperationException()
+                },
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email
+
+            });
         });
     }
 }

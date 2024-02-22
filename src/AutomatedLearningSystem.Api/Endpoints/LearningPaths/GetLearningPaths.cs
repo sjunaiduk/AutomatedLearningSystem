@@ -8,7 +8,9 @@ public class GetLearningPaths : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet(Routes.LearningPaths.GetAll, async (ISender sender) =>
+
+        // TODO! Create endpoint for all learning paths, and one for a specific user
+        app.MapGet(Routes.User.LearningPaths.GetAll, async (ISender sender) =>
         {
             var query = new GetLearningPathsQuery();
             var learningPaths = await sender.Send(query);

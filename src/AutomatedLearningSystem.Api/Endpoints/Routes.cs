@@ -22,8 +22,10 @@ public static class Routes
         public const string Update = $"{UserBase}/{{id:guid}}";
         public static class LearningPaths
         {
-            
+
             private const string LearningPathBase = $"{UserBase}/{{userId:guid}}/learning-paths";
+
+            public const string GetAll = $"{LearningPathBase}";
             public const string Create = $"{LearningPathBase}";
         }
     }
@@ -38,6 +40,8 @@ public static class Routes
     {
         private const string LearningPathsBase = $"{Base}/learning-paths";
         public const string GetAll = $"{Base}";
+
+
     }
 
     public static class UserLearningItems
