@@ -4,22 +4,22 @@ namespace AutomatedLearningSystem.Api.Mappings;
 
 public static class UserRoleMappings
 {
-    public static Role MapToDomainRole(this UserRole userRole)
+    public static Role MapToDomainRole(this RoleDto roleDto)
     {
-        return userRole switch
+        return roleDto switch
         {
-            UserRole.Student => Role.Student,
-            UserRole.Admin => Role.Admin,
-            _ => throw new ArgumentOutOfRangeException(nameof(userRole), userRole, null)
+            RoleDto.Student => Role.Student,
+            RoleDto.Admin => Role.Admin,
+            _ => throw new ArgumentOutOfRangeException(nameof(roleDto), roleDto, null)
         };
     }
 
-    public static UserRole MapToUiRole(this Role userRole)
+    public static RoleDto MapToUiRole(this Role userRole)
     {
         return userRole switch
         {
-            Role.Admin => UserRole.Admin,
-            Role.Student => UserRole.Student,
+            Role.Admin => RoleDto.Admin,
+            Role.Student => RoleDto.Student,
             _ => throw new ArgumentOutOfRangeException(nameof(userRole), userRole, null)
 
         };

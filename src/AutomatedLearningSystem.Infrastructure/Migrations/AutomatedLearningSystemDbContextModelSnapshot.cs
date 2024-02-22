@@ -58,15 +58,15 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("DifficultyLevel")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserLevel")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

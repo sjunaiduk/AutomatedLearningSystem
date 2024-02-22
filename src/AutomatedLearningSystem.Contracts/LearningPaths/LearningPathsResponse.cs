@@ -7,10 +7,10 @@ public class LearningPathResponse
     public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
-    public List<LearningItemResponse> UserLearningItems { get; init; } = null!;
+    public List<UserLearningItemDto> UserLearningItems { get; init; } = null!;
 }
 
-public class LearningItemResponse
+public class UserLearningItemDto
 {
     public Guid Id { get; set; }
 
@@ -18,14 +18,14 @@ public class LearningItemResponse
 
     public string Description { get; set; } = null!;
 
-    public CategoryUi Category { get; set; }
+    public CategoryDto Category { get; set; }
 
     public bool Completed { get; set; }
 }
 
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum CategoryUi
+public enum CategoryDto
 {
     Frontend = 0,
     Backend = 1,

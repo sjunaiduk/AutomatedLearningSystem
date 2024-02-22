@@ -27,13 +27,13 @@ public class CompleteUserLearningItemTest : BaseFunctionalTest
         var answers = AnswerForQuestionFactory.CreateMany(question, 1, AdminUser!.Id);
         var request = new QuestionnaireData
         {
-            Profile = new UserProficiencyProfileUi()
+            Profile = new UserProficiencyProfileDto()
             {
                 Backend = default,
                 Database = default,
                 Frontend = default
             },
-            Answers = answers.Select(a => new AnswerForQuestionFromUi()
+            Answers = answers.Select(a => new AnswerForQuestionDto()
             {
                 Answer = a.Answer,
                 QuestionId = a.QuestionId

@@ -41,7 +41,7 @@ public static class ApplicationBuilderExtensions
                     return User.Create(faker.Person.FirstName,
                         faker.Person.LastName, // Changed from FirstName to LastName for more realistic data
                         faker.Person.Email,
-                        faker.PickRandomParam(Role.Admin, Role.Student),
+                        faker.PickRandomParam(Domain.Users.Role.Admin, Domain.Users.Role.Student),
                         faker.Random.AlphaNumeric(10));
                 })
                 .ToList();
@@ -52,7 +52,7 @@ public static class ApplicationBuilderExtensions
             dbContext.Set<User>()
                 .Add(User.Create("john","doe",
                 "doe@gmail.com",
-                Role.Admin,
+                Domain.Users.Role.Admin,
                 "password"));
         }
 
@@ -93,7 +93,7 @@ public static class ApplicationBuilderExtensions
                         faker.Lorem.Sentence(),
                         faker.PickRandom<Category>(),
                         faker.PickRandom<Priority>(),
-                        faker.PickRandom<DifficultyLevel>());
+                        faker.PickRandom<UserLevel>());
                 }).ToList();
 
             dbContext.Set<LearningItem>()

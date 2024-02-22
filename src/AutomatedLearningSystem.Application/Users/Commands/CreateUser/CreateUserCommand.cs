@@ -1,5 +1,6 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
+using Role = AutomatedLearningSystem.Domain.Users.Role;
 
 namespace AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 

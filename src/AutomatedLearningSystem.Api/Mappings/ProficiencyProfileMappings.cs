@@ -1,20 +1,19 @@
 ﻿using AutomatedLearningSystem.Contracts.Common;
 using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.Users;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using InvalidOperationException = System.InvalidOperationException;
 
 namespace AutomatedLearningSystem.Api.Mappings;
 
 public static class ProficiencyProfileMappings
 {
-    public static UserProficiencyProfile ToUserProficiencyProfile(this UserProficiencyProfileUi profile)
+    public static UserProficiencyProfile ToUserProficiencyProfile(this UserProficiencyProfileDto profile)
     {
-        DifficultyLevel dbLevel = GetDifficultyLevel(profile.Database);
-        DifficultyLevel frontendLevel = GetDifficultyLevel(profile.Frontend);
-        DifficultyLevel backendLevel = GetDifficultyLevel(profile.Backend);
+        UserLevel dbLevel = GetDifficultyLevel(profile.Database);
+        UserLevel frontendLevel = GetDifficultyLevel(profile.Frontend);
+        UserLevel backendLevel = GetDifficultyLevel(profile.Backend);
 
-        return new UserProficiencyProfile()
+        return new UserProficiencyProfile
         {
             DatabaseLevel = dbLevel,
             FrontEndLevel = frontendLevel,
@@ -23,13 +22,13 @@ public static class ProficiencyProfileMappings
 
     }
 
-    public static DifficultyLevel GetDifficultyLevel(UserLevel level)
+    public static UserLevel GetDifficultyLevel(UserLevelDto levelDto)
     {
-        return level switch
+        return levelDto switch
         {
-            UserLevel.Beginner => DifficultyLevel.Beginner,
-            UserLevel.Intermediate => DifficultyLevel.Intermediate,
-            UserLevel.Advanced => DifficultyLevel.Advanced,
+            UserLevelDto.Beginner => UserLevel.Beginner,
+            UserLevelDto.Intermediate => UserLevel.Intermediate,
+            UserLevelDto.Advanced => UserLevel.Advanced,
             _ => throw new InvalidOperationException()
 
         };

@@ -8,7 +8,7 @@ public static class LearningItemConstants
     public const string Name = "Learning Item";
     public const string Description = "Learning Item Description";
     public static Category Category { get; } = Category.Backend;
-    public static DifficultyLevel Level { get; } = DifficultyLevel.Beginner;
+    public static UserLevel Level { get; } = UserLevel.Beginner;
     public static Priority Priority { get; } = Priority.Low;
 
 }

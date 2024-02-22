@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AutomatedLearningSystemDbContext))]
-    [Migration("20240220202322_CreateUserLearningItemForLearningPath")]
-    partial class CreateUserLearningItemForLearningPath
+    [Migration("20240222220716_UpdateSomePropertyNames")]
+    partial class UpdateSomePropertyNames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,15 +61,15 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("DifficultyLevel")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserLevel")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

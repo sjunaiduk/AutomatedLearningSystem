@@ -19,7 +19,7 @@ public class CreateUserTests(FunctionalTestWebApplicationFactory factory) : Base
             "Last Name",
             "test@gmail.com",
             "password",
-            UserRole.Student);
+            RoleDto.Student);
 
         // Act
         

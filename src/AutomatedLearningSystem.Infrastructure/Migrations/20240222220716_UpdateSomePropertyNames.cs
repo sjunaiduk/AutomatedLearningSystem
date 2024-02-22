@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AutomatedLearningSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatePassword : Migration
+    public partial class UpdateSomePropertyNames : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                     Description = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
                     Category = table.Column<int>(type: "INTEGER", nullable: false),
                     Priority = table.Column<int>(type: "INTEGER", nullable: false),
-                    DifficultyLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                    UserLevel = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,6 +88,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -102,27 +103,27 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LearningItemLearningPath",
+                name: "UserLearningItem",
                 columns: table => new
                 {
-                    LearningItemsId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LearningPathId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LearningItemId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Completed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LearningPathId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LearningItemLearningPath", x => new { x.LearningItemsId, x.LearningPathId });
+                    table.PrimaryKey("PK_UserLearningItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LearningItemLearningPath_LearningItem_LearningItemsId",
-                        column: x => x.LearningItemsId,
+                        name: "FK_UserLearningItem_LearningItem_LearningItemId",
+                        column: x => x.LearningItemId,
                         principalTable: "LearningItem",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_LearningItemLearningPath_LearningPath_LearningPathId",
+                        name: "FK_UserLearningItem_LearningPath_LearningPathId",
                         column: x => x.LearningPathId,
                         principalTable: "LearningPath",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -136,14 +137,19 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LearningItemLearningPath_LearningPathId",
-                table: "LearningItemLearningPath",
-                column: "LearningPathId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_LearningPath_UserId",
                 table: "LearningPath",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLearningItem_LearningItemId",
+                table: "UserLearningItem",
+                column: "LearningItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLearningItem_LearningPathId",
+                table: "UserLearningItem",
+                column: "LearningPathId");
         }
 
         /// <inheritdoc />
@@ -153,7 +159,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
                 name: "AnswerForQuestion");
 
             migrationBuilder.DropTable(
-                name: "LearningItemLearningPath");
+                name: "UserLearningItem");
 
             migrationBuilder.DropTable(
                 name: "Question");

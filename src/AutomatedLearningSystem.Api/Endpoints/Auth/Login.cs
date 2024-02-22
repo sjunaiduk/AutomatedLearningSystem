@@ -48,10 +48,10 @@ public class Login : IEndpoint
             return Results.Ok(new LoginResponse
             {
                 Id = user.Id,
-                Role = user.Role switch
+                RoleDto = user.Role switch
                 {
-                    Role.Admin => UserRole.Admin,
-                    Role.Student => UserRole.Student,
+                    Role.Admin => RoleDto.Admin,
+                    Role.Student => RoleDto.Student,
                     _ => throw new InvalidOperationException()
                 },
                 FirstName = user.FirstName,

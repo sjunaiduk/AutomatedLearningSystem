@@ -18,7 +18,7 @@ public class CreateUser : IEndpoint
                 request.LastName,
                 request.Email,
                 request.Password,
-                request.Role.MapToDomainRole());
+                request.RoleDto.MapToDomainRole());
 
             var result = await sender.Send(command);
 

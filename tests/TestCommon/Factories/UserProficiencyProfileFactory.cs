@@ -6,9 +6,9 @@ namespace TestCommon.Factories;
 
 public static class UserProficiencyProfileFactory
 {
-    public static UserProficiencyProfile Create(DifficultyLevel? frontendLevel = null,
-        DifficultyLevel? backendLevel = null,
-        DifficultyLevel? databaseLevel = null)
+    public static UserProficiencyProfile Create(UserLevel? frontendLevel = null,
+        UserLevel? backendLevel = null,
+        UserLevel? databaseLevel = null)
     {
         return new UserProficiencyProfile
         {

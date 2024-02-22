@@ -74,11 +74,11 @@ public static class LearningItemsGeneratorService
         switch (category)
         {
             case Category.Backend:
-                return item.DifficultyLevel < profile.BackEndLevel ? 0.75m : 1.25m;
+                return item.UserLevel < profile.BackEndLevel ? 0.75m : 1.25m;
             case Category.Frontend:
-                return item.DifficultyLevel < profile.FrontEndLevel ? 0.75m : 1.25m;
+                return item.UserLevel < profile.FrontEndLevel ? 0.75m : 1.25m;
             case Category.Database:
-                return item.DifficultyLevel < profile.DatabaseLevel ? 0.75m : 1.25m;
+                return item.UserLevel < profile.DatabaseLevel ? 0.75m : 1.25m;
             default:
                 return 1.0m;
         }
@@ -91,8 +91,8 @@ public static class LearningItemsGeneratorService
 //    private const decimal negativeDifficultyLevelMultiplier = 0.75m;
 
 //    public static List<LearningItem> Generate(List<AnswerForQuestion> answers, 
-//        List<LearningItem> availableLearningItems, DifficultyLevel userBackEndLevel,
-//        DifficultyLevel userFrontEndLevel, DifficultyLevel userDatabaseLevel)
+//        List<LearningItem> availableLearningItems, UserLevel userBackEndLevel,
+//        UserLevel userFrontEndLevel, UserLevel userDatabaseLevel)
 //    {
 
 //        var backEndTopics = availableLearningItems.Where(x =>
@@ -118,7 +118,7 @@ public static class LearningItemsGeneratorService
 //                {
 //                    item.Score += score;
 
-//                    if (item.DifficultyLevel == userBackEndLevel)
+//                    if (item.UserLevel == userBackEndLevel)
 //                    {
 //                        item.Score *= positiveDifficultyLevelMultiplier;
 //                    }
@@ -136,7 +136,7 @@ public static class LearningItemsGeneratorService
 //                {
 //                    item.Score += score;
 
-//                    if (item.DifficultyLevel == userFrontEndLevel)
+//                    if (item.UserLevel == userFrontEndLevel)
 //                    {
 //                        item.Score *= positiveDifficultyLevelMultiplier;
 //                    }
@@ -155,7 +155,7 @@ public static class LearningItemsGeneratorService
 //                {
 //                    item.Score += score;
 
-//                    if (item.DifficultyLevel == userDatabaseLevel)
+//                    if (item.UserLevel == userDatabaseLevel)
 //                    {
 //                        item.Score *= positiveDifficultyLevelMultiplier;
 //                    }

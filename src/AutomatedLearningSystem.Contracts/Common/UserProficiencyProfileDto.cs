@@ -2,16 +2,16 @@
 
 namespace AutomatedLearningSystem.Contracts.Common;
 
-public class UserProficiencyProfileUi
+public class UserProficiencyProfileDto
 {
-    public UserLevel Frontend { get; init; }
-    public UserLevel Backend { get; init; }
-    public UserLevel Database { get; init; }
+    public UserLevelDto Frontend { get; init; }
+    public UserLevelDto Backend { get; init; }
+    public UserLevelDto Database { get; init; }
 
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum UserLevel
+public enum UserLevelDto
 {
     Beginner = 0,
     Intermediate = 1,

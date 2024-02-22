@@ -3,8 +3,8 @@
 namespace AutomatedLearningSystem.Domain.Users;
 public class UserProficiencyProfile
 {
-    public DifficultyLevel BackEndLevel { get; set; }
-    public DifficultyLevel FrontEndLevel { get; set; }
-    public DifficultyLevel DatabaseLevel { get; set; }
+    public Common.UserLevel BackEndLevel { get; set; }
+    public Common.UserLevel FrontEndLevel { get; set; }
+    public Common.UserLevel DatabaseLevel { get; set; }
 
 }

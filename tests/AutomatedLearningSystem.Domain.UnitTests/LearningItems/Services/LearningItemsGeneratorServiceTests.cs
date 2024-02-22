@@ -62,9 +62,9 @@ public class LearningItemsGeneratorServiceTests
 
         // Arrange
         var preferredLearningItem = LearningItemFactory.CreateMany(category: Category.Database,
-            difficulty: DifficultyLevel.Advanced);
+            difficulty: UserLevel.Advanced);
         var otherLearningItems = LearningItemFactory.CreateMany(category: Category.Backend, count: 3,
-            difficulty: DifficultyLevel.Beginner);
+            difficulty: UserLevel.Beginner);
         var allLearningItems = preferredLearningItem.Concat(otherLearningItems).ToList();
 
         var databaseQuestion = QuestionFactory.Create(category: Category.Database);
@@ -77,9 +77,9 @@ public class LearningItemsGeneratorServiceTests
         allAnswers.Add(databaseQuestionAnswer);
 
 
-        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
-            backendLevel: DifficultyLevel.Intermediate,
-            frontendLevel: DifficultyLevel.Intermediate);
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: UserLevel.Advanced,
+            backendLevel: UserLevel.Intermediate,
+            frontendLevel: UserLevel.Intermediate);
 
         // Act
 
@@ -111,9 +111,9 @@ public class LearningItemsGeneratorServiceTests
 
         // Arrange
         var preferredLearningItem = LearningItemFactory.CreateMany(category: Category.Database,
-            difficulty: DifficultyLevel.Advanced);
+            difficulty: UserLevel.Advanced);
         var otherLearningItems = LearningItemFactory.CreateMany(category: Category.Backend, count: 3,
-            difficulty: DifficultyLevel.Intermediate,
+            difficulty: UserLevel.Intermediate,
             priority: Priority.High);
         var allLearningItems = preferredLearningItem.Concat(otherLearningItems).ToList();
 
@@ -127,8 +127,8 @@ public class LearningItemsGeneratorServiceTests
         allAnswers.Add(databaseQuestionAnswer);
 
 
-        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
-            backendLevel: DifficultyLevel.Intermediate);
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: UserLevel.Advanced,
+            backendLevel: UserLevel.Intermediate);
 
         // Act
 
@@ -152,9 +152,9 @@ public class LearningItemsGeneratorServiceTests
 
         // Arrange
         var preferredLearningItem = LearningItemFactory.CreateMany(category: Category.Database,
-            difficulty: DifficultyLevel.Advanced);
+            difficulty: UserLevel.Advanced);
         var otherLearningItems = LearningItemFactory.CreateMany(category: Category.Backend, count: 20,
-            difficulty: DifficultyLevel.Intermediate,
+            difficulty: UserLevel.Intermediate,
             priority: Priority.High);
         var allLearningItems = preferredLearningItem.Concat(otherLearningItems).ToList();
 
@@ -168,8 +168,8 @@ public class LearningItemsGeneratorServiceTests
         allAnswers.Add(databaseQuestionAnswer);
 
 
-        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
-            backendLevel: DifficultyLevel.Intermediate);
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: UserLevel.Advanced,
+            backendLevel: UserLevel.Intermediate);
 
         // Act
 
@@ -196,10 +196,10 @@ public class LearningItemsGeneratorServiceTests
 
         // Arrange
         var databaseLearningItems = LearningItemFactory.CreateMany(category: Category.Database,
-            difficulty: DifficultyLevel.Advanced,
+            difficulty: UserLevel.Advanced,
             priority: Priority.Low);
         var backendLearningItems = LearningItemFactory.CreateMany(category: Category.Backend,
-            difficulty: DifficultyLevel.Intermediate,
+            difficulty: UserLevel.Intermediate,
             priority: Priority.Medium);
         var frontendLearningItems = LearningItemFactory.CreateMany(category: Category.Frontend,
             count: 1,
@@ -221,8 +221,8 @@ public class LearningItemsGeneratorServiceTests
             { databaseQuestionAnswer, backendQuestionAnswer, frontendQuestionAnswer };
 
 
-        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: DifficultyLevel.Advanced,
-            backendLevel: DifficultyLevel.Intermediate);
+        var userProfile = UserProficiencyProfileFactory.Create(databaseLevel: UserLevel.Advanced,
+            backendLevel: UserLevel.Intermediate);
 
         // Act
 

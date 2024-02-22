@@ -3,7 +3,7 @@
 namespace AutomatedLearningSystem.Contracts.Users;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum UserRole
+public enum RoleDto
 {
     Admin = 0,
     Student = 1

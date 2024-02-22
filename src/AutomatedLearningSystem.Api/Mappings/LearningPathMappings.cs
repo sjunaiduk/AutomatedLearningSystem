@@ -13,13 +13,13 @@ public static class LearningPathMappings
              {
                  Id = lp.Id,
                  Name = lp.Name,
-                 UserLearningItems = lp.UserLearningItems.Select(userLearningItem => new LearningItemResponse()
+                 UserLearningItems = lp.UserLearningItems.Select(userLearningItem => new UserLearningItemDto()
                  {
                      Category = userLearningItem.LearningItem!.Category switch
                      {
-                         Category.Database => CategoryUi.Database,
-                         Category.Frontend => CategoryUi.Frontend,
-                         Category.Backend => CategoryUi.Backend,
+                         Category.Database => CategoryDto.Database,
+                         Category.Frontend => CategoryDto.Frontend,
+                         Category.Backend => CategoryDto.Backend,
                          _ => throw new InvalidOperationException()
                      },
                      Description = userLearningItem.LearningItem.Description,

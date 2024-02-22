@@ -12,7 +12,7 @@ public static class LearningItemFactory
         string name = LearningItemConstants.Name,
         string description = LearningItemConstants.Description,
         Priority? priority = null,
-        DifficultyLevel? difficulty = null)
+        UserLevel? difficulty = null)
 
     {
         return Enumerable.Range(0, count)

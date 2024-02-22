@@ -13,7 +13,7 @@ public class LearningItem
 
     public Priority Priority { get; private set; }
 
-    public DifficultyLevel DifficultyLevel { get; private set; }
+    public UserLevel UserLevel { get; private set; }
 
     // for use during in memory learning path personalization
     public decimal Score { get; set; } = 1;
@@ -25,7 +25,7 @@ public class LearningItem
 
     private LearningItem(string name, string description, Category category,
         Priority priority,
-        DifficultyLevel difficultyLevel,
+        UserLevel level,
         Guid? id = null)
     {
         Id = id ?? Guid.NewGuid();
@@ -33,17 +33,17 @@ public class LearningItem
         Description = description;
         Category = category;
         Priority = priority;
-        DifficultyLevel = difficultyLevel;
+        UserLevel = level;
 
     }
 
     public static LearningItem Create(string name, string description, Category category,
         Priority priority,
-        DifficultyLevel difficultyLevel,
+        UserLevel role,
         Guid? id = null)
     {
         return new LearningItem(name, description, category, priority,
-            difficultyLevel,
+            role,
              id);
     }
 }
