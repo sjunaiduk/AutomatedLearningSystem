@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../main";
 import { userService } from "../services/userService";
 
-export const useUpdateUser = () =>
-  useMutation({
+export const useUpdateUser = () => {
+  const mutation = useMutation({
     mutationFn: (updatedUser: User) => {
       return userService.Update<User>(updatedUser.id, updatedUser);
     },
@@ -13,3 +13,8 @@ export const useUpdateUser = () =>
       });
     },
   });
+
+  return {
+    mutate: mutation.mutate,
+  };
+};

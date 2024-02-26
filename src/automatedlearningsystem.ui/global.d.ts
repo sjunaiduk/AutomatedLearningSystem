@@ -51,7 +51,7 @@ interface Profile {
   database: UserLevel;
 }
 interface GenerateLearningPathRequest {
-  answers: Answers[];
+  answers: Answer[];
   Profile: Profile;
   learningPathName: string;
 }
