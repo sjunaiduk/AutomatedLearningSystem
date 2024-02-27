@@ -5,7 +5,6 @@ import {
 } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { RouterProvider } from "react-router-dom";
-import router from "src/routes";
 import { vi } from "vitest";
 
 interface Props {
