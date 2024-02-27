@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "types": ["@testing-library/jest-dom"],
+
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
@@ -7,5 +9,5 @@
     "allowSyntheticDefaultImports": true,
     "strict": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src/global.d.ts"]
 }
