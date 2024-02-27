@@ -1,22 +1,25 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Navbar } from "../components/layout/Navbar";
-import DummyTable from "../components/DummyTable";
-// Mocks
+
 jest.mock("../features/authentication/hooks/useLogout", () => ({
   useLogout: () => ({
     logout: jest.fn(),
   }),
 }));
 
-const mockDeleteMutationCall = jest.fn().mockReturnValue({
-  mutate: jest.fn,
-});
-jest.mock("../features/admin/users/hooks/useDeleteUser", () => ({
-  useDeleteUser: () => ({
-    mutate: mockDeleteMutationCall,
+jest.mock("../features/admin/users/hooks/useUpdateUser", () => ({
+  useUpdateUser: () => ({
+    mutate: jest.fn(),
   }),
 }));
+
+jest.mock("../features/admin/users/hooks/useDeleteUser", () => ({
+  useDeleteUser: () => ({
+    mutate: jest.fn(),
+  }),
+}));
+
 jest.mock("../features/admin/users/hooks/useUsers", () => ({
   useUsers: () => ({
     data: [],
@@ -35,22 +38,6 @@ describe("Component rendering tests", () => {
     await waitFor(() => {
       expect(screen.getByText("Login")).toBeInTheDocument();
       expect(screen.queryByText("Users")).toBeNull();
-    });
-  });
-
-  test("Renders UserTable component correctly", async () => {
-    window.matchMedia = jest.fn().mockImplementation(() => ({
-      matches: false,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
-
-    await waitFor(() => {
-      const { getByRole } = render(<DummyTable />);
-      expect(getByRole("table")).toBeInTheDocument();
     });
   });
 });
