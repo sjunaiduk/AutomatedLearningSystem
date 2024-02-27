@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Layout, theme } from "antd";
-import { Navbar } from "../components/layout/Navbar";
+import { Navbar } from "src/components/layout/Navbar";
 import { Outlet } from "react-router-dom";
-import FooterComponent from "../components/layout/Footer";
+import FooterComponent from "src/components/layout/Footer";
 
 const { Content, Sider } = Layout;
 

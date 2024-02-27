@@ -1,26 +1,26 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Navbar } from "../components/layout/Navbar";
+import { Navbar } from "src/components/layout/Navbar";
 
-jest.mock("../features/authentication/hooks/useLogout", () => ({
+jest.mock("src/features/authentication/hooks/useLogout", () => ({
   useLogout: () => ({
     logout: jest.fn(),
   }),
 }));
 
-jest.mock("../features/admin/users/hooks/useUpdateUser", () => ({
+jest.mock("src/features/admin/users/hooks/useUpdateUser", () => ({
   useUpdateUser: () => ({
     mutate: jest.fn(),
   }),
 }));
 
-jest.mock("../features/admin/users/hooks/useDeleteUser", () => ({
+jest.mock("src/features/admin/users/hooks/useDeleteUser", () => ({
   useDeleteUser: () => ({
     mutate: jest.fn(),
   }),
 }));
 
-jest.mock("../features/admin/users/hooks/useUsers", () => ({
+jest.mock("src/features/admin/users/hooks/useUsers", () => ({
   useUsers: () => ({
     data: [],
   }),

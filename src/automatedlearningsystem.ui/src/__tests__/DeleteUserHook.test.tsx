@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook } from "@testing-library/react";
-import * as useDeleteUsers from "../features/admin/users/hooks/useDeleteUser";
+import * as useDeleteUsers from "src/features/admin/users/hooks/useDeleteUser";
+
 jest.mock("../main", () => ({
   invalidateQueries: jest.fn(),
 }));
