@@ -1,36 +1,44 @@
 import { render, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import UserTable from "../../../../../src/features/admin/users/components/UserTable";
-import React from "react";
-import * as useUsers from "../../../../../src/features/admin/users/hooks/useUsers";
-import * as useDeleteUser from "../../../../../src/features/admin/users/hooks/useDeleteUser";
-import * as useUpdateUser from "../../../../../src/features/admin/users/hooks/useUpdateUser";
 
-const mockUsers: User[] = [
+const mockedUsers: User[] = [
   {
-    firstName: "Sid",
-    lastName: "Senati",
+    email: "myemail@gmail.com",
+    firstName: "junaid",
     id: "",
-    email: "",
+    lastName: "",
     password: "",
     role: "Admin",
   },
 ];
-describe("users", () => {
-  const useUsersSpy = vi.spyOn(useUsers, "useUsers");
-  //const useDeleteUserSpy = vi.spyOn(useDeleteUser, "useDeleteUser");
-  //const useUpdateUserSpy = vi.spyOn(useUpdateUser, "useUpdateUser");
 
-  // useDeleteUserSpy.mockReturnValue({
-  //   mutate: vi.fn(),
-  // });
-  // useUpdateUserSpy.mockReturnValue({
-  //   mutate: vi.fn(),
-  // });
-  useUsersSpy.mockReturnValue({
-    data: mockUsers,
-  });
+vi.mock("../../../../../src/features/admin/users/hooks/useUpdateUser", () => ({
+  useUpdateUser: () => ({
+    mutate: vi.fn(),
+  }),
+}));
+
+vi.mock("../../../../../src/features/admin/users/hooks/useDeleteUser", () => ({
+  useDeleteUser: () => ({
+    mutate: vi.fn(),
+  }),
+}));
+
+vi.mock("../../../../../src/features/admin/users/hooks/useUsers", () => ({
+  useUsers: () => ({
+    data: mockedUsers,
+  }),
+}));
+
+describe("users", () => {
   it("should render a table of users", async () => {
-    render(<UserTable />);
+    const { getByRole, queryByText } = render(<UserTable />);
+    await waitFor(() => {
+      var table = getByRole("table");
+      expect(table).toBeInTheDocument();
+      expect(table).toHaveTextContent("junaid");
+      expect(queryByText("sam")).toBeNull();
+    });
   });
 });
