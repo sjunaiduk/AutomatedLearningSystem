@@ -1,6 +1,6 @@
 import { render, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import UserTable from "../../../../../src/features/admin/users/components/UserTable";
+import UserTable from "src/features/admin/users/components/UserTable";
 
 const mockedUsers: User[] = [
   {
@@ -13,19 +13,19 @@ const mockedUsers: User[] = [
   },
 ];
 
-vi.mock("../../../../../src/features/admin/users/hooks/useUpdateUser", () => ({
+vi.mock("src/features/admin/users/hooks/useUpdateUser", () => ({
   useUpdateUser: () => ({
     mutate: vi.fn(),
   }),
 }));
 
-vi.mock("../../../../../src/features/admin/users/hooks/useDeleteUser", () => ({
+vi.mock("src/features/admin/users/hooks/useDeleteUser", () => ({
   useDeleteUser: () => ({
     mutate: vi.fn(),
   }),
 }));
 
-vi.mock("../../../../../src/features/admin/users/hooks/useUsers", () => ({
+vi.mock("src/features/admin/users/hooks/useUsers", () => ({
   useUsers: () => ({
     data: mockedUsers,
   }),

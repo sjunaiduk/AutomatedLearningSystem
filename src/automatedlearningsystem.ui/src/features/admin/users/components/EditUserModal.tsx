@@ -1,6 +1,6 @@
 import { Modal, Button, Input, Select, Form } from "antd";
 import { useEffect, useState } from "react";
-import { useUpdateUser } from "../hooks/useUpdateUser";
+import { useUpdateUser } from "src/features/admin/users/hooks/useUpdateUser";
 
 const { Option } = Select;
 
