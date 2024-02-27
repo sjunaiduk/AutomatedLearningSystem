@@ -4,6 +4,9 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactNode } from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "src/routes";
+import { vi } from "vitest";
 
 interface Props {
   children: ReactNode;
@@ -13,6 +16,10 @@ export function queryClientWrapper(config?: QueryClientConfig | undefined) {
   return ({ children }: Props) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
+}
+
+export function routerProvider() {
+  return () => <RouterProvider router={vi.fn() as any} />;
 }
 
 export var mockedUsers: User[] = [

@@ -8,8 +8,7 @@ import AdminRoutes from "./AdminRoutes";
 import UsersPage from "../features/admin/users/pages/UsersPage";
 import LearningPathsPage from "../features/learningPaths/pages/LearningPathsPage";
 import QuestionnarePage from "../features/learningPaths/pages/QuestionnarePage";
-
-const router = createBrowserRouter([
+export const routerConfig = [
   {
     path: "/",
     element: <LayoutPage />,
@@ -48,6 +47,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+const router = createBrowserRouter(routerConfig);
 
 export default router;

@@ -72,6 +72,7 @@ const Login = () => {
               type="primary"
               htmlType="submit"
               style={{ marginBottom: "1rem" }}
+              data-testid={"login-button"}
             >
               Log in
             </Button>

@@ -20,14 +20,15 @@ const useNavigationItems = (): ItemType[] => {
     items.push({
       key: "1",
       label: "Login",
-      icon: <LoginOutlined />,
+      icon: <LoginOutlined data-testid={"login-nav-button"} />,
       onClick: () => navigate("/login"),
     });
   } else {
     items.push({
       key: "1",
       label: "Logout",
-      icon: <LogoutOutlined />,
+      icon: <LogoutOutlined id="123" data-testid={"logout-button"} />,
+
       onClick: () => {
         logout();
       },

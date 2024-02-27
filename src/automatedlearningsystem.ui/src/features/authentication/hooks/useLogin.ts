@@ -7,7 +7,6 @@ export const useLogin = ({ Email, Password }: LoginData) => {
   const { mutate } = useMutation({
     mutationFn: () => authService.Login({ Email, Password }),
     onSuccess: (loginResponse) => {
-      console.log("Login success ", loginResponse);
       LoginUser(loginResponse);
     },
     onError: () => console.log("Login failed"),
