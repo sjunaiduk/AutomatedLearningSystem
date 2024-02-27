@@ -1,18 +1,10 @@
 import { render, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import UserTable from "src/features/admin/users/components/UserTable";
+import { mockedUsers, queryClientWrapper } from "__tests__/common/utils";
+import nock from "nock";
 
-const mockedUsers: User[] = [
-  {
-    email: "myemail@gmail.com",
-    firstName: "junaid",
-    id: "",
-    lastName: "",
-    password: "",
-    role: "Admin",
-  },
-];
-
+// Arrange Mock Modules
 vi.mock("src/features/admin/users/hooks/useUpdateUser", () => ({
   useUpdateUser: () => ({
     mutate: vi.fn(),
@@ -25,20 +17,31 @@ vi.mock("src/features/admin/users/hooks/useDeleteUser", () => ({
   }),
 }));
 
-vi.mock("src/features/admin/users/hooks/useUsers", () => ({
-  useUsers: () => ({
-    data: mockedUsers,
-  }),
-}));
-
 describe("users", () => {
   it("should render a table of users", async () => {
-    const { getByRole, queryByText } = render(<UserTable />);
+    // Arrange
+    nock(import.meta.env.VITE_API_BASE)
+      .defaultReplyHeaders({
+        "access-control-allow-origin": "*",
+        "access-control-allow-credentials": "true",
+      })
+      .get("/api/users")
+      .reply(200, mockedUsers);
+
+    const Wrapper = queryClientWrapper();
+
+    // Act
+    const { getByRole } = render(
+      <Wrapper>
+        <UserTable />
+      </Wrapper>
+    );
+
+    // Assert
     await waitFor(() => {
       var table = getByRole("table");
       expect(table).toBeInTheDocument();
-      expect(table).toHaveTextContent("junaid");
-      expect(queryByText("sam")).toBeNull();
+      expect(table).toHaveTextContent(mockedUsers[0].firstName);
     });
   });
 });

@@ -4,9 +4,11 @@ import FooterComponent from "src/components/layout/Footer";
 
 describe("Footer", () => {
   it("should render the footer", () => {
+    // Act
     const { getByTestId } = render(<FooterComponent />);
     const footer = getByTestId("footer");
 
+    // Assert
     expect(footer).toHaveTextContent("Ant");
   });
 });

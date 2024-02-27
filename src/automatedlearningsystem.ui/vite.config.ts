@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       src: path.resolve(__dirname, "src"),
+      __tests__: path.resolve(__dirname, "./__tests__"),
     },
   },
   base: mode === "production" ? "client/" : "/",
