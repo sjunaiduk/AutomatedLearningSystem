@@ -11,11 +11,10 @@ public class UserLearningItemConfigurations : IEntityTypeConfiguration<UserLearn
     public void Configure(EntityTypeBuilder<UserLearningItem> builder)
     {
 
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
         builder.HasKey(x => x.Id);
         builder.HasOne(x => x.LearningItem);
-
-        builder.HasOne<LearningPath>()
-            .WithMany(lp => lp.UserLearningItems);
 
     
 

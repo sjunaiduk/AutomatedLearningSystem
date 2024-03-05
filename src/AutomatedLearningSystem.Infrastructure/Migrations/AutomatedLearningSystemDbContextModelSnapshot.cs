@@ -41,7 +41,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AnswerForQuestion");
+                    b.ToTable("AnswerForQuestion", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.LearningItems.LearningItem", b =>
@@ -71,7 +71,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LearningItem");
+                    b.ToTable("LearningItem", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.LearningPaths.LearningPath", b =>
@@ -91,7 +91,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LearningPath");
+                    b.ToTable("LearningPath", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.Questions.Question", b =>
@@ -109,7 +109,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Question");
+                    b.ToTable("Question", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.UserLearningItems.UserLearningItem", b =>
@@ -133,7 +133,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasIndex("LearningPathId");
 
-                    b.ToTable("UserLearningItem");
+                    b.ToTable("UserLearningItem", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.Users.User", b =>
@@ -163,7 +163,7 @@ namespace AutomatedLearningSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("AutomatedLearningSystem.Domain.Answers.AnswerForQuestion", b =>

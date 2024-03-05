@@ -10,6 +10,8 @@ public class LearningPathConfigurations : IEntityTypeConfiguration<LearningPath>
 {
     public void Configure(EntityTypeBuilder<LearningPath> builder)
     {
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
 
         builder.HasKey(x => x.Id);
 

@@ -72,8 +72,6 @@ Result>
 
         var learningPath = LearningPath.CreateLearningPath(request.LearningPathName ?? "");
 
-        _learningPathRepository.Create(learningPath);
-
         foreach (var item in generatedLearningItems)
         {
             var userLearningItem = UserLearningItem.Create(item);
