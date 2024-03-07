@@ -36,11 +36,11 @@ describe("userAddUser hook", () => {
       .reply(201, () => calls++);
 
     // Act
-    const { result } = renderHook(() => useAddUser(createUserRequest), {
+    const { result } = renderHook(() => useAddUser(), {
       wrapper: Wrapper,
     });
 
-    result.current.mutate();
+    result.current.mutate(createUserRequest);
 
     // Assert
 
@@ -50,14 +50,5 @@ describe("userAddUser hook", () => {
       expect(result.current.data).not.toBeUndefined();
       expect(queryClient.getQueryState(["users"])?.isInvalidated).toBeTruthy();
     });
-    // await waitFor(
-    //   () =>
-    //     expect(
-    //       queryClient.getQueryState(["users"])?.isInvalidated
-    //     ).toBeTruthy(),
-    //   {
-    //     timeout: 10000,
-    //   }
-    // );
   });
 });
