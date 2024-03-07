@@ -32,7 +32,7 @@ describe("userAddUser hook", () => {
         "access-control-allow-origin": "*",
         "access-control-allow-credentials": "true",
       })
-      .post("/api/users/")
+      .post("/api/users")
       .reply(201, () => calls++);
 
     // Act
