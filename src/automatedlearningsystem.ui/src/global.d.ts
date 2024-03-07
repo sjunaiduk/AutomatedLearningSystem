@@ -55,3 +55,9 @@ interface GenerateLearningPathRequest {
   Profile: Profile;
   learningPathName: string;
 }
+
+interface Question {
+  id: string;
+  category: "Frontend" | "Backend" | "Database";
+  description: string;
+}
