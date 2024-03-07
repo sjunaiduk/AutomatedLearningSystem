@@ -1,8 +1,4 @@
-import {
-  QueryClient,
-  QueryClientConfig,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { RouterProvider } from "react-router-dom";
 import { vi } from "vitest";
@@ -10,10 +6,11 @@ import { vi } from "vitest";
 interface Props {
   children: ReactNode;
 }
-export function queryClientWrapper(config?: QueryClientConfig | undefined) {
-  const queryClient = new QueryClient(config);
+export function queryClientWrapper(queryClient?: QueryClient | undefined) {
   return ({ children }: Props) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient || new QueryClient()}>
+      {children}
+    </QueryClientProvider>
   );
 }
 

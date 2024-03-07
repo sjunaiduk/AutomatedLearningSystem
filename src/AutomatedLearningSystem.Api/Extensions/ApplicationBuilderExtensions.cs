@@ -50,10 +50,15 @@ public static class ApplicationBuilderExtensions
                 .AddRange(users);
 
             dbContext.Set<User>()
-                .Add(User.Create("john","doe",
+                .Add(User.Create("john", "doe",
                 "doe@gmail.com",
                 Domain.Users.Role.Admin,
                 "password"));
+            dbContext.Set<User>()
+           .Add(User.Create("john", "doe",
+           "john@gmail.com",
+           Domain.Users.Role.Student,
+           "password"));
         }
 
         var anyQuestions = dbContext.Set<Question>()
@@ -68,7 +73,7 @@ public static class ApplicationBuilderExtensions
                     return Question.Create(faker.Lorem.Sentence(),
                         x switch
                         {
-                            <=2 => Category.Database,
+                            <= 2 => Category.Database,
                             <= 4 => Category.Frontend,
                             <= 6 => Category.Backend,
                             _ => throw new InvalidOperationException()

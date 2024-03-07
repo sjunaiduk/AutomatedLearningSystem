@@ -61,3 +61,11 @@ interface Question {
   category: "Frontend" | "Backend" | "Database";
   description: string;
 }
+
+interface CreateUserRequest {
+  role: Role;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
