@@ -1,5 +1,5 @@
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { useAuthStore } from "../features/authentication/stores/userStore";
+import { useAuthStore } from "../stores/userStore";
 import {
   LoginOutlined,
   LogoutOutlined,
@@ -8,7 +8,7 @@ import {
   QuestionCircleTwoTone,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../features/authentication/hooks/useLogout";
+import { useLogout } from "./useLogout";
 
 const useNavigationItems = (): ItemType[] => {
   const { User } = useAuthStore();

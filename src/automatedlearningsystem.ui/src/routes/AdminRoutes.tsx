@@ -1,4 +1,4 @@
-import { useAuthStore } from "../features/authentication/stores/userStore";
+import { useAuthStore } from "../stores/userStore";
 import { Navigate, Outlet } from "react-router-dom";
 
 const AdminRoutes = () => {

@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import LayoutPage from "../pages/LayoutPage";
-import HomePage from "../features/admin/pages/HomePage";
-import { LoginPage } from "../features/authentication/pages/LoginPage";
+import HomePage from "../pages/admin/HomePage";
+import { LoginPage } from "../pages/authentication/LoginPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
 
-import UsersPage from "../features/admin/users/pages/UsersPage";
-import LearningPathsPage from "../features/learningPaths/pages/LearningPathsPage";
-import QuestionnarePage from "../features/learningPaths/pages/QuestionnarePage";
+import UsersPage from "../pages/admin/UsersPage";
+import LearningPathsPage from "../pages/LearningPathsPage";
+import QuestionnarePage from "../pages/QuestionnarePage";
 export const routerConfig = [
   {
     path: "/",
