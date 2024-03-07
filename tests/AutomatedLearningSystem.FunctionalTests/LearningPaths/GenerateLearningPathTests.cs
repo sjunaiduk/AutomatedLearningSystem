@@ -37,7 +37,10 @@ public class GenerateLearningPathTests(FunctionalTestWebApplicationFactory facto
             {
                 Answer = a.Answer,
                 QuestionId = a.QuestionId
-            }).ToList()
+            }).ToList(),
+
+            LearningPathName = LearningPathConstants.Name
+
         };
 
         // Act

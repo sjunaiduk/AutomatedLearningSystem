@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 using AutomatedLearningSystem.Domain.Users;
 using FluentAssertions;
+using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.UserLearningItems;
@@ -37,7 +38,8 @@ public class CompleteUserLearningItemTest : BaseFunctionalTest
             {
                 Answer = a.Answer,
                 QuestionId = a.QuestionId
-            }).ToList()
+            }).ToList(),
+            LearningPathName = LearningPathConstants.Name
         };
 
         await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);

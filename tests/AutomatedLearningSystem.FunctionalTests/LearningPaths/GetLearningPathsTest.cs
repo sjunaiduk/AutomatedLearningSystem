@@ -8,7 +8,9 @@ using AutomatedLearningSystem.Contracts.Questionnaire;
 using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
@@ -47,7 +49,8 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
             {
                 Answer = a.Answer,
                 QuestionId = a.QuestionId
-            }).ToList()
+            }).ToList(),
+            LearningPathName = LearningPathConstants.Name
         };
 
         var generateLearningPathResult = await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser!.Id}/learning-paths", request);
@@ -60,6 +63,8 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
         learningPaths?.Count.Should().NotBe(0);
         learningPaths?.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
         learningPaths?.Any(lp => lp.Id == default).Should().BeFalse();
+        learningPaths!.Any(lp => lp.Name == LearningPathConstants.Name).Should()
+            .BeTrue();
 
 
     }
@@ -85,7 +90,8 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
             {
                 Answer = a.Answer,
                 QuestionId = a.QuestionId
-            }).ToList()
+            }).ToList(),
+            LearningPathName = LearningPathConstants.Name
         };
 
         var generateLearningPathResult =
