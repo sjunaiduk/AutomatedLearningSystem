@@ -48,7 +48,7 @@ public class Login : IEndpoint
             return Results.Ok(new LoginResponse
             {
                 Id = user.Id,
-                RoleDto = user.Role switch
+                Role = user.Role switch
                 {
                     Role.Admin => RoleDto.Admin,
                     Role.Student => RoleDto.Student,

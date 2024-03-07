@@ -5,7 +5,7 @@ namespace AutomatedLearningSystem.Contracts.Login;
 public class LoginResponse
 {
     public Guid Id { get; set; }
-    public RoleDto RoleDto { get; set; }
+    public RoleDto Role { get; set; }
 
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;

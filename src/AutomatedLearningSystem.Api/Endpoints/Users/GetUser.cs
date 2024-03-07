@@ -24,7 +24,7 @@ public class GetUser : IEndpoint
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         Email = user.Email,
-                        RoleDto = user.Role.MapToUiRole()
+                        Role = user.Role.MapToUiRole()
                     }),
                 errors => errors.ToProblemDetails());
         }).WithName("GetUser")
