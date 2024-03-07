@@ -27,6 +27,7 @@ export class BaseClient<TResponse> {
 
   Post = async <TPostRequest>(request: TPostRequest) => {
     var res = await client.post(`${this.endpoint}`, request);
+    console.log("post res data - ", res.data);
     return res.data;
   };
 

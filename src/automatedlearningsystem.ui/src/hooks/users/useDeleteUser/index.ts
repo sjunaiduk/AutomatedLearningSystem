@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "src/common";
 import { userService } from "../../../services/userService";
 
-export const useDeleteUser = () => {
-  const mutation = useMutation({
+export const useDeleteUser = () =>
+  useMutation({
     mutationFn: (userId: string) => {
       return userService.Delete(userId);
     },
@@ -15,8 +15,3 @@ export const useDeleteUser = () => {
       });
     },
   });
-
-  return {
-    mutate: mutation.mutate,
-  };
-};

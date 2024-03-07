@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Space, Table } from "antd";
+import { Button, Popconfirm, Space, Table, message } from "antd";
 import { useUsers } from "src/hooks/users/useUsers";
 import EditUserModal from "./EditUserModal";
 import { useDeleteUser } from "src/hooks/users/useDeleteUser";
@@ -11,8 +11,10 @@ const UserTable: React.FC = () => {
   let { data: users } = useUsers();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [user, setUser] = useState({} as User);
-  const { mutate: deleteUser } = useDeleteUser();
+  const [userToEdit, setUserToEdit] = useState({} as User);
+  const { mutate: deleteUser, data } = useDeleteUser();
+  console.log(data);
+
   return (
     <>
       <Button onClick={() => setAddModalOpen(!addModalOpen)}>Add User</Button>
@@ -27,21 +29,24 @@ const UserTable: React.FC = () => {
             <Space size="middle">
               <a
                 onClick={() => {
-                  setUser(user);
+                  setUserToEdit(user);
                   setEditModalOpen(true);
                 }}
               >
                 Edit
               </a>
-              <a
-                onClick={() => {
-                  confirm(
-                    `About to delete ${user.firstName} ${user.lastName}. Click 'OK' to proceed`
-                  ) && deleteUser(user.id);
+              <Popconfirm
+                title="Delete the user"
+                description="Are you sure to delete this user?"
+                onConfirm={() => {
+                  deleteUser(user.id);
+                  message.success("Deleted");
                 }}
+                okText="Yes"
+                cancelText="No"
               >
-                Delete
-              </a>
+                <a>Delete</a>
+              </Popconfirm>
             </Space>
           )}
         />
@@ -49,7 +54,7 @@ const UserTable: React.FC = () => {
       <EditUserModal
         open={editModalOpen}
         setOpen={setEditModalOpen}
-        user={user}
+        user={userToEdit}
       />
       <AddUserModal open={addModalOpen} setOpen={setAddModalOpen} />
     </>
