@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import getLearningPathsService from "../services/learningPathsService";
-import { queryClient } from "../main";
+import { queryClient } from "src/common";
 
 export const useGenerateLearningPaths = (userId: string) => {
   return useMutation({

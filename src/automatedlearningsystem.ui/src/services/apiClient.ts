@@ -1,5 +1,4 @@
 import axios from "axios";
-import { log } from "console";
 
 export const client = axios.create({
   baseURL: import.meta.env.VITE_API_BASE,

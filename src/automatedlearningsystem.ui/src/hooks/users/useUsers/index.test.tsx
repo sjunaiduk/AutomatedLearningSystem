@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import nock from "nock";
 import { renderHook, waitFor } from "@testing-library/react";
-import { useUsers } from "src/hooks/useUsers";
+import { useUsers } from "src/hooks/users/useUsers";
 import { mockedUsers, queryClientWrapper } from "__tests__/common/utils";
 
 describe("useUsers() hook", () => {

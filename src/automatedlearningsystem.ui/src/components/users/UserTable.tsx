@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Space, Table } from "antd";
-import { useUsers } from "src/hooks/useUsers";
+import { useUsers } from "src/hooks/users/useUsers";
 import EditUserModal from "./EditUserModal";
-import { useDeleteUser } from "src/hooks/useDeleteUser";
+import { useDeleteUser } from "src/hooks/users/useDeleteUser";
 
 const { Column } = Table;
 
