@@ -32,6 +32,7 @@ interface LearningPath {
   userLearningItems: LearningItem[];
 }
 
+// User Learning Item
 interface LearningItem {
   id: string;
   name: string;
