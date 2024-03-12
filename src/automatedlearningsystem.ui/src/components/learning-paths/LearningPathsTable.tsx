@@ -1,9 +1,10 @@
 import { Checkbox, Table } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox/Checkbox";
+import { useCompleteLearningItem } from "src/hooks/useCompleteLearningItem";
 interface Props {
   learningPaths: LearningPath[];
 }
 const LearningPathsTable = ({ learningPaths }: Props) => {
+  const { mutate } = useCompleteLearningItem();
   return (
     <>
       {learningPaths?.map((learningPath) => (
@@ -12,6 +13,12 @@ const LearningPathsTable = ({ learningPaths }: Props) => {
           <Table
             dataSource={learningPath.userLearningItems}
             rowKey={(record) => record.id}
+            rowClassName={(record) => {
+              if (record.completed) {
+                return "row-completed";
+              }
+              return "";
+            }}
           >
             <Table.Column title="Name" dataIndex="name" key="name" />
             <Table.Column
@@ -25,14 +32,9 @@ const LearningPathsTable = ({ learningPaths }: Props) => {
               key="completed"
               render={(completed, learningItem: LearningItem) => (
                 <Checkbox
-                  onChange={(event: CheckboxChangeEvent) =>
-                    console.log(
-                      "sending complete request for learning item with id",
-                      learningItem.id,
-                      event.target.checked
-                    )
-                  }
+                  onChange={() => mutate(learningItem.id)}
                   defaultChecked={completed}
+                  disabled={learningItem.completed}
                 />
               )}
             />

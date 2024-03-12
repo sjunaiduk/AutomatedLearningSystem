@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication();
@@ -20,8 +20,9 @@ builder.Services.AddCors();
 builder.Services.AddAuthentication(AuthConstants.DefaultCookieScheme)
     .AddCookie(AuthConstants.DefaultCookieScheme, opt =>
     {
-        opt.Events.OnRedirectToAccessDenied = context => {
-            return Task.FromResult(context.Response.StatusCode = 
+        opt.Events.OnRedirectToAccessDenied = context =>
+        {
+            return Task.FromResult(context.Response.StatusCode =
             StatusCodes.Status401Unauthorized);
         };
         opt.Events.OnRedirectToLogin = context => Task.FromResult(context.Response.StatusCode = StatusCodes.Status401Unauthorized);
@@ -58,7 +59,8 @@ if (app.Environment.IsDevelopment())
 
 }
 
-app.UseCors(cp => {
+app.UseCors(cp =>
+{
     cp.WithOrigins("http://localhost:5173");
     cp.AllowAnyMethod();
     cp.AllowCredentials();
@@ -73,7 +75,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapEndpoints();
-app.MapRazorPages();
+app.MapControllers();
 
 app.Run();
 

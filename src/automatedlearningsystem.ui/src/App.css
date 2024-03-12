@@ -1,3 +1,11 @@
 body {
   margin: 0;
 }
+
+.row-completed {
+  background-color: rgba(172, 253, 172, 0.888);
+}
+
+.row-completed .ant-table-cell-row-hover {
+  background-color: rgba(172, 253, 172, 0.888) !important;
+}

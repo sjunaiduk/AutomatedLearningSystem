@@ -12,8 +12,7 @@ const UserTable: React.FC = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState({} as User);
-  const { mutate: deleteUser, data } = useDeleteUser();
-  console.log(data);
+  const { mutate: deleteUser } = useDeleteUser();
 
   return (
     <>

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedLearningSystem.Api.Pages
 {
-    public class IndexModel : PageModel
+    public class ReactApp : Controller
     {
-        public IActionResult OnGet()
+        [Route("/")]
+        public IActionResult Index()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/client/index.html");
             return PhysicalFile(path, "text/html");
