@@ -66,16 +66,29 @@ public static class ApplicationBuilderExtensions
 
         if (!anyQuestions)
         {
-            var questions = Enumerable.Range(0, 6)
+            string[] possibleQuestions = [
+    "Rate your interest in backend development.",
+    "Rate your interest in frontend development.",
+    "Rate your proficiency with database management and operations.",
+    "Rate your comfort level with cloud services and operations.",
+    "Rate your enthusiasm for learning new backend technologies.",
+    "Rate your enthusiasm for adopting new frontend frameworks and libraries.",
+    "Rate your comfort level with designing and implementing API services.",
+    "Rate your proficiency in handling server-side scripting and programming.",
+    "Rate your interest in serverless architecture in cloud environments.",
+    "Rate your experience with deploying applications on cloud platforms.",
+            ];
+
+            var questions = Enumerable.Range(0, 9)
                 .Select(x =>
                 {
                     var faker = new Faker();
-                    return Question.Create(faker.Lorem.Sentence(),
+                    return Question.Create(possibleQuestions[x],
                         x switch
                         {
                             <= 2 => Category.Database,
-                            <= 4 => Category.Frontend,
-                            <= 6 => Category.Backend,
+                            <= 5 => Category.Frontend,
+                            <= 9 => Category.Backend,
                             _ => throw new InvalidOperationException()
                         });
                 })

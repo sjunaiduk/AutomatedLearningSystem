@@ -70,3 +70,10 @@ interface CreateUserRequest {
   lastName: string;
   password: string;
 }
+
+interface UserProfile {
+  backend: UserLevel;
+  frontend: UserLevel;
+  database: UserLevel;
+  [key: string]: string; // Add index signature
+}
