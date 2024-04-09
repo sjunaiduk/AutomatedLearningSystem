@@ -7,7 +7,6 @@ import {
   Progress,
   message,
   Input,
-  RadioChangeEvent,
 } from "antd";
 import { useGenerateLearningPaths } from "../../hooks/useGenerateLearningPaths";
 import { useAuthStore } from "../../stores/userStore";
@@ -21,6 +20,7 @@ const GenerateLearningPath = () => {
   const { mutate, status } = useGenerateLearningPaths(User!.id);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1); // Start before the first question
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [currentAnswer, setCurrentAnswer] = useState(3);
   const [learningPathName, setLearningPathName] = useState("");
   const [profile, setProfile] = useState<UserProfile>({
     backend: "Beginner",
@@ -36,11 +36,11 @@ const GenerateLearningPath = () => {
     }
   }, [status]);
 
-  const handleAnswerChange = (e: RadioChangeEvent) => {
+  const handleAnswerChange = (answer: number) => {
     const updatedAnswers = [...answers];
     updatedAnswers[currentQuestionIndex] = {
       questionId: questions![currentQuestionIndex].id,
-      answer: e.target.value,
+      answer,
     };
     setAnswers(updatedAnswers);
   };
@@ -62,6 +62,8 @@ const GenerateLearningPath = () => {
     }
 
     if (currentQuestionIndex < questions!.length - 1) {
+      handleAnswerChange(currentAnswer);
+      setCurrentAnswer(3);
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       const requestData: GenerateLearningPathRequest = {
@@ -69,8 +71,6 @@ const GenerateLearningPath = () => {
         Profile: profile,
         answers,
       };
-
-      console.log(requestData);
 
       mutate(requestData);
     }
@@ -128,8 +128,8 @@ const GenerateLearningPath = () => {
       <Title level={4}>{questions[currentQuestionIndex].description}</Title>
       <Paragraph>Please rate your confidence (1 - least, 5 - most):</Paragraph>
       <Radio.Group
-        onChange={handleAnswerChange}
-        value={answers[currentQuestionIndex]?.answer || 3}
+        onChange={(e) => setCurrentAnswer(e.target.value)}
+        value={currentAnswer}
       >
         {Array.from({ length: 5 }, (_, i) => (
           <Radio key={i + 1} value={i + 1}>

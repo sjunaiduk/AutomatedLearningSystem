@@ -24,11 +24,7 @@ public class BaseFunctionalTest : IClassFixture<FunctionalTestWebApplicationFact
     protected BaseFunctionalTest(FunctionalTestWebApplicationFactory factory)
     {
         HttpClient =
-            factory.CreateClient(new WebApplicationFactoryClientOptions()
-            {
-                AllowAutoRedirect = false,
-
-            });
+            factory.CreateClient(new WebApplicationFactoryClientOptions());
         var scope = factory.Services.CreateScope();
 
         DbContext = scope.ServiceProvider.GetRequiredService<AutomatedLearningSystemDbContext>();

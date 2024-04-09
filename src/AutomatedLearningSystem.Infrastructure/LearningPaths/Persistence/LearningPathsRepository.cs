@@ -35,4 +35,14 @@ public class LearningPathsRepository : ILearningPathRepository
             .ThenInclude(ulp => ulp.LearningItem)
             .ToListAsync();
     }
+
+    public Task<List<LearningPath>> GetAllByUserId(Guid UserId)
+    {
+        return _learningPaths
+        .Select(x => x)
+        .Include(lp => lp.UserLearningItems)
+        .ThenInclude(uli => uli.LearningItem)
+        .Where(lp => lp.UserId == UserId)
+        .ToListAsync();
+    }
 }

@@ -11,7 +11,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public string Name { get; private set; }
         public List<UserLearningItem> UserLearningItems { get; private set; } = new();
 
-
+        public Guid UserId { get; private set; }
         public LearningPath()
         {
         }

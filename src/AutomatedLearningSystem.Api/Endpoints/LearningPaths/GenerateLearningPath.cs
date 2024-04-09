@@ -15,9 +15,11 @@ public class GenerateLearningPath : IEndpoint
             async (HttpContext context,
                 Guid userId,
                 ISender sender,
-                QuestionnaireData request) =>
+                QuestionnaireData request,
+                ILogger<GenerateLearningPath> Logger) =>
         {
-            var answers = request.Answers.Select(x => 
+            Logger.LogInformation("Generating learning path");
+            var answers = request.Answers.Select(x =>
                     AnswerForQuestion.Create(x.Answer, x.QuestionId, userId))
             .ToList();
             var profile = request.Profile.ToUserProficiencyProfile();
@@ -29,6 +31,6 @@ public class GenerateLearningPath : IEndpoint
         }).RequireAuthorization(AuthConstants.Policies.Protected); ;
     }
 
- 
+
 }
 

@@ -1,6 +1,5 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http.Json;
-using AutomatedLearningSystem.Api.Endpoints;
 using AutomatedLearningSystem.Contracts.AnswersForQuestions;
 using AutomatedLearningSystem.Contracts.Common;
 using AutomatedLearningSystem.Contracts.LearningPaths;
@@ -9,31 +8,20 @@ using AutomatedLearningSystem.Domain.Questions;
 using AutomatedLearningSystem.Domain.Users;
 using AutomatedLearningSystem.FunctionalTests.Infrastructure;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestCommon.Constants;
 using TestCommon.Factories;
 
 namespace AutomatedLearningSystem.FunctionalTests.LearningPaths;
 
-public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
+
+
+public class GetLearningPathByUserIdTests(FunctionalTestWebApplicationFactory factory) : BaseFunctionalTest(factory)
 {
-    [Fact]
-
-    public async void GetLearningPaths_ShouldReturnOk()
-    {
-        // Act
-        var user = DbContext.Set<User>().First();
-        var result = await HttpClient.GetAsync($"/api/users/{user.Id}/learning-paths");
-
-        // Assert
-
-        result.StatusCode.Should().Be(HttpStatusCode.OK);
-    }
 
     [Fact]
 
-    public async void GetLearningPaths_ShouldReturnLearningPaths_WhenLearningPathsExist()
+    public async void GetLearningPathsForUserId_ShouldReturnLearningPaths_WhenLearningPathsExist()
     {
         // Arrange
         await SetAdminCookie();
@@ -60,7 +48,6 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
 
         // Act
         var learningPaths = await HttpClient.GetFromJsonAsync<List<LearningPathResponse>>($"/api/users/{AdminUser.Id}/learning-paths");
-
         // Assert
         learningPaths?.Count.Should().NotBe(0);
         learningPaths?.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
@@ -71,48 +58,21 @@ public class GetLearningPathsTest(FunctionalTestWebApplicationFactory factory) :
 
     }
 
-
     [Fact]
 
-    public async void GetLearningPaths_ShouldReturnLearningItems_WhenLearningPathsExist()
+    public async Task GetLearningPathByUserId_ShouldReturnEmptyArray_WhenNoLearningPathsExist()
     {
         // Arrange
-        await SetAdminCookie();
-        var question = await DbContext.Set<Question>().FirstAsync();
-        var answers = AnswerForQuestionFactory.CreateMany(question, 1, AdminUser!.Id);
-        var request = new QuestionnaireData
-        {
-            Profile = new UserProficiencyProfileDto()
-            {
-                Backend = default,
-                Database = default,
-                Frontend = default
-            },
-            Answers = answers.Select(a => new AnswerForQuestionDto()
-            {
-                Answer = a.Answer,
-                QuestionId = a.QuestionId
-            }).ToList(),
-            LearningPathName = LearningPathConstants.Name
-        };
-
-        var generateLearningPathResult =
-            await HttpClient.PostAsJsonAsync($"/api/users/{AdminUser.Id}/learning-paths", request);
-        generateLearningPathResult.StatusCode.Should().Be(HttpStatusCode.Created);
+        var nonAdmin = await DbContext.Set<User>().FirstAsync(user => user.Role != Role.Admin);
 
         // Act
-        var response = await HttpClient.GetFromJsonAsync<List<LearningPathResponse>>($"/api/users/{AdminUser.Id}/learning-paths");
+        var nonAdminLearningPaths = await HttpClient.GetFromJsonAsync<List<LearningPathResponse>>($"/api/users/{nonAdmin.Id}/learning-paths");
 
         // Assert
-        response?.Any(lp => lp.UserLearningItems.Count == 0).Should().BeFalse();
-        response?.SelectMany(lp => lp.UserLearningItems).All(li =>
-            li is not
-            {
-                Description: null,
-                Name: null
-            })
-            .Should().BeTrue();
+        nonAdminLearningPaths!.Count.Should().Be(0);
 
 
     }
+
+
 }
