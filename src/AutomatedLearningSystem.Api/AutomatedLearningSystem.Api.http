@@ -1,6 +1,6 @@
-@AutomatedLearningSystem.Api_HostAddress = http://localhost:5147
+@Api_HostAddress = http://localhost:5147
 
-GET {{AutomatedLearningSystem.Api_HostAddress}}/weatherforecast/
+GET {{Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
