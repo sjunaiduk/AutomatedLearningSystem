@@ -1,29 +1,26 @@
 import { Button, Checkbox, Form, Input, Typography } from "antd";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
+import { useLogin } from "src/hooks/useLogin";
+import RegistrationModal from "./RegisterModal";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 
 const { Text, Title, Link } = Typography;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerOpen, setRegisterOpen] = useState(false);
   const { login } = useLogin({ Email: email, Password: password });
 
   return (
-    <section
-      style={{
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <section style={{ display: "flex", justifyContent: "center" }}>
       <div>
         <div>
           <Title>Sign in</Title>
-          <Text>
+          <Typography.Text>
             Welcome back to AntBlocks UI! Please enter your details below to
             sign in.
-          </Text>
+          </Typography.Text>
         </div>
         <Form
           name="normal_login"
@@ -78,10 +75,14 @@ const Login = () => {
             </Button>
             <div>
               <Text>Don't have an account?</Text>{" "}
-              <Link href="">Sign up now</Link>
+              <Button type="link" onClick={() => setRegisterOpen(true)}>
+                Sign up now
+              </Button>
             </div>
           </Form.Item>
         </Form>
+
+        <RegistrationModal open={registerOpen} setOpen={setRegisterOpen} />
       </div>
     </section>
   );

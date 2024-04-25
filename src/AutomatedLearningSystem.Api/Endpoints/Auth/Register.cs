@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Api.Mappings;
 using AutomatedLearningSystem.Application.Users.Commands.CreateUser;
 using AutomatedLearningSystem.Contracts;
+using AutomatedLearningSystem.Contracts.Users;
 using MediatR;
 
 namespace AutomatedLearningSystem.Api.Endpoints.Auth;
@@ -16,7 +17,7 @@ public class Register : IEndpoint
                 request.LastName,
                 request.Email,
                 request.Password,
-                default,
+                Domain.Users.Role.Student,
                 request.Token);
 
             var registerResult

@@ -11,7 +11,7 @@ public class GetLearningPathsReport : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
 
-        app.MapGet(Routes.LearningPaths.GetAll, async (ISender sender) =>
+        app.MapGet("api/reports", async (ISender sender) =>
         {
             var query = new GetLearningPathsQuery();
             var learningPaths = await sender.Send(query);
@@ -24,19 +24,19 @@ public class GetLearningPathsReport : IEndpoint
 
                 var userQuery = new GetUserQuery(path.UserId);
                 var user = await sender.Send(userQuery);
-                    var report = new UserProgressReportDto
-                    {
-                        LearningPathId = path.Id,
-                        LearningPathName = path.Name,
-                        UserId = path.UserId,
-                        UserName = user.Value.FirstName, // Assuming the User entity is loaded
-                        PercentageProgress = CalculateProgress(path.UserLearningItems)
-                    };
+                var report = new UserProgressReportDto
+                {
+                    LearningPathId = path.Id,
+                    LearningPathName = path.Name,
+                    UserId = path.UserId,
+                    UserName = user.Value.FirstName, // Assuming the User entity is loaded
+                    PercentageProgress = CalculateProgress(path.UserLearningItems)
+                };
 
-                    reports.Add(report);
-                
+                reports.Add(report);
+
             }
-            return Results.Ok(learningPaths.ToLearningPathsResponse());
+            return Results.Ok(reports);
 
         });
     }

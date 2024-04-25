@@ -6,6 +6,7 @@ import {
   UserOutlined,
   BookOutlined,
   QuestionCircleTwoTone,
+  PrinterOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useLogout } from "./useLogout";
@@ -46,6 +47,12 @@ const useNavigationItems = (): ItemType[] => {
         label: "Learning Items",
         icon: <UserOutlined />,
         onClick: () => navigate("/learning-items"),
+      });
+      items.push({
+        key: "31",
+        label: "Progress Report",
+        icon: <PrinterOutlined />,
+        onClick: () => navigate("/report"),
       });
     } else {
       items.push({

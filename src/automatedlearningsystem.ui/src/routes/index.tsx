@@ -9,6 +9,7 @@ import UsersPage from "../pages/admin/UsersPage";
 import LearningPathsPage from "../pages/LearningPathsPage";
 import QuestionnarePage from "../pages/QuestionnarePage";
 import LearningItemsPage from "src/pages/admin/LearningItemsPage";
+import LearningPathsReportPage from "src/pages/admin/ReportsPage";
 export const routerConfig = [
   {
     path: "/",
@@ -33,6 +34,10 @@ export const routerConfig = [
               {
                 path: "/learning-items",
                 element: <LearningItemsPage />,
+              },
+              {
+                path: "/report",
+                element: <LearningPathsReportPage />,
               },
             ],
           },
