@@ -21,10 +21,24 @@ public class GetLearningItems : IEndpoint
         {
             var query = new GetLearningItemsQuery();
             var learningItems = await sender.Send(query);
-            return Results.Ok(learningItems);
+            return Results.Ok(learningItems.Value);
 
         });
 
-   
+
     }
+}
+
+public class LearningItemDto
+{
+    public Guid Id { get; private set; }
+    public string Name { get; private set; } = null!;
+
+    public string Description { get; private set; } = null!;
+
+    public CategoryDto Category { get; private set; }
+
+    public PriorityDto Priority { get; private set; }
+
+    public UserLevelDto UserLevel { get; private set; }
 }

@@ -41,6 +41,12 @@ const useNavigationItems = (): ItemType[] => {
         icon: <UserOutlined />,
         onClick: () => navigate("/users"),
       });
+      items.push({
+        key: "21",
+        label: "Learning Items",
+        icon: <UserOutlined />,
+        onClick: () => navigate("/learning-items"),
+      });
     } else {
       items.push({
         key: "2",

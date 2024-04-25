@@ -8,6 +8,7 @@ import AdminRoutes from "./AdminRoutes";
 import UsersPage from "../pages/admin/UsersPage";
 import LearningPathsPage from "../pages/LearningPathsPage";
 import QuestionnarePage from "../pages/QuestionnarePage";
+import LearningItemsPage from "src/pages/admin/LearningItemsPage";
 export const routerConfig = [
   {
     path: "/",
@@ -28,6 +29,10 @@ export const routerConfig = [
               {
                 path: "/users",
                 element: <UsersPage />,
+              },
+              {
+                path: "/learning-items",
+                element: <LearningItemsPage />,
               },
             ],
           },
