@@ -1,6 +1,7 @@
 ﻿using AutomatedLearningSystem.Domain.Common;
 using AutomatedLearningSystem.Domain.LearningItems;
 using AutomatedLearningSystem.Domain.UserLearningItems;
+using AutomatedLearningSystem.Domain.Users;
 
 namespace AutomatedLearningSystem.Domain.LearningPaths
 {
@@ -12,6 +13,7 @@ namespace AutomatedLearningSystem.Domain.LearningPaths
         public List<UserLearningItem> UserLearningItems { get; private set; } = new();
 
         public Guid UserId { get; private set; }
+
         public LearningPath()
         {
         }

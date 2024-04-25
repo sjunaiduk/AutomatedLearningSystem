@@ -9,6 +9,7 @@ public sealed record CreateUserCommand(
     string LastName,
     string Email,
     string Password,
-    Role Role
+    Role Role,
+    string? Token = null
     ) : ICommand<Result<User>>
 { }

@@ -53,4 +53,10 @@ public static class Routes
     public const string Login = $"/auth/login";
 
     public const string Logout = $"/auth/logout";
+    public const string Register = "/auth/register";
+
+    public static class LearningItems
+    {
+        public const string GetAll = $"{Base}/learning-items";
+    }
 }
