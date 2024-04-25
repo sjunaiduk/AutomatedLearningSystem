@@ -31,6 +31,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
             services.AddDbContext<AutomatedLearningSystemDbContext>(opt =>
             {
                 opt.UseSqlite($"Data Source={_dbName}.db");
+                opt.EnableSensitiveDataLogging();
             });
 
             services.AddSingleton<IAuthenticationSchemeProvider, MockSchemeProvider>();

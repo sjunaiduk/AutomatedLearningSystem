@@ -27,7 +27,7 @@ public static class DependencyInjection
         services.AddScoped<ILearningItemsRepository, LearningItemsRepository>();
         services.AddScoped<ILearningPathRepository, LearningPathsRepository>();
         services.AddScoped<IQuestionRepository, QuestionsRepository>();
-        services.AddScoped<DbContext, AutomatedLearningSystemDbContext>();
+        //services.AddScoped<DbContext, AutomatedLearningSystemDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserLearningItemRepository, UserLearningItemRepository>();
 

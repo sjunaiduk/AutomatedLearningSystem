@@ -25,4 +25,15 @@ public class LearningItemsRepository : ILearningItemsRepository
         _db.Set<LearningItem>()
             .Add(newItem);
     }
+
+    public Task<LearningItem?> GetByIdAsync(Guid id)
+    {
+        return _db.Set<LearningItem>()
+            .FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public void Delete(LearningItem item)
+    {
+        _db.Set<LearningItem>().Remove(item);
+    }
 }
