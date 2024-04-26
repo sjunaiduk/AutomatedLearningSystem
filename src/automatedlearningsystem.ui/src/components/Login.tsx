@@ -4,7 +4,7 @@ import { useLogin } from "src/hooks/useLogin";
 import RegistrationModal from "./RegisterModal";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 
-const { Text, Title, Link } = Typography;
+const { Text, Title } = Typography;
 
 const Login = () => {
   const [email, setEmail] = useState("");

@@ -1,5 +1,4 @@
 import { Modal, Button, Input, Select, Form } from "antd";
-import axios from "axios";
 import { client } from "src/services/apiClient";
 
 const { Option } = Select;
