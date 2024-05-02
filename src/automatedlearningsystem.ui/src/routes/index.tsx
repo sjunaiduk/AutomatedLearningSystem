@@ -1,63 +1,53 @@
 import { createBrowserRouter } from "react-router-dom";
 import LayoutPage from "../pages/LayoutPage";
-import HomePage from "../pages/admin/HomePage";
-import { LoginPage } from "../pages/authentication/LoginPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
-
 import UsersPage from "../pages/admin/UsersPage";
 import LearningPathsPage from "../pages/LearningPathsPage";
-import QuestionnarePage from "../pages/QuestionnarePage";
-import LearningItemsPage from "src/pages/admin/LearningItemsPage";
-import LearningPathsReportPage from "src/pages/admin/ReportsPage";
+import LearningItemsPage from "../pages/admin/LearningItemsPage";
+import LearningPathsReportPage from "../pages/admin/ReportsPage";
+import GenericHomePage from "../pages/GenericHomePage";
+import AdminHomePage from "../pages/admin/AdminHomePage";
+import StudentHomePage from "../pages/student/StudentHomePage";
+import { LoginPage } from "src/pages/authentication/LoginPage";
+import QuestionnarePage from "src/pages/QuestionnarePage";
+
 export const routerConfig = [
   {
     path: "/",
     element: <LayoutPage />,
     children: [
+      { path: "/", element: <GenericHomePage /> },
       {
-        path: "",
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/",
         element: <ProtectedRoutes />,
         children: [
           {
-            path: "",
-            element: <HomePage />,
-          },
-          {
-            path: "",
+            path: "admin",
             element: <AdminRoutes />,
             children: [
-              {
-                path: "/users",
-                element: <UsersPage />,
-              },
-              {
-                path: "/learning-items",
-                element: <LearningItemsPage />,
-              },
-              {
-                path: "/report",
-                element: <LearningPathsReportPage />,
-              },
+              { path: "", element: <AdminHomePage /> },
+              { path: "users", element: <UsersPage /> },
+              { path: "learning-items", element: <LearningItemsPage /> },
+              { path: "report", element: <LearningPathsReportPage /> },
             ],
           },
           {
-            path: "/learning-paths",
-            element: <LearningPathsPage />,
+            path: "student",
+            element: <StudentHomePage />,
           },
-          {
-            path: "/questionnare",
-            element: <QuestionnarePage />,
-          },
+          { path: "student/learning-paths", element: <LearningPathsPage /> },
+          { path: "student/questionnaire", element: <QuestionnarePage /> },
         ],
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
       },
     ],
   },
 ];
+
 const router = createBrowserRouter(routerConfig);
 
 export default router;

@@ -40,32 +40,32 @@ const useNavigationItems = (): ItemType[] => {
         key: "2",
         label: "Users",
         icon: <UserOutlined />,
-        onClick: () => navigate("/users"),
+        onClick: () => navigate("admin/users"),
       });
       items.push({
         key: "21",
         label: "Learning Items",
         icon: <UserOutlined />,
-        onClick: () => navigate("/learning-items"),
+        onClick: () => navigate("admin/learning-items"),
       });
       items.push({
         key: "31",
         label: "Progress Report",
         icon: <PrinterOutlined />,
-        onClick: () => navigate("/report"),
+        onClick: () => navigate("admin/report"),
       });
     } else {
       items.push({
         key: "2",
         label: "My Learning Paths",
         icon: <BookOutlined />,
-        onClick: () => navigate("/learning-paths"),
+        onClick: () => navigate("student/learning-paths"),
       });
       items.push({
         key: "3",
         label: "Questionnare",
         icon: <QuestionCircleTwoTone />,
-        onClick: () => navigate("/questionnare"),
+        onClick: () => navigate("student/questionnaire"),
       });
     }
   }

@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 const ProtectedRoutes = () => {
   const { Authenticated } = useAuthStore();
 
+  console.log("auth: ", Authenticated);
   if (Authenticated) {
     return <Outlet />;
   }

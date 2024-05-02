@@ -7,6 +7,8 @@ import {
   Progress,
   message,
   Input,
+  Form,
+  Select,
 } from "antd";
 import { useGenerateLearningPaths } from "../../hooks/useGenerateLearningPaths";
 import { useAuthStore } from "../../stores/userStore";
@@ -79,38 +81,47 @@ const GenerateLearningPath = () => {
   if (currentQuestionIndex === -1) {
     return (
       <Card>
-        <Title level={4}>Create Your Learning Path</Title>
-        <Input
-          placeholder="Enter Learning Path Name"
-          value={learningPathName}
-          onChange={(e) => setLearningPathName(e.target.value)}
-          style={{ marginBottom: 16 }}
-        />
-        <Paragraph>Select your proficiency levels:</Paragraph>
-        {["backend", "database", "frontend"].map((area) => (
-          <div key={area}>
-            <b>{area}:</b>
-            <Radio.Group
-              onChange={(e) =>
-                setProfile({ ...profile, [area]: e.target.value })
-              }
-              value={profile[area]}
+        <Form layout="vertical">
+          <Title level={4}>Create Your Learning Path</Title>
+          <Form.Item
+            label="Learning Path Name"
+            required
+            tooltip="This is a required field"
+          >
+            <Input
+              placeholder="Enter Learning Path Name"
+              value={learningPathName}
+              onChange={(e) => setLearningPathName(e.target.value)}
+            />
+          </Form.Item>
+          <Paragraph>Select your proficiency levels:</Paragraph>
+          {["backend", "database", "frontend"].map((area) => (
+            <Form.Item
+              label={`${
+                area.charAt(0).toUpperCase() + area.slice(1)
+              } Proficiency`}
+              key={area}
             >
-              {["Beginner", "Intermediate", "Advanced"].map((level) => (
-                <Radio key={level} value={level}>
-                  {level}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </div>
-        ))}
-        <Button
-          type="primary"
-          onClick={handleNextQuestion}
-          style={{ marginTop: 16 }}
-        >
-          Start
-        </Button>
+              <Select
+                value={profile[area]}
+                onChange={(value: string) =>
+                  setProfile({ ...profile, [area]: value })
+                }
+              >
+                {["Beginner", "Intermediate", "Advanced"].map((level) => (
+                  <Radio key={level} value={level}>
+                    {level}
+                  </Radio>
+                ))}
+              </Select>
+            </Form.Item>
+          ))}
+          <Form.Item>
+            <Button type="primary" onClick={handleNextQuestion}>
+              Start
+            </Button>
+          </Form.Item>
+        </Form>
       </Card>
     );
   }

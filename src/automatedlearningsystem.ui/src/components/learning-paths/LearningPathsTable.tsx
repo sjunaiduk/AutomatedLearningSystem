@@ -1,4 +1,5 @@
 import { Checkbox, Table } from "antd";
+import Title from "antd/es/typography/Title";
 import { useCompleteLearningItem } from "src/hooks/useCompleteLearningItem";
 interface Props {
   learningPaths: LearningPath[];
@@ -9,7 +10,7 @@ const LearningPathsTable = ({ learningPaths }: Props) => {
     <>
       {learningPaths?.map((learningPath) => (
         <div key={learningPath.id} style={{ marginBottom: "20px" }}>
-          <h2>{learningPath.name}</h2>
+          <Title level={2}>{learningPath.name}</Title>
           <Table
             dataSource={learningPath.userLearningItems}
             rowKey={(record) => record.id}

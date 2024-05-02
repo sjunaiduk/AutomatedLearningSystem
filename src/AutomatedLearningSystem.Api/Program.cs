@@ -62,6 +62,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(cp =>
 {
     cp.WithOrigins("http://localhost:5173");
+    cp.WithOrigins("http://localhost:5174");
     cp.AllowAnyMethod();
     cp.AllowCredentials();
     cp.AllowAnyHeader();

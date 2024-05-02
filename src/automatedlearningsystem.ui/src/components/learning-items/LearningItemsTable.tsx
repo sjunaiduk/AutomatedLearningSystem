@@ -17,7 +17,13 @@ const LearningItemsTable: React.FC = () => {
 
   return (
     <>
-      <Button onClick={() => setAddModalOpen(!addModalOpen)}>
+      <Button
+        type="primary"
+        style={{
+          marginBottom: "1rem",
+        }}
+        onClick={() => setAddModalOpen(!addModalOpen)}
+      >
         Add Learning Item
       </Button>
       <Table dataSource={learningItems} rowKey={(record) => record.id}>

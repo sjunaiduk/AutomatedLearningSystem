@@ -3,9 +3,9 @@ import Login from "../../components/Login";
 import { useAuthStore } from "../../stores/userStore";
 
 export const LoginPage = () => {
-  const { Authenticated } = useAuthStore();
+  const { Authenticated, User } = useAuthStore();
   if (Authenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to={User?.role === "Admin" ? "/admin" : "/student"} />;
   }
   return <Login />;
 };

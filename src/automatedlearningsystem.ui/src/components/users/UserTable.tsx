@@ -16,7 +16,15 @@ const UserTable: React.FC = () => {
 
   return (
     <>
-      <Button onClick={() => setAddModalOpen(!addModalOpen)}>Add User</Button>
+      <Button
+        type="primary"
+        style={{
+          marginBottom: "1rem",
+        }}
+        onClick={() => setAddModalOpen(!addModalOpen)}
+      >
+        Add User
+      </Button>
       <Table dataSource={users} rowKey={(record) => record.id}>
         <Column title="First Name" dataIndex="firstName" key="firstName" />
         <Column title="Last Name" dataIndex="lastName" key="lastName" />
