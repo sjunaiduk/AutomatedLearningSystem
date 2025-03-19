@@ -1,5 +1,5 @@
 import { useAuthStore } from "../../stores/userStore";
-import { Typography, Button, Row, Col, Card } from "antd";
+import { Typography, Row, Col, Card } from "antd";
 
 const { Title, Paragraph, Text } = Typography;
 
