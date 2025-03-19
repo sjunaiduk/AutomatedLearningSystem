@@ -1,8 +1,8 @@
-**/**/bin
-**/**/**/obj
-.vs
+**/**/bin/*
+**/**/obj/*
+.vs/
 **/**/*.db
 *.sln.DotSettings.user
 src/**/als.*
-**/**/.vscode
-**/**/src/AutomatedLearningSystem.Api/wwwroot/client/
+**/**/.vscode/
+**/**/src/AutomatedLearningSystem.Api/wwwroot/client/*
