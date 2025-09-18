@@ -19,28 +19,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj" />
-    <ProjectReference Include="..\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
-    <ProjectReference Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
+    <ProjectReference
+      Include="..\AutomatedLearningSystem.Application\AutomatedLearningSystem.Application.csproj" />
+    <ProjectReference
+      Include="..\AutomatedLearningSystem.Contracts\AutomatedLearningSystem.Contracts.csproj" />
+    <ProjectReference
+      Include="..\AutomatedLearningSystem.Infrastructure\AutomatedLearningSystem.Infrastructure.csproj" />
   </ItemGroup>
 
- 
 
-	<Target Name="CompileClient" BeforeTargets="Publish">
-		<Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm install" />
-		<Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm run build" />
-	</Target>
+  <Target Name="CompileClient" BeforeTargets="Build">
+    <Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm install" />
+    <Exec WorkingDirectory="../automatedlearningsystem.ui" Command="npm run build" />
+  </Target>
 
-	<ItemGroup>
-		<None Include="wwwroot\**">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-
-
-
-
+  <ItemGroup>
+    <None Include="wwwroot\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 
 </Project>
